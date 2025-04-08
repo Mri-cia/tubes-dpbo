@@ -5,17 +5,27 @@ import java.awt.*;
 import java.awt.event.*;
 
 public class WindowLogin extends JPanel  {
+	
+	
 	ImageIcon loginIcon;
+	
+	
 	JLabel nameLabel;
 	JLabel passLabel;
+	
 	JTextField nameField;
 	JTextField passField;
+	
 	String nameFlavor = "Joko...";
 	String passFlavor = "8safva8";
+	
+	
 	JButton submitButton;
+	
+	
+	ButtonGroup buttonGroup;
 	JRadioButton optionPembeli;
 	JRadioButton optionPenjual;
-	ButtonGroup buttonGroup;
 	
 	public WindowLogin(ActionListener userPenjual, ActionListener userPembeli) {
 		
