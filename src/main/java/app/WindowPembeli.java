@@ -2,12 +2,15 @@ package app;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.*;
 
-public class WindowPembeli extends MainWindow {
+import java.awt.*;
+
+public class WindowPembeli extends JPanel {
 	JLabel test = new JLabel();
 	JPanel panel = new JPanel();
 	
-	public WindowPembeli() {
+	public WindowPembeli(ActionListener a) {
 		panel.add(new JLabel("Halaman 2"));
 		add(panel);
 	}

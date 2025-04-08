@@ -17,9 +17,16 @@ public class MainWindow extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setResizable(false);
 		
-		WindowLogin winLogin = new WindowLogin(e -> cardLayout.show(mainPane, "Register"));
+		WindowLogin winLogin = new WindowLogin(
+				e -> cardLayout.show(mainPane, "Penjual"),
+				e -> cardLayout.show(mainPane, "Pembeli")
+			);
+		WindowPenjual winPenj = new WindowPenjual(e -> cardLayout.show(mainPane, "Login"));
+		WindowPembeli winPem = new WindowPembeli(e -> cardLayout.show(mainPane, "Login"));
 		
 		mainPane.add(winLogin, "Login");
+		mainPane.add(winPenj, "Penjual");
+		mainPane.add(winPem, "Pembeli");
 		
 		
 		add(mainPane);
