@@ -1,5 +1,7 @@
 package app;
 
-public class DataBarang {
+import java.util.ArrayList;
 
+public class DataBarang {
+	static ArrayList<Barang> listBarang = new ArrayList<Barang>();
 }

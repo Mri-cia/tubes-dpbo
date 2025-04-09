@@ -7,9 +7,11 @@ import java.util.Date;
 public class Barang {
 	private String name;
 	private String type;
+
 	private Date kadaluarsa;
 	private int harga;
-	private SimpleDateFormat sdf;
+	
+	private SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
 	
 	public Barang(String name, String type, Date kadalusarsa, int harga) {
 		this.name = name;
@@ -26,4 +28,17 @@ public class Barang {
 	public String getDate() {
 		return sdf.format(kadaluarsa);
 	}
+	
+	public String getName() {
+		return name;
+	}
+	
+	public int getHarga() {
+		return harga;
+	}
+	
+	public String getType() {
+		return type;
+	}
+	
 }

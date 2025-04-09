@@ -20,7 +20,7 @@ public class WindowLogin extends JPanel  {
 	String passFlavor = "8safva8";
 	
 	
-	JButton submitButton;
+	CusButton submitButton;
 	
 	
 	ButtonGroup buttonGroup;
@@ -55,9 +55,7 @@ public class WindowLogin extends JPanel  {
 		passField.setBounds((int)((MainWindow.winWidth * 0.5) - 150), (passLabel.getY() + passLabel.getHeight()) + 10, 300, 30);
 		
 		//Tombol
-		submitButton = new JButton("Submit");
-		submitButton.setEnabled(false);
-		submitButton.setFocusable(false);
+		submitButton = new CusButton("Submit", 13, false);
 		submitButton.setBounds(passField.getX() + passField.getWidth() - 100, (passField.getY() + passField.getHeight()) + 20, 100, 40);
 		
 		//Tipe User

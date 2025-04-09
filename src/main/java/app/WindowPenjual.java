@@ -15,6 +15,8 @@ public class WindowPenjual extends JPanel {
 	int totalItem = 0;
 	int value = 0;
 	int expiring = 0;
+	JTable table;
+	JScrollPane scroller;
 	
 	public WindowPenjual(ActionListener a) {
 		
@@ -46,6 +48,9 @@ public class WindowPenjual extends JPanel {
 		goodsExpiring = new JLabel("Expiring Goods: " + expiring);
 		goodsExpiring.setBounds((int)(MainWindow.winWidth * 0.9) - 120, (int)(statPane.getY() + (statPane.getHeight() * 0.5)) - 10, 120, 20);
 		
+		
+		refreshTable();
+		
 		//Adding components
 		//Profile
 		add(name);
@@ -57,4 +62,33 @@ public class WindowPenjual extends JPanel {
 		add(goodsExpiring);
 		add(statPane);
 	}
+	
+	// Mengambil data dari class DataBarang dan tambahkan ke tabel
+		private void refreshTable() {
+	        // Convert item list to table data
+	        String[] columns = {"Nama", "Tipe", "Kadaluarsa", "Price (IDR)"};
+	        Object[][] data = new Object[DataBarang.listBarang.size()][4];
+
+	        for (int i = 0; i < DataBarang.listBarang.size(); i++) {
+	            Barang item = DataBarang.listBarang.get(i);
+	            data[i][0] = item.getName();
+	            data[i][1] = item.getType();
+	            data[i][2] = item.getDate();
+	            data[i][3] = item.getHarga();
+	        }
+
+	        if (table != null) {
+	            remove(scroller);
+	        }
+
+	        table = new JTable(data, columns);
+	        scroller = new JScrollPane(table);
+	        
+	        scroller.setBounds((int)(MainWindow.winWidth * 0.1), (int)(statPane.getY() + (statPane.getHeight())) + 10, (int)(statPane.getWidth() * 0.8), 300);
+	        
+	        add(scroller, BorderLayout.CENTER);
+
+	        revalidate();
+	        repaint();
+	    }
 }
