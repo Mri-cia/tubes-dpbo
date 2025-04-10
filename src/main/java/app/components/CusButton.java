@@ -8,6 +8,7 @@ import java.awt.event.*;
 public class CusButton extends JButton {
 	private int fontSize = 10;
 	private boolean isEnabled = true;
+	private boolean isAllowedHover = true;
 	
 	private void defaultStyle() {
 		setFocusable(false);
@@ -22,7 +23,7 @@ public class CusButton extends JButton {
 			
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				if(isEnabled) {
+				if(isEnabled && isAllowedHover) {
 					setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, new Color(0xf5f5f5)));
 					setCursor(new Cursor(Cursor.HAND_CURSOR));
 				}
@@ -57,6 +58,13 @@ public class CusButton extends JButton {
 		setEnabled(isEnabled);
 	}
 	
+	public CusButton(ImageIcon icon) {
+		defaultStyle();
+		hoverEffect();
+		setIcon((Icon)icon);
+		setEnabled(isEnabled);
+	}
+	
 	public CusButton(String text, int fontSize) {
 		defaultStyle();
 		hoverEffect();
@@ -73,4 +81,14 @@ public class CusButton extends JButton {
 		setText(text);
 		setEnabled(isEnabled);
 	}
+	
+	public void setIconSize(int x, int y) {
+		Image image = ((Image) this.getIcon()).getScaledInstance(20, 20, Image.SCALE_SMOOTH);
+		this.setIcon((Icon) image);
+	}
+	
+	public void setHoverEnabled(boolean isAllowedHover) {
+		this.isAllowedHover = isAllowedHover;
+	}
+	
 }
