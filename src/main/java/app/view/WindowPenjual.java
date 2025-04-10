@@ -5,6 +5,8 @@ import javax.swing.border.*;
 import java.awt.*;
 import java.awt.event.*;
 
+import app.model.*;
+
 public class WindowPenjual extends JPanel {
 	JLabel name;
 	JLabel role;
@@ -49,7 +51,7 @@ public class WindowPenjual extends JPanel {
 		goodsExpiring.setBounds((int)(MainWindow.winWidth * 0.9) - 120, (int)(statPane.getY() + (statPane.getHeight() * 0.5)) - 10, 120, 20);
 		
 		
-		//refreshTable();
+		refreshTable();
 		
 		//Adding components
 		//Profile
@@ -62,7 +64,7 @@ public class WindowPenjual extends JPanel {
 		add(goodsExpiring);
 		add(statPane);
 	}
-	/*
+	
 	// Mengambil data dari class DataBarang dan tambahkan ke tabel
 		private void refreshTable() {
 	        // Convert item list to table data
@@ -91,5 +93,5 @@ public class WindowPenjual extends JPanel {
 	        revalidate();
 	        repaint();
 	    }
-	   */
+	   
 }

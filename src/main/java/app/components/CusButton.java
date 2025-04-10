@@ -6,11 +6,12 @@ import java.awt.*;
 import java.awt.event.*;
 
 public class CusButton extends JButton {
+	private int fontSize = 10;
+	private boolean isEnabled = true;
 	
 	private void defaultStyle() {
-		setEnabled(true);
 		setFocusable(false);
-		setFont(new Font("ARIAL", Font.BOLD, 10));
+		setFont(new Font("ARIAL", Font.BOLD, fontSize));
 		setBorder(null);
 		setBackground(new Color(0x404040));
 		setForeground(new Color(0xf5f5f5));
@@ -21,8 +22,10 @@ public class CusButton extends JButton {
 			
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, new Color(0xf5f5f5)));
-				setCursor(new Cursor(Cursor.HAND_CURSOR));
+				if(isEnabled) {
+					setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, new Color(0xf5f5f5)));
+					setCursor(new Cursor(Cursor.HAND_CURSOR));
+				}
 			}
 
 			@Override
@@ -51,20 +54,23 @@ public class CusButton extends JButton {
 		defaultStyle();
 		hoverEffect();
 		setText(text);
+		setEnabled(isEnabled);
 	}
 	
 	public CusButton(String text, int fontSize) {
 		defaultStyle();
 		hoverEffect();
 		setText(text);
+		setEnabled(isEnabled);
 		setFont(new Font(this.getName(), Font.BOLD, fontSize));
 	}
 	
 	public CusButton(String text, int fontSize, boolean isEnabled) {
+		this.fontSize = fontSize;
+		this.isEnabled = isEnabled;
 		defaultStyle();
 		hoverEffect();
 		setText(text);
-		setFont(new Font(this.getName(), Font.BOLD, fontSize));
 		setEnabled(isEnabled);
 	}
 }
