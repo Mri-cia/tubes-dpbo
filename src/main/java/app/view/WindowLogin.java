@@ -120,20 +120,20 @@ public class WindowLogin extends JPanel  {
 		//--Password Panel--//
 		passPanel.setLayout(new GridBagLayout());
 		GridBagConstraints passGBC = new GridBagConstraints();
-		nameLabel = new JLabel("Password");
-		nameField = new JTextField("****");
+		passLabel = new JLabel("Password");
+		passField = new JTextField("****");
 		
-		nameLabel.setPreferredSize(new Dimension(250, 10));
-		nameField.setPreferredSize(new Dimension(250, 25));
+		passLabel.setPreferredSize(new Dimension(250, 10));
+		passField.setPreferredSize(new Dimension(250, 25));
 		
 		passGBC.gridwidth = 1;
 		passGBC.insets = new Insets(0, 0, 10, 0);
 		
 		passGBC.gridy = 1;
-		passPanel.add(nameLabel, passGBC);
+		passPanel.add(passLabel, passGBC);
 		passGBC.gridy = 2;
 		passGBC.insets = new Insets(0, 0, 0, 0);
-		passPanel.add(nameField, passGBC);
+		passPanel.add(passField, passGBC);
 		
 		
 		//--Button Panel--//
