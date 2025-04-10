@@ -1,6 +1,9 @@
-package app;
+package app.view;
 
 import javax.swing.*;
+
+import app.components.CusButton;
+
 import java.awt.*;
 import java.awt.event.*;
 

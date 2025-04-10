@@ -1,4 +1,4 @@
-package app;
+package app.view;
 
 import javax.swing.*;
 import javax.swing.border.*;
@@ -49,7 +49,7 @@ public class WindowPenjual extends JPanel {
 		goodsExpiring.setBounds((int)(MainWindow.winWidth * 0.9) - 120, (int)(statPane.getY() + (statPane.getHeight() * 0.5)) - 10, 120, 20);
 		
 		
-		refreshTable();
+		//refreshTable();
 		
 		//Adding components
 		//Profile
@@ -62,7 +62,7 @@ public class WindowPenjual extends JPanel {
 		add(goodsExpiring);
 		add(statPane);
 	}
-	
+	/*
 	// Mengambil data dari class DataBarang dan tambahkan ke tabel
 		private void refreshTable() {
 	        // Convert item list to table data
@@ -84,11 +84,12 @@ public class WindowPenjual extends JPanel {
 	        table = new JTable(data, columns);
 	        scroller = new JScrollPane(table);
 	        
-	        scroller.setBounds((int)(MainWindow.winWidth * 0.1), (int)(statPane.getY() + (statPane.getHeight())) + 10, (int)(statPane.getWidth() * 0.8), 300);
+	        scroller.setBounds((int)(MainWindow.winWidth * 0.1), (int)(statPane.getY() + (statPane.getHeight())) + 20, (int)(statPane.getWidth() * 0.8), 300);
 	        
 	        add(scroller, BorderLayout.CENTER);
 
 	        revalidate();
 	        repaint();
 	    }
+	   */
 }
