@@ -2,7 +2,6 @@ package app.view;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.*;
 
 public class MainWindow extends JFrame {
 	private CardLayout cardLayout = new CardLayout();
@@ -30,7 +29,7 @@ public class MainWindow extends JFrame {
 		
 		
 		add(mainPane);
-		cardLayout.show(mainPane, "Penjual"); // untuk testing layout 
+		cardLayout.show(mainPane, "Pembeli"); // untuk testing layout 
 		setVisible(true);
 	}
 	
