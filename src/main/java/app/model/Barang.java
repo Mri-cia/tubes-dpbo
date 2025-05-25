@@ -40,5 +40,10 @@ public class Barang {
 	public String getType() {
 		return type;
 	}
+
+	public void add(Barang barang) {
+		// TODO Auto-generated method stub
+		
+	}
 	
 }

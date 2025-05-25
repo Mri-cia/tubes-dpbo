@@ -2,7 +2,7 @@ package app.model;
 
 import java.util.ArrayList;
 
-public class Penjual extends User {
+public class Penjual extends User implements Contributor {
 	ArrayList<Barang> barang;
 	
 	public Penjual(String username) {
