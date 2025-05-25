@@ -14,7 +14,7 @@ public class WindowPenjual extends JPanel {
 	JTable table;
 	JScrollPane scroller;
 	
-	public WindowPenjual(ActionListener a) {
+	public WindowPenjual(ActionListener a, ActionListener b) {
 		
 		//--MainPanel setup--//
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
@@ -168,6 +168,10 @@ public class WindowPenjual extends JPanel {
 		addBtn.setPreferredSize(new Dimension(100, 30));
 		editBtn.setPreferredSize(new Dimension(100, 30));
 		deleteBtn.setPreferredSize(new Dimension(50, 30));
+		
+		addBtn.addActionListener(e -> {
+		  b.actionPerformed(e);
+		});
 		
 		rightBtnPanel.add(addBtn);
 		rightBtnPanel.add(editBtn);
