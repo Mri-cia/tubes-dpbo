@@ -24,17 +24,20 @@ public class MainWindow extends JFrame {
 	  LoginPage winLogin = new LoginPage(e -> cardLayout.show(mainPane, "Penjual"),
 			  e -> cardLayout.show(mainPane, "Pembeli"));
 	  SellerPage winPenj = new SellerPage(e -> cardLayout.show(mainPane, "Login"),
-			  e -> cardLayout.show(mainPane, "TambahBarang"));
-	  BuyerPage winPem = new BuyerPage(e -> cardLayout.show(mainPane, "Login"));
+			  e -> cardLayout.show(mainPane, "TambahBarang"),
+			  e -> cardLayout.show(mainPane, "Katalog"));
+	  BuyerPage winPem = new BuyerPage(e -> cardLayout.show(mainPane, "Login"), e -> cardLayout.show(mainPane, "Katalog"));
 	  AddGoodsPage winTambahBarang = new AddGoodsPage(e -> cardLayout.show(mainPane, "Penjual"));
+	  CatalogPage winKatalog = new CatalogPage();
 	  
 	  mainPane.add(winLogin, "Login");
 	  mainPane.add(winPenj, "Penjual");
 	  mainPane.add(winPem, "Pembeli");
 	  mainPane.add(winTambahBarang, "TambahBarang");
+	  mainPane.add(winKatalog, "Katalog");
 	  
 	  add(mainPane);
-	  cardLayout.show(mainPane, "TambahBarang"); // untuk testing layout
+	  cardLayout.show(mainPane, "Pembeli"); // untuk testing layout
 	  setVisible(true);
   }
 

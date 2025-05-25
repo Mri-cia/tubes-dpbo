@@ -14,7 +14,7 @@ public class SellerPage extends Page {
 	JTable table;
 	JScrollPane scroller;
 	
-	public SellerPage(ActionListener a, ActionListener b) {
+	public SellerPage(ActionListener logout, ActionListener b, ActionListener catalog) {
 		
 		//--MainPanel setup--//
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
@@ -83,13 +83,15 @@ public class SellerPage extends Page {
 		
 		//--logoutPanel--//
 		logoutPanel.setLayout(new BoxLayout(logoutPanel, BoxLayout.Y_AXIS));
-		CusButton logoutBtn = new CusButton(new ImageIcon("C:\\Users\\rawik\\Documents\\Kuliah\\DPBO\\Tubes\\src\\main\\java\\assets\\logout_icon.png"));
+		CusButton logoutBtn = new CusButton("Back");
 		
 		logoutBtn.setHoverEnabled(false);
 		
 		logoutBtn.setMaximumSize(new Dimension(38, 50));
 		
 		logoutBtn.setAlignmentX(JButton.RIGHT_ALIGNMENT);
+		
+		logoutBtn.addActionListener(logout);
 		
 		logoutPanel.add(logoutBtn);
 		

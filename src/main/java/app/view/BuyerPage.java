@@ -16,7 +16,7 @@ public class BuyerPage extends Page {
 	JTable table;
 	JScrollPane scroller;
 	
-	public BuyerPage(ActionListener a) {
+	public BuyerPage(ActionListener logout, ActionListener catalog) {
 		
 		//--MainPanel setup--//
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
@@ -85,13 +85,15 @@ public class BuyerPage extends Page {
 		
 		//--logoutPanel--//
 		logoutPanel.setLayout(new BoxLayout(logoutPanel, BoxLayout.Y_AXIS));
-		CusButton logoutBtn = new CusButton(new ImageIcon("C:\\Users\\rawik\\Documents\\Kuliah\\DPBO\\Tubes\\src\\main\\java\\assets\\logout_icon.png"));
+		CusButton logoutBtn = new CusButton("back");
 		
 		logoutBtn.setHoverEnabled(false);
 		
 		logoutBtn.setMaximumSize(new Dimension(38, 50));
 		
 		logoutBtn.setAlignmentX(JButton.RIGHT_ALIGNMENT);
+		
+		logoutBtn.addActionListener(logout);
 		
 		logoutPanel.add(logoutBtn);
 		
@@ -181,10 +183,10 @@ public class BuyerPage extends Page {
 		JPanel rightBtnPanel = new JPanel();
 		
 		//testing boundaries
-//		outerLeft.setBackground(Color.red);
-//		outerRight.setBackground(Color.red);
-//		leftBtnPanel.setBackground(Color.DARK_GRAY);
-//		rightBtnPanel.setBackground(Color.blue);
+		//outerLeft.setBackground(Color.red);
+		//outerRight.setBackground(Color.red);
+		//leftBtnPanel.setBackground(Color.DARK_GRAY);
+		//rightBtnPanel.setBackground(Color.blue);
 		
 		leftBtnPanel.setPreferredSize(new Dimension(275,0));
 		rightBtnPanel.setPreferredSize(new Dimension(275,0));
@@ -200,6 +202,8 @@ public class BuyerPage extends Page {
 		//--rightBtnPanel--//
 		rightBtnPanel.setLayout(new FlowLayout(FlowLayout.TRAILING, 10, 5));
 		CusButton deleteBtn = new CusButton("To Catalog...", 13);
+		
+		deleteBtn.addActionListener(catalog);
 		
 		deleteBtn.setPreferredSize(new Dimension(150, 30));
 		
