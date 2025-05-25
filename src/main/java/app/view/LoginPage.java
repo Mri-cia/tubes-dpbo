@@ -7,7 +7,7 @@ import java.awt.event.*;
 
 import app.components.CusButton;
 
-public class WindowLogin extends JPanel  {
+public class LoginPage extends Page  {
 	
 	
 	ImageIcon loginIcon;
@@ -30,7 +30,9 @@ public class WindowLogin extends JPanel  {
 	JRadioButton optionPembeli;
 	JRadioButton optionPenjual;
 	
-	public WindowLogin(ActionListener userPenjual, ActionListener userPembeli) {
+	public LoginPage(ActionListener userPenjual, ActionListener userPembeli) {
+		
+		
 		
 		//--MainPanel setup--//
 		setLayout(new BorderLayout());
@@ -44,12 +46,12 @@ public class WindowLogin extends JPanel  {
 		//centerPanel.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.black));
 		
 		//Uniform sizing
-		int outerWidth = (int)(MainWindow.winWidth * 0.15);
-		int outerHeight = (int)(MainWindow.winHeight * 0.1);
-		headPanel.setPreferredSize(new Dimension((int)MainWindow.winWidth, outerHeight));
-		footPanel.setPreferredSize(new Dimension((int)MainWindow.winWidth, outerHeight));
-		leftPanel.setPreferredSize(new Dimension(outerWidth, (int)MainWindow.winHeight));
-		rightPanel.setPreferredSize(new Dimension(outerWidth, (int)MainWindow.winHeight));
+		int outerWidth = (int)(widthLimit * 0.15);
+		int outerHeight = (int)(heightLimit * 0.1);
+		headPanel.setPreferredSize(new Dimension((int)widthLimit, outerHeight));
+		footPanel.setPreferredSize(new Dimension((int)widthLimit, outerHeight));
+		leftPanel.setPreferredSize(new Dimension(outerWidth, (int)heightLimit));
+		rightPanel.setPreferredSize(new Dimension(outerWidth, (int)heightLimit));
 		
 		add(headPanel, BorderLayout.NORTH);
 		add(footPanel, BorderLayout.SOUTH);

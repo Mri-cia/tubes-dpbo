@@ -4,10 +4,10 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
-import app.model.*;
+import app.modules.*;
 import app.components.*;
 
-public class WindowTambahBarang extends JPanel {
+public class AddGoodsPage extends Page {
 
   JLabel nameLabel;
   JLabel passLabel;
@@ -17,7 +17,7 @@ public class WindowTambahBarang extends JPanel {
 
   CusButton submitButton;
 
-  public WindowTambahBarang(ActionListener a) {
+  public AddGoodsPage(ActionListener a) {
     // --MainPanel setup--//
     setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
     JPanel profilePanel = new JPanel();
@@ -32,6 +32,14 @@ public class WindowTambahBarang extends JPanel {
 
     add(Box.createRigidArea(new Dimension(0, 20)));
     add(profilePanel);
+    add(Box.createRigidArea(new Dimension(0, 20)));
+    add(backPanel);
+    add(Box.createRigidArea(new Dimension(0, 20)));
+    add(formPanel);
+    
+    
+    //testing style
+    //backPanel.setBorder(BorderFactory.createMatteBorder(0, 0, 0, 3, Color.black));
 
     // --Profile Panel--//
     profilePanel.setLayout(new BoxLayout(profilePanel, BoxLayout.X_AXIS));
@@ -74,18 +82,23 @@ public class WindowTambahBarang extends JPanel {
     // --Form Panel setup--//
     formPanel.setLayout(new BoxLayout(formPanel, BoxLayout.Y_AXIS));
     JPanel namePanel = new JPanel();
-    JPanel passPanel = new JPanel();
+    JPanel typePanel = new JPanel();
+    JPanel datePanel = new JPanel();
     JPanel buttonPanel = new JPanel();
 
     // Sizing
-    namePanel.setMaximumSize(new Dimension(Integer.MAX_VALUE, 60));
-    passPanel.setMaximumSize(new Dimension(Integer.MAX_VALUE, 60));
-    buttonPanel.setMaximumSize(new Dimension(Integer.MAX_VALUE, 60));
+    
+    namePanel.setMaximumSize(new Dimension((int)(widthLimit/1.5), 40));
+    typePanel.setMaximumSize(new Dimension((int)(widthLimit/1.5), 40));
+    datePanel.setMaximumSize(new Dimension((int)(widthLimit/1.5), 40));
+    buttonPanel.setMaximumSize(new Dimension((int)(widthLimit/1.5), 40));
 
-    formPanel.add(Box.createRigidArea(new Dimension(0, 20)));
+    formPanel.add(Box.createRigidArea(new Dimension(0, 10)));
     formPanel.add(namePanel);
     formPanel.add(Box.createRigidArea(new Dimension(0, 10)));
-    formPanel.add(passPanel);
+    formPanel.add(typePanel);
+    formPanel.add(Box.createRigidArea(new Dimension(0, 10)));
+    formPanel.add(datePanel);
     formPanel.add(Box.createRigidArea(new Dimension(0, 10)));
     formPanel.add(buttonPanel);
     formPanel.add(Box.createRigidArea(new Dimension(0, 10)));
@@ -93,37 +106,55 @@ public class WindowTambahBarang extends JPanel {
     // --Username Panel--//
     namePanel.setLayout(new GridBagLayout());
     GridBagConstraints nameGBC = new GridBagConstraints();
-    nameLabel = new JLabel("Username");
+    nameLabel = new JLabel("Nama Barang : ");
     nameField = new JTextField("Username");
 
-    nameLabel.setPreferredSize(new Dimension(250, 10));
-    nameField.setPreferredSize(new Dimension(250, 25));
+    nameLabel.setPreferredSize(new Dimension(100, 15));
+    nameField.setPreferredSize(new Dimension(350, 25));
 
-    nameGBC.insets = new Insets(0, 0, 10, 0);
 
-    nameGBC.gridy = 1;
+    nameGBC.gridx = 1;
+    nameGBC.anchor = GridBagConstraints.WEST;
     namePanel.add(nameLabel, nameGBC);
-    nameGBC.gridy = 2;
-    nameGBC.insets = new Insets(0, 0, 0, 0);
+    nameGBC.gridx = 2;
+    nameGBC.anchor = GridBagConstraints.EAST;
+    nameGBC.weightx = 1.0;
     namePanel.add(nameField, nameGBC);
+    
+    // --Type Panel--//
+    typePanel.setLayout(new GridBagLayout());
+    GridBagConstraints typeGBC = new GridBagConstraints();
+    JLabel typeLabel = new JLabel("Tipe Barang : ");
+    JTextField typeField = new JTextField("Tipe Barang");
 
-    // --Password Panel--//
-    passPanel.setLayout(new GridBagLayout());
-    GridBagConstraints passGBC = new GridBagConstraints();
-    passLabel = new JLabel("Password");
-    passField = new JTextField("****");
+    typeLabel.setPreferredSize(new Dimension(100, 15));
+    typeField.setPreferredSize(new Dimension(350, 25));
 
-    passLabel.setPreferredSize(new Dimension(250, 10));
-    passField.setPreferredSize(new Dimension(250, 25));
+    typeGBC.gridx = 1;
+    typeGBC.anchor = GridBagConstraints.WEST;
+    typePanel.add(typeLabel, typeGBC);
+    typeGBC.gridx = 2;
+    typeGBC.anchor = GridBagConstraints.EAST;
+    typeGBC.weightx = 1.0;
+    typePanel.add(typeField, typeGBC);
+    
+    // --Date Panel--//
+    datePanel.setLayout(new GridBagLayout());
+    GridBagConstraints dateGBC = new GridBagConstraints();
+    JLabel dateLabel = new JLabel("Tanggal Kadaluarsa : ");
+    JTextField dateField = new JTextField("01-01-2001");
 
-    passGBC.gridwidth = 1;
-    passGBC.insets = new Insets(0, 0, 10, 0);
+    dateLabel.setPreferredSize(new Dimension(150, 15));
+    dateField.setPreferredSize(new Dimension(350, 25));
+    
+    dateGBC.gridx = 1;
+    dateGBC.anchor = GridBagConstraints.WEST;
+    datePanel.add(dateLabel, dateGBC);
+    dateGBC.gridx = 2;
+    dateGBC.anchor = GridBagConstraints.EAST;
+    dateGBC.weightx = 1.0;
+    datePanel.add(dateField, dateGBC);
 
-    passGBC.gridy = 1;
-    passPanel.add(passLabel, passGBC);
-    passGBC.gridy = 2;
-    passGBC.insets = new Insets(0, 0, 0, 0);
-    passPanel.add(passField, passGBC);
 
     // --Button Panel--//
     buttonPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 7, 0));

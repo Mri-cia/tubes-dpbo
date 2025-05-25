@@ -4,17 +4,17 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
-import app.model.*;
+import app.modules.*;
 import app.components.*;
 
-public class WindowPenjual extends JPanel {
+public class SellerPage extends Page {
 	int totalItem = 0;
 	int value = 0;
 	int expiring = 0;
 	JTable table;
 	JScrollPane scroller;
 	
-	public WindowPenjual(ActionListener a, ActionListener b) {
+	public SellerPage(ActionListener a, ActionListener b) {
 		
 		//--MainPanel setup--//
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
@@ -33,7 +33,7 @@ public class WindowPenjual extends JPanel {
 		//Sizing
 		profilePanel.setPreferredSize(new Dimension(0, 100));
 		statPanel.setMaximumSize(new Dimension(Integer.MAX_VALUE, 1));
-		tablePanel.setPreferredSize(new Dimension((int)(MainWindow.winWidth * 0.08), 230));
+		tablePanel.setPreferredSize(new Dimension((int)(widthLimit * 0.08), 230));
 		
 		add(Box.createRigidArea(new Dimension(0, 20)));
 		add(profilePanel);
@@ -199,7 +199,7 @@ public class WindowPenjual extends JPanel {
 	        table = new JTable(data, columns);
 	        scroller = new JScrollPane(table);
 	        
-	        scroller.setPreferredSize(new Dimension((int)(MainWindow.winWidth * 0.8), 260));
+	        scroller.setPreferredSize(new Dimension((int)(widthLimit * 0.8), 260));
 	        
 	        tablePanel.add(scroller, BorderLayout.CENTER);
 

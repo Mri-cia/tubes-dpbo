@@ -5,10 +5,10 @@ import java.awt.*;
 import java.awt.event.*;
 
 import app.components.CusButton;
-import app.model.Barang;
-import app.model.DataBarang;
+import app.modules.Barang;
+import app.modules.DataBarang;
 
-public class WindowPembeli extends JPanel {
+public class BuyerPage extends Page {
 	private int itemsBought = 0;
 	private int moneySpent = 0;
 	private int moneySaved = 0;
@@ -16,7 +16,7 @@ public class WindowPembeli extends JPanel {
 	JTable table;
 	JScrollPane scroller;
 	
-	public WindowPembeli(ActionListener a) {
+	public BuyerPage(ActionListener a) {
 		
 		//--MainPanel setup--//
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
@@ -35,7 +35,7 @@ public class WindowPembeli extends JPanel {
 		//Sizing
 		profilePanel.setPreferredSize(new Dimension(0, 100));
 		statPanel.setMaximumSize(new Dimension(Integer.MAX_VALUE, 1));
-		tablePanel.setPreferredSize(new Dimension((int)(MainWindow.winWidth * 0.08), 200));
+		tablePanel.setPreferredSize(new Dimension((int)(widthLimit * 0.08), 200));
 		
 		add(Box.createRigidArea(new Dimension(0, 20)));
 		add(profilePanel);
@@ -230,7 +230,7 @@ public class WindowPembeli extends JPanel {
 		        table = new JTable(data, columns);
 		        scroller = new JScrollPane(table);
 		        
-		        scroller.setPreferredSize(new Dimension((int)(MainWindow.winWidth * 0.8), 235));
+		        scroller.setPreferredSize(new Dimension((int)(widthLimit * 0.8), 235));
 		        
 		        tablePanel.add(scroller, BorderLayout.CENTER);
 

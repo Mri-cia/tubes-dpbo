@@ -1,4 +1,4 @@
-package app.model;
+package app.modules;
 
 public interface Contributor {
 	Barang getBarang();
