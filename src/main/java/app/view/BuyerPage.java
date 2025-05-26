@@ -9,6 +9,7 @@ import app.modules.Barang;
 import app.modules.DataBarang;
 
 public class BuyerPage extends Page {
+	private String role;
 	private int itemsBought = 0;
 	private int moneySpent = 0;
 	private int moneySaved = 0;
@@ -213,32 +214,38 @@ public class BuyerPage extends Page {
 	}
 	
 	// Mengambil data dari class DataBarang dan tambahkan ke tabel
-			private void refreshTable(JPanel tablePanel) {
-				
-		        // Convert item list to table data
-		        String[] columns = {"Nama", "Tipe", "Kadaluarsa", "Price (IDR)"};
-		        Object[][] data = new Object[DataBarang.listBarang.size()][4];
-
-		        for (int i = 0; i < DataBarang.listBarang.size(); i++) {
-		            Barang item = DataBarang.listBarang.get(i);
-		            data[i][0] = item.getName();
-		            data[i][1] = item.getType();
-		            data[i][2] = item.getDate();
-		            data[i][3] = item.getHarga();
-		        }
-
-		        if (table != null) {
-		            remove(scroller);
-		        }
-
-		        table = new JTable(data, columns);
-		        scroller = new JScrollPane(table);
-		        
-		        scroller.setPreferredSize(new Dimension((int)(widthLimit * 0.8), 235));
-		        
-		        tablePanel.add(scroller, BorderLayout.CENTER);
-
-		        revalidate();
-		        repaint();
-		    }
+		private void refreshTable(JPanel tablePanel) {
+			
+	        // Convert item list to table data
+	        String[] columns = {"Nama", "Tipe", "Kadaluarsa", "Price (IDR)"};
+	        Object[][] data = new Object[DataBarang.listBarang.size()][4];
+	
+	        for (int i = 0; i < DataBarang.listBarang.size(); i++) {
+	            Barang item = DataBarang.listBarang.get(i);
+	            data[i][0] = item.getName();
+	            data[i][1] = item.getType();
+	            data[i][2] = item.getDate();
+	            data[i][3] = item.getHarga();
+	        }
+	
+	        if (table != null) {
+	            remove(scroller);
+	        }
+	
+	        table = new JTable(data, columns);
+	        scroller = new JScrollPane(table);
+	        
+	        scroller.setPreferredSize(new Dimension((int)(widthLimit * 0.8), 235));
+	        
+	        tablePanel.add(scroller, BorderLayout.CENTER);
+	
+	        revalidate();
+	        repaint();
+	    }
+		
+		public void setRole(String role) {
+			this.role = role;
+		}
+			
+		
 }

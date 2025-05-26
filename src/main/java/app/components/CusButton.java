@@ -9,6 +9,8 @@ public class CusButton extends JButton {
 	private int fontSize = 10;
 	private boolean isEnabled = true;
 	private boolean isAllowedHover = true;
+	private int radius = 0;
+	private int opacity = 255;
 	
 	private void defaultStyle() {
 		setFocusable(false);
@@ -19,13 +21,13 @@ public class CusButton extends JButton {
 	}
 	
 	public void hoverEffect() {
-		addMouseListener(new MouseListener() {
+		addMouseListener(new MouseAdapter() {
 			
 			@Override
 			public void mouseEntered(MouseEvent e) {
 				if(isEnabled && isAllowedHover) {
-					setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, new Color(0xf5f5f5)));
-					setCursor(new Cursor(Cursor.HAND_CURSOR));
+					defaultStyle();
+
 				}
 			}
 
@@ -36,7 +38,11 @@ public class CusButton extends JButton {
 
 			@Override
 			public void mousePressed(MouseEvent e) {
-				defaultStyle();
+				setBackground(new Color(0xffffff));
+				setForeground(Color.black);
+				setCursor(new Cursor(Cursor.HAND_CURSOR));
+				setOpaque(true);
+				repaint();
 			}
 
 			@Override
@@ -75,6 +81,7 @@ public class CusButton extends JButton {
 	
 	public CusButton(String text, int fontSize, boolean isEnabled) {
 		this.fontSize = fontSize;
+		this.radius = radius;
 		this.isEnabled = isEnabled;
 		defaultStyle();
 		hoverEffect();
@@ -90,5 +97,6 @@ public class CusButton extends JButton {
 	public void setHoverEnabled(boolean isAllowedHover) {
 		this.isAllowedHover = isAllowedHover;
 	}
+
 	
 }

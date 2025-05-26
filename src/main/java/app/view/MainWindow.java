@@ -22,14 +22,25 @@ public class MainWindow extends JFrame {
   }
   
   private void managePages() {
-	  LoginPage winLogin = new LoginPage(e -> cardLayout.show(mainPane, "Penjual"),
-			  e -> cardLayout.show(mainPane, "Pembeli"));
-	  SellerPage winPenj = new SellerPage(e -> cardLayout.show(mainPane, "Login"),
+	  
+	  Page winLogin = new LoginPage(
+			  e -> cardLayout.show(mainPane, "Penjual"),
+			  e -> cardLayout.show(mainPane, "Pembeli")
+			  );
+	  
+	  Page winPenj = new SellerPage(
+			  e -> cardLayout.show(mainPane, "Login"),
 			  e -> cardLayout.show(mainPane, "TambahBarang"),
-			  e -> cardLayout.show(mainPane, "Katalog"));
-	  BuyerPage winPem = new BuyerPage(e -> cardLayout.show(mainPane, "Login"), e -> cardLayout.show(mainPane, "Katalog"));
-	  AddGoodsPage winTambahBarang = new AddGoodsPage(e -> cardLayout.show(mainPane, "Penjual"));
-	  CatalogPage winKatalog = new CatalogPage();
+			  e -> cardLayout.show(mainPane, "Katalog")
+			  );
+	  
+	  Page winPem = new BuyerPage(
+			  e -> cardLayout.show(mainPane, "Login"), 
+			  e -> cardLayout.show(mainPane, "Katalog")
+			  );
+	  
+	  Page winTambahBarang = new AddGoodsPage(e -> cardLayout.show(mainPane, "Penjual"));
+	  Page winKatalog = new CatalogPage();
 	  
 	  mainPane.add(winLogin, "Login");
 	  mainPane.add(winPenj, "Penjual");
@@ -38,7 +49,7 @@ public class MainWindow extends JFrame {
 	  mainPane.add(winKatalog, "Katalog");
 	  
 	  add(mainPane);
-	  cardLayout.show(mainPane, "Katalog"); // untuk testing layout
+	  cardLayout.show(mainPane, "Login"); // untuk testing layout
 	  setVisible(true);
   }
 

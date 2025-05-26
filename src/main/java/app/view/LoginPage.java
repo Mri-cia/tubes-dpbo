@@ -25,6 +25,8 @@ public class LoginPage extends Page  {
 	
 	CusButton submitButton;
 	
+
+	JComboBox<String> roleSelect;
 	
 	ButtonGroup buttonGroup;
 	JRadioButton optionPembeli;
@@ -139,40 +141,85 @@ public class LoginPage extends Page  {
 		
 		
 		//--Button Panel--//
-		buttonPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 7, 0));
+		buttonPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 60, 10));
 		submitButton = new CusButton("Submit", 13, false);
-		optionPenjual = new JRadioButton("Penjual");
-		optionPembeli = new JRadioButton("Pembeli");
+//		optionPenjual = new JRadioButton("Penjual");
+//		optionPembeli = new JRadioButton("Pembeli");
+		//Dropdown
+		String[] roles = {"Penjual", "Pembeli", "Donatur", "Penerima"};
+		roleSelect = new JComboBox<>(roles); 
+		
+		roleSelect.setBackground(getBackground());
+		roleSelect.setForeground(new Color(0x404040));
+		roleSelect.setBorder(BorderFactory.createEmptyBorder());
+		
 		
 		submitButton.setPreferredSize(new Dimension(100, 40));
 		
-		buttonPanel.add(optionPenjual);
-		buttonPanel.add(optionPembeli);
+		
+//		buttonPanel.add(optionPenjual);
+//		buttonPanel.add(optionPembeli);
+		buttonPanel.add(roleSelect);
 		buttonPanel.add(submitButton);
 		
 		
 		//ALGORITHM
 		//Grouping radio button
-		buttonGroup = new ButtonGroup();
-		buttonGroup.add(optionPenjual);
-		buttonGroup.add(optionPembeli);
+//		buttonGroup = new ButtonGroup();
+//		buttonGroup.add(optionPenjual);
+//		buttonGroup.add(optionPembeli);
+//
+//		//Enabling submit button
+//		ItemListener enableSubmit = e -> {
+//		    if ((optionPenjual.isSelected() || optionPembeli.isSelected()) && validateForm()) {
+//		        submitButton.setEnabled(true);
+//		    }
+//		};
+//		optionPenjual.addItemListener(enableSubmit);
+//		optionPembeli.addItemListener(enableSubmit);
+		
+		//DropdownSelection
+		
+		roleSelect.addActionListener(e -> {
+		    if (roleSelect.getSelectedItem() != null && validateForm()) {
+		    	submitButton.setEnabled(true);
+		    }
+		});
+		
 
 		//Enabling submit button
-		ItemListener enableSubmit = e -> {
-		    if ((optionPenjual.isSelected() || optionPembeli.isSelected()) && validateForm()) {
-		        submitButton.setEnabled(true);
-		    }
-		};
-		optionPenjual.addItemListener(enableSubmit);
-		optionPembeli.addItemListener(enableSubmit);
+//		ItemListener enableSubmit = e -> {
+//		    if ((optionPenjual.isSelected() || optionPembeli.isSelected()) && validateForm()) {
+//		        submitButton.setEnabled(true);
+//		    }
+//		};
+		
+//		//OnClicked submit button
+//		submitButton.addActionListener(e -> {
+//		    if (optionPenjual.isSelected()) {
+//		        userPenjual.actionPerformed(e);
+//		    } else if (optionPembeli.isSelected()) {
+//		        userPembeli.actionPerformed(e);
+//		    }
+//		});
 		
 		//OnClicked submit button
 		submitButton.addActionListener(e -> {
-		    if (optionPenjual.isSelected()) {
+			String selectedRole = (String)roleSelect.getSelectedItem();
+			switch(selectedRole) {
+			case "Penjual":
+			case "Donatur":
 		        userPenjual.actionPerformed(e);
-		    } else if (optionPembeli.isSelected()) {
+				break;
+				
+			case "Pembeli":
+			case "Penerima":
 		        userPembeli.actionPerformed(e);
-		    }
+		        break;
+		    
+		    default:
+		    	break;
+			}
 		});
 		
 	}
