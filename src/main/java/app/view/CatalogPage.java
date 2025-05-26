@@ -129,7 +129,7 @@ public class CatalogPage extends Page {
         // Convert item list to table data
 		DataBarang.initializeData();
         String[] columns = {"Nama", "Tipe", "Kadaluarsa", "Price (IDR)"};
-        Object[][] data = new Object[DataBarang.listBarang.size()][4];
+        Object[][] data = new Object[DataBarang.listBarang.size()][5];
 
         for (int i = 0; i < DataBarang.listBarang.size(); i++) {
             Barang item = DataBarang.listBarang.get(i);
@@ -137,6 +137,7 @@ public class CatalogPage extends Page {
             data[i][1] = item.getType();
             data[i][2] = item.getDate();
             data[i][3] = item.getHarga();
+            data[i][4] = new CusButton("edit");
         }
 
         if (table != null) {
@@ -146,6 +147,7 @@ public class CatalogPage extends Page {
         table = new JTable(data, columns);
         scroller = new JScrollPane(table);
         
+        table.setBackground(getBackground());
         scroller.setPreferredSize(tableSize);
         
         // Center all columns
@@ -160,6 +162,7 @@ public class CatalogPage extends Page {
         scroller.getVerticalScrollBar().setPreferredSize(new Dimension(0, 0));
         scroller.getHorizontalScrollBar().setPreferredSize(new Dimension(0, 0));
         
+ 
         tablePanel.add(scroller, BorderLayout.CENTER);
 
         revalidate();

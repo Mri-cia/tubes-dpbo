@@ -15,6 +15,7 @@ public class MainWindow extends JFrame {
     setTitle("TuBes DPBO");
     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     setResizable(false);
+    setLocationRelativeTo(null);
     
     managePages();
 
