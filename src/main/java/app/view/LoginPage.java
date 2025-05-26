@@ -6,12 +6,13 @@ import java.awt.*;
 import java.awt.event.*;
 
 import app.components.CusButton;
+import app.modules.*;
 
 public class LoginPage extends Page  {
 	
+	static User currentUser;
 	
 	ImageIcon loginIcon;
-	
 	
 	JLabel nameLabel;
 	JLabel passLabel;
@@ -19,14 +20,11 @@ public class LoginPage extends Page  {
 	JTextField nameField;
 	JPasswordField passField;
 	
-	CusButton submitButton;
+	String name;;
+	String pass;
 	
-
 	JComboBox<String> roleSelect;
-	
-	ButtonGroup buttonGroup;
-	JRadioButton optionPembeli;
-	JRadioButton optionPenjual;
+
 	
 	public LoginPage(ActionListener userPenjual, ActionListener userPembeli) {
 		
@@ -139,7 +137,7 @@ public class LoginPage extends Page  {
 		
 		//--Button Panel--//
 		buttonPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 60, 10));
-		submitButton = new CusButton("Submit", 13, false);
+		CusButton submitButton = new CusButton("Submit", 13, false);
 //		optionPenjual = new JRadioButton("Penjual");
 //		optionPembeli = new JRadioButton("Pembeli");
 		//Dropdown
@@ -203,14 +201,23 @@ public class LoginPage extends Page  {
 		//OnClicked submit button
 		submitButton.addActionListener(e -> {
 			String selectedRole = (String)roleSelect.getSelectedItem();
+			getForm();
 			switch(selectedRole) {
 			case "Penjual":
+				currentUser = new Seller(name, pass);
+				userPenjual.actionPerformed(e);
+				break;
 			case "Donatur":
-		        userPenjual.actionPerformed(e);
+				currentUser = new Donator(name, pass);
+				userPenjual.actionPerformed(e);
 				break;
 				
 			case "Pembeli":
+				currentUser = new Buyer(name, pass);
+		        userPembeli.actionPerformed(e);
+		        break;
 			case "Penerima":
+				currentUser = new Recipient(name, pass);
 		        userPembeli.actionPerformed(e);
 		        break;
 		    
@@ -220,19 +227,27 @@ public class LoginPage extends Page  {
 			
 			nameField.setText(null);
 			passField.setText(null);
+			
+			submitButton.setEnabled(false);
 		});
 		
 	}
 	
 	//Validating if the text field is filled and not the same as placeholder
-	private boolean validateForm() {	
-		String nameFlavor = "Username";
-		String passFlavor = "***";
-	    String name = nameField.getText().trim();
-	    String pass = new String(passField.getPassword());
+	private boolean validateForm() {
+		getForm();
 	    boolean isNameValid = !name.equals("");
 	    boolean isPassValid = !pass.equals("");
 	    
 	    return isNameValid && isPassValid;
+	}
+	
+	private void getForm() {
+		name = nameField.getText().trim();
+		pass = new String(passField.getPassword());
+	}
+	
+	static User getCurrentUser() {
+		return currentUser;
 	}
 }

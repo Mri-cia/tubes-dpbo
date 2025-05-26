@@ -7,8 +7,9 @@ import java.awt.event.*;
 import app.components.CusButton;
 import app.modules.Barang;
 import app.modules.DataBarang;
+import app.modules.User;
 
-public class BuyerPage extends Page {
+public class BuyerPage extends ProfilePages {
 	private String role;
 	private int itemsBought = 0;
 	private int moneySpent = 0;
@@ -16,9 +17,11 @@ public class BuyerPage extends Page {
 	private String mostType = "";
 	JTable table;
 	JScrollPane scroller;
+
+	JLabel nameLabel = new JLabel("URSULA");
+	JLabel roleLabel = new JLabel("Pembeli");
 	
 	public BuyerPage(ActionListener logout, ActionListener catalog) {
-		
 		//--MainPanel setup--//
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		JPanel profilePanel = new JPanel();
@@ -73,8 +76,8 @@ public class BuyerPage extends Page {
 		
 		//--nameProfile Panel--//
 		nameProfile.setLayout(new BoxLayout(nameProfile, BoxLayout.Y_AXIS));
-		JLabel nameLabel = new JLabel("URSULA");
-		JLabel roleLabel = new JLabel("Pembeli");
+		nameLabel = new JLabel();
+		roleLabel = new JLabel();
 		
 		nameLabel.setFont(new Font("ARIAL", Font.BOLD, 40));
 		roleLabel.setFont(new Font("ARIAL", Font.BOLD, 20));
@@ -246,6 +249,15 @@ public class BuyerPage extends Page {
 		public void setRole(String role) {
 			this.role = role;
 		}
-			
 		
+		@Override
+		protected void updateUserInfo() {
+		    if (user != null) {
+		        // Update UI 
+		    	nameLabel.setText(user.getUsername().toUpperCase());
+		    	roleLabel.setText(user.getRole().toUpperCase());
+		        // you can dynamically update label text if needed
+		    }
+		}
+			
 }

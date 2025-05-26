@@ -1,6 +1,9 @@
 package app.view;
 
 import javax.swing.*;
+
+import app.modules.User;
+
 import java.awt.*;
 
 public class MainWindow extends JFrame {
@@ -23,24 +26,26 @@ public class MainWindow extends JFrame {
   
   private void managePages() {
 	  
-	  Page winLogin = new LoginPage(
-			  e -> cardLayout.show(mainPane, "Penjual"),
-			  e -> cardLayout.show(mainPane, "Pembeli")
-			  );
 	  
-	  Page winPenj = new SellerPage(
+	  ProfilePages winPenj = new SellerPage(
 			  e -> cardLayout.show(mainPane, "Login"),
 			  e -> cardLayout.show(mainPane, "TambahBarang"),
 			  e -> cardLayout.show(mainPane, "Katalog")
 			  );
 	  
-	  Page winPem = new BuyerPage(
+	  ProfilePages winPem = new BuyerPage(
 			  e -> cardLayout.show(mainPane, "Login"), 
 			  e -> cardLayout.show(mainPane, "Katalog")
 			  );
 	  
 	  Page winTambahBarang = new AddGoodsPage(e -> cardLayout.show(mainPane, "Penjual"));
+	  
 	  Page winKatalog = new CatalogPage();
+	  
+	  Page winLogin = new LoginPage(
+			  e -> {winPenj.setUser(LoginPage.getCurrentUser()); cardLayout.show(mainPane, "Penjual");},
+			  e -> {winPem.setUser(LoginPage.getCurrentUser()); cardLayout.show(mainPane, "Pembeli");}
+			  );
 	  
 	  mainPane.add(winLogin, "Login");
 	  mainPane.add(winPenj, "Penjual");
@@ -52,5 +57,12 @@ public class MainWindow extends JFrame {
 	  cardLayout.show(mainPane, "Login"); // untuk testing layout
 	  setVisible(true);
   }
+  
+  
+  //--Metode untuk class user terisi atau tidak
+//  private void checkUserClass() {
+//	  User user = LoginPage.getCurrentUser();
+//	  System.out.println(user.getUsername() + user.getPassword()); 
+//  }
 
 }

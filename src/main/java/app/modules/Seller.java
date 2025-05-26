@@ -2,10 +2,10 @@ package app.modules;
 
 import java.util.ArrayList;
 
-public class Penjual extends User {
+public class Seller extends User {
 	ArrayList<Barang> barang;
 	
-	public Penjual(String username, String password) {
+	public Seller(String username, String password) {
 		super(username, password, "Penjual");
 		barang = new ArrayList<Barang>();
 	}
