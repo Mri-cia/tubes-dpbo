@@ -17,10 +17,7 @@ public class LoginPage extends Page  {
 	JLabel passLabel;
 	
 	JTextField nameField;
-	JTextField passField;
-	
-
-	
+	JPasswordField passField;
 	
 	CusButton submitButton;
 	
@@ -106,7 +103,7 @@ public class LoginPage extends Page  {
 		namePanel.setLayout(new GridBagLayout());
 		GridBagConstraints nameGBC = new GridBagConstraints();
 		nameLabel = new JLabel("Username");
-		nameField = new JTextField("Username");
+		nameField = new JTextField();
 		
 		nameLabel.setPreferredSize(new Dimension(250, 10));
 		nameField.setPreferredSize(new Dimension(250, 25));
@@ -124,7 +121,8 @@ public class LoginPage extends Page  {
 		passPanel.setLayout(new GridBagLayout());
 		GridBagConstraints passGBC = new GridBagConstraints();
 		passLabel = new JLabel("Password");
-		passField = new JTextField("****");
+		passField = new JPasswordField();
+		passField.setEchoChar('*');
 		
 		passLabel.setPreferredSize(new Dimension(250, 10));
 		passField.setPreferredSize(new Dimension(250, 25));
@@ -220,8 +218,8 @@ public class LoginPage extends Page  {
 		    	break;
 			}
 			
-			nameField.setText("Username");
-			passField.setText("***");
+			nameField.setText(null);
+			passField.setText(null);
 		});
 		
 	}
@@ -231,9 +229,9 @@ public class LoginPage extends Page  {
 		String nameFlavor = "Username";
 		String passFlavor = "***";
 	    String name = nameField.getText().trim();
-	    String pass = passField.getText().trim();
-	    boolean isNameValid = !name.equals("") && !name.equals(nameFlavor);
-	    boolean isPassValid = !pass.equals("") && !pass.equals(passFlavor);
+	    String pass = new String(passField.getPassword());
+	    boolean isNameValid = !name.equals("");
+	    boolean isPassValid = !pass.equals("");
 	    
 	    return isNameValid && isPassValid;
 	}
