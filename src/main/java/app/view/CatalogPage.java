@@ -1,6 +1,7 @@
 package app.view;
 
 import java.awt.BorderLayout;
+import javax.swing.table.DefaultTableCellRenderer;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
@@ -52,7 +53,7 @@ public class CatalogPage extends Page {
 	    
 	    //--Table Panel--//
 	    Dimension tableSize = new Dimension((int)(widthLimit * 0.9), 400);
-	    tradedGoods(tablePanel, tableSize);
+	    donatedGoods(tablePanel, tableSize);
 	    
 	    
 		//--Button Panel--//
@@ -146,6 +147,18 @@ public class CatalogPage extends Page {
         scroller = new JScrollPane(table);
         
         scroller.setPreferredSize(tableSize);
+        
+        // Center all columns
+        DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
+        centerRenderer.setHorizontalAlignment(JLabel.CENTER);
+
+        for (int i = 1; i < table.getColumnCount(); i++) {
+            table.getColumnModel().getColumn(i).setCellRenderer(centerRenderer);
+        }
+        
+        // Hide scrollbar UI but keep scroll functionality
+        scroller.getVerticalScrollBar().setPreferredSize(new Dimension(0, 0));
+        scroller.getHorizontalScrollBar().setPreferredSize(new Dimension(0, 0));
         
         tablePanel.add(scroller, BorderLayout.CENTER);
 

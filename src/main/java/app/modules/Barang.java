@@ -1,32 +1,36 @@
 package app.modules;
 
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.time.LocalDate;
+
+import app.utils.*;
 
 public class Barang {
 	private String name;
 	private String type;
 
-	private Date kadaluarsa;
+	private LocalDate kadaluarsa;
 	private int harga;
 	
-	private SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+	private LocalDate today = LocalDate.now();
 	
-	public Barang(String name, String type, Date kadalusarsa, int harga) {
+	public Barang(String name, String type, LocalDate kadaluarsa, int harga) {
 		this.name = name;
 		this.type = type;
 		this.kadaluarsa= kadaluarsa;
 		this.harga = harga;
 	}
 	
-	public boolean getKadaluarsa() throws ParseException {
-		Date tgl = sdf.parse(sdf.format(new Date()));
-		return tgl.after(this.kadaluarsa);
+	public boolean isKadaluarsa() throws ParseException {
+		if(kadaluarsa.isAfter(today)) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 	
 	public String getDate() {
-		return sdf.format(kadaluarsa);
+		return DateUtils.formatLocalDate(kadaluarsa);
 	}
 	
 	public String getName() {
