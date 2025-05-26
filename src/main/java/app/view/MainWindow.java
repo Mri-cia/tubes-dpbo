@@ -37,7 +37,7 @@ public class MainWindow extends JFrame {
 	  mainPane.add(winKatalog, "Katalog");
 	  
 	  add(mainPane);
-	  cardLayout.show(mainPane, "Pembeli"); // untuk testing layout
+	  cardLayout.show(mainPane, "Katalog"); // untuk testing layout
 	  setVisible(true);
   }
 

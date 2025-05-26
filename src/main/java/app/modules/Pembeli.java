@@ -1,6 +1,5 @@
 package app.modules;
 
-public class Pembeli {
+public class Pembeli{
 
-	
 }
