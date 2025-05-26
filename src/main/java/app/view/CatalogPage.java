@@ -126,12 +126,13 @@ public class CatalogPage extends Page {
 	
 	private void donatedGoods(JPanel tablePanel, Dimension tableSize) {
         // Convert item list to table data
+		DataBarang.initializeData();
         String[] columns = {"Nama", "Tipe", "Kadaluarsa", "Price (IDR)"};
         Object[][] data = new Object[DataBarang.listBarang.size()][4];
 
         for (int i = 0; i < DataBarang.listBarang.size(); i++) {
             Barang item = DataBarang.listBarang.get(i);
-            data[i][0] = DataBarang.listBarang.get(i).getName();
+            data[i][0] = item.getName();
             data[i][1] = item.getType();
             data[i][2] = item.getDate();
             data[i][3] = item.getHarga();
