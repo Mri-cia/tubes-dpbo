@@ -19,8 +19,7 @@ public class LoginPage extends Page  {
 	JTextField nameField;
 	JTextField passField;
 	
-	String nameFlavor = "Joko...";
-	String passFlavor = "8safva8";
+
 	
 	
 	CusButton submitButton;
@@ -220,12 +219,17 @@ public class LoginPage extends Page  {
 		    default:
 		    	break;
 			}
+			
+			nameField.setText("Username");
+			passField.setText("***");
 		});
 		
 	}
 	
 	//Validating if the text field is filled and not the same as placeholder
-	private boolean validateForm() {
+	private boolean validateForm() {	
+		String nameFlavor = "Username";
+		String passFlavor = "***";
 	    String name = nameField.getText().trim();
 	    String pass = passField.getText().trim();
 	    boolean isNameValid = !name.equals("") && !name.equals(nameFlavor);
