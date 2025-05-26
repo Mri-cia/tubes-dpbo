@@ -66,11 +66,11 @@ public class CusButton extends JButton {
 	}
 	
 	public CusButton(String text, int fontSize) {
+		this.fontSize = fontSize;
 		defaultStyle();
 		hoverEffect();
 		setText(text);
 		setEnabled(isEnabled);
-		setFont(new Font(this.getName(), Font.BOLD, fontSize));
 	}
 	
 	public CusButton(String text, int fontSize, boolean isEnabled) {

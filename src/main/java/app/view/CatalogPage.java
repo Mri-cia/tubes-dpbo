@@ -69,15 +69,30 @@ public class CatalogPage extends Page {
 		//leftBtnPanel.setBackground(Color.DARK_GRAY);
 		//rightBtnPanel.setBackground(Color.blue);
 		
+		
+		//Btn panel sizing
+		int outerWidth = -(int)(widthLimit * 0.08);
+		
+		outerLeft.setPreferredSize(new Dimension(outerWidth,0));
+		outerRight.setPreferredSize(new Dimension(outerWidth,0));
 		leftBtnPanel.setPreferredSize(new Dimension(275,0));
 		rightBtnPanel.setPreferredSize(new Dimension(275,0));
 		
+		
+		//Btn panel layout setup
 		rightBtnPanel.setAlignmentY(JPanel.CENTER_ALIGNMENT);
 		
 		buttonPanel.add(outerLeft);
 		buttonPanel.add(leftBtnPanel);
 		buttonPanel.add(rightBtnPanel);
 		buttonPanel.add(outerRight);
+		
+		
+		//--leftBtnPanel--//
+		leftBtnPanel.setLayout(new FlowLayout(FlowLayout.LEADING, 9, 5));
+		CusButton backBtn = new CusButton("Back", 12);
+		backBtn.setPreferredSize(new Dimension(100, 30));
+		leftBtnPanel.add(backBtn);
 		
 		
 		//--rightBtnPanel--//
@@ -146,6 +161,9 @@ public class CatalogPage extends Page {
 
         table = new JTable(data, columns);
         scroller = new JScrollPane(table);
+        
+        table.getTableHeader().setPreferredSize(new Dimension(table.getTableHeader().getWidth(), 38));
+        table.setRowHeight(30);
         
         table.setBackground(getBackground());
         scroller.setPreferredSize(tableSize);
