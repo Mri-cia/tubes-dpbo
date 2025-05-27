@@ -18,8 +18,8 @@ public class BuyerPage extends ProfilePages {
 	JTable table;
 	JScrollPane scroller;
 
-	JLabel nameLabel = new JLabel("URSULA");
-	JLabel roleLabel = new JLabel("Pembeli");
+	JLabel nameLabel = new JLabel();
+	JLabel roleLabel = new JLabel();
 	
 	public BuyerPage(ActionListener logout, ActionListener catalog) {
 		//--MainPanel setup--//

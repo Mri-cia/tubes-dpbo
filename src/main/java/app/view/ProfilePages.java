@@ -11,4 +11,5 @@ public abstract class ProfilePages extends Page{
     }
     
     protected abstract void updateUserInfo();
+    
 }

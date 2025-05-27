@@ -18,7 +18,9 @@ public class CatalogPage extends Page {
 	JTable table;
 	JScrollPane scroller;
 	
-	public CatalogPage() {
+	CusButton backBtn;
+	
+	public CatalogPage(ActionListener back) {
 	    // --MainPanel setup--//
 	    setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 	    JPanel titlePanel = new JPanel();
@@ -90,7 +92,7 @@ public class CatalogPage extends Page {
 		
 		//--leftBtnPanel--//
 		leftBtnPanel.setLayout(new FlowLayout(FlowLayout.LEADING, 9, 5));
-		CusButton backBtn = new CusButton("Back", 12);
+		backBtn = new CusButton("Back", 12);
 		backBtn.setPreferredSize(new Dimension(100, 30));
 		leftBtnPanel.add(backBtn);
 		
@@ -109,6 +111,8 @@ public class CatalogPage extends Page {
 		rightBtnPanel.add(addBtn);
 		rightBtnPanel.add(editBtn);
 		rightBtnPanel.add(deleteBtn);
+		
+		goBack(back);
 	    
 	}
 	
@@ -187,7 +191,9 @@ public class CatalogPage extends Page {
         repaint();
 	}
 	
-	private void goBack() {
-		
+	private void goBack(ActionListener back) {
+		backBtn.addActionListener(e -> {
+			back.actionPerformed(e);
+		});
 	}
 }

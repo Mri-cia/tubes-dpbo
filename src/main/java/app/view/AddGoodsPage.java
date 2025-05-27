@@ -7,13 +7,11 @@ import java.awt.event.*;
 import app.modules.*;
 import app.components.*;
 
-public class AddGoodsPage extends Page {
-
-  JLabel nameLabel;
-  JLabel passLabel;
-
-  JTextField nameField;
-  JTextField passField;
+public class AddGoodsPage extends ProfilePages {
+	private String role;
+	
+	JLabel nameLabel = new JLabel();
+	JLabel roleLabel = new JLabel();
 
   CusButton submitButton;
 
@@ -59,8 +57,8 @@ public class AddGoodsPage extends Page {
 
     // --nameProfile Panel--//
     nameProfile.setLayout(new BoxLayout(nameProfile, BoxLayout.Y_AXIS));
-    JLabel nameLabel = new JLabel("URSULA");
-    JLabel roleLabel = new JLabel("Penjual");
+    nameLabel = new JLabel("URSULA");
+    roleLabel = new JLabel("Penjual");
 
     nameLabel.setFont(new Font("ARIAL", Font.BOLD, 40));
     roleLabel.setFont(new Font("ARIAL", Font.BOLD, 20));
@@ -106,8 +104,8 @@ public class AddGoodsPage extends Page {
     // --Username Panel--//
     namePanel.setLayout(new GridBagLayout());
     GridBagConstraints nameGBC = new GridBagConstraints();
-    nameLabel = new JLabel("Nama Barang : ");
-    nameField = new JTextField("Username");
+    JLabel nameLabel = new JLabel("Nama Barang : ");
+    JTextField nameField = new JTextField("Username");
 
     nameLabel.setPreferredSize(new Dimension(100, 15));
     nameField.setPreferredSize(new Dimension(350, 25));
@@ -164,5 +162,19 @@ public class AddGoodsPage extends Page {
 
     buttonPanel.add(submitButton);
   }
+  
+	public void setRole(String role) {
+		this.role = role;
+	}
+	
+	@Override
+	protected void updateUserInfo() {
+	    if (user != null) {
+	        // Update UI 
+	    	nameLabel.setText(user.getUsername().toUpperCase());
+	    	roleLabel.setText(user.getRole().toUpperCase());
+	        // you can dynamically update label text if needed
+	    }
+	}
 
 }

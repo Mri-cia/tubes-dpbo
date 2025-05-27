@@ -138,8 +138,6 @@ public class LoginPage extends Page  {
 		//--Button Panel--//
 		buttonPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 60, 10));
 		CusButton submitButton = new CusButton("Submit", 13, false);
-//		optionPenjual = new JRadioButton("Penjual");
-//		optionPembeli = new JRadioButton("Pembeli");
 		//Dropdown
 		String[] roles = {"Penjual", "Pembeli", "Donatur", "Penerima"};
 		roleSelect = new JComboBox<>(roles); 
@@ -151,52 +149,19 @@ public class LoginPage extends Page  {
 		
 		submitButton.setPreferredSize(new Dimension(100, 40));
 		
-		
-//		buttonPanel.add(optionPenjual);
-//		buttonPanel.add(optionPembeli);
+
 		buttonPanel.add(roleSelect);
 		buttonPanel.add(submitButton);
 		
 		
-		//ALGORITHM
-		//Grouping radio button
-//		buttonGroup = new ButtonGroup();
-//		buttonGroup.add(optionPenjual);
-//		buttonGroup.add(optionPembeli);
-//
-//		//Enabling submit button
-//		ItemListener enableSubmit = e -> {
-//		    if ((optionPenjual.isSelected() || optionPembeli.isSelected()) && validateForm()) {
-//		        submitButton.setEnabled(true);
-//		    }
-//		};
-//		optionPenjual.addItemListener(enableSubmit);
-//		optionPembeli.addItemListener(enableSubmit);
 		
 		//DropdownSelection
-		
 		roleSelect.addActionListener(e -> {
 		    if (roleSelect.getSelectedItem() != null && validateForm()) {
 		    	submitButton.setEnabled(true);
 		    }
 		});
 		
-
-		//Enabling submit button
-//		ItemListener enableSubmit = e -> {
-//		    if ((optionPenjual.isSelected() || optionPembeli.isSelected()) && validateForm()) {
-//		        submitButton.setEnabled(true);
-//		    }
-//		};
-		
-//		//OnClicked submit button
-//		submitButton.addActionListener(e -> {
-//		    if (optionPenjual.isSelected()) {
-//		        userPenjual.actionPerformed(e);
-//		    } else if (optionPembeli.isSelected()) {
-//		        userPembeli.actionPerformed(e);
-//		    }
-//		});
 		
 		//OnClicked submit button
 		submitButton.addActionListener(e -> {
