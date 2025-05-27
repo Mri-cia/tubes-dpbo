@@ -3,10 +3,12 @@ package app.modules;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 
 import app.utils.*;
 
 public class DataBarang {
+	public static HashMap<String, ArrayList> data = new HashMap<>();
 	public static ArrayList<Barang> listBarang = new ArrayList<>();
 	
 	public static void initializeData() {
