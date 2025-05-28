@@ -3,8 +3,6 @@ package app.modules;
 import java.util.ArrayList;
 
 public class Seller extends User {
-	static ArrayList<Barang> barang;
-	
 	
 	public Seller(String username, String password) {
 		super(username, password, "Penjual");

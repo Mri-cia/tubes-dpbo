@@ -1,6 +1,9 @@
 package app.view;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.DefaultTableModel;
+
 import java.awt.*;
 import java.awt.event.*;
 
@@ -13,6 +16,9 @@ public class SellerPage extends ProfilePages{
 	int expiring = 0;
 	JTable table;
 	JScrollPane scroller;
+	
+	private JPanel tablePanel = new JPanel();
+	private JPanel modelPanel = new JPanel();
 
 	private JLabel nameLabel = new JLabel("URSULA");
 	private JLabel roleLabel = new JLabel("Penjual");
@@ -23,7 +29,6 @@ public class SellerPage extends ProfilePages{
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		JPanel profilePanel = new JPanel();
 		JPanel statPanel = new JPanel();
-		JPanel tablePanel = new JPanel();
 		JPanel buttonPanel = new JPanel();
 		
 		//testing boundaries
@@ -36,7 +41,8 @@ public class SellerPage extends ProfilePages{
 		//Sizing
 		profilePanel.setPreferredSize(new Dimension(0, 100));
 		statPanel.setMaximumSize(new Dimension(Integer.MAX_VALUE, 1));
-		tablePanel.setPreferredSize(new Dimension((int)(widthLimit * 0.08), 230));
+		
+		tablePanel.setPreferredSize(new Dimension(widthLimit, 200));
 		
 		add(Box.createRigidArea(new Dimension(0, 20)));
 		add(profilePanel);
@@ -136,8 +142,6 @@ public class SellerPage extends ProfilePages{
 		numberPanel.add(Box.createRigidArea(new Dimension(100, 0)));
 		numberPanel.add(goodsExpiring);
 		
-		//--Table Panel-//
-		refreshTable(tablePanel);
 		
 		
 		//--Button Panel--//
@@ -185,33 +189,27 @@ public class SellerPage extends ProfilePages{
 	
 	// Mengambil data dari class DataBarang dan tambahkan ke tabel
 	private void refreshTable(JPanel tablePanel) {
-        // Convert item list to table data
-        String[] columns = {"Nama", "Tipe", "Kadaluarsa", "Price (IDR)"};
-        Object[][] data = new Object[DataBarang.listBarang.size()][4];
+		modelPanel.removeAll(); //refresh panel
+		modelPanel.setPreferredSize(new Dimension((int)(widthLimit * 0.9), 230));
+		tablePanel.add(modelPanel);
 
-        for (int i = 0; i < DataBarang.listBarang.size(); i++) {
-            Barang item = DataBarang.listBarang.get(i);
-            data[i][0] = item.getName();
-            data[i][1] = item.getType();
-            data[i][2] = item.getDate();
-            data[i][3] = item.getHarga();
-        }
-
-        if (table != null) {
-            remove(scroller);
-        }
-
-        table = new JTable(data, columns);
-        scroller = new JScrollPane(table);
-        
-        scroller.setPreferredSize(new Dimension((int)(widthLimit * 0.8), 260));
-        
-        tablePanel.add(scroller, BorderLayout.CENTER);
-
-        revalidate();
-        repaint();
-    }
+		String[] columns = {"Nama", "Tipe", "Kadaluarsa", "Price (IDR)"};
+	    
+		Dimension tableSize = new Dimension((int)(widthLimit * 0.9), 400);
+		GoodsTable sellerTable = new GoodsTable(modelPanel, columns, widthLimit, heightLimit);
+				
+	    revalidate();
+	    repaint();
+	}
 		
+	@Override
+	public void setUser(User user) {
+	    this.user = user;
+	    DataBarang.getUser(user);
+	    updateUserInfo();
+	    refreshTable(tablePanel);
+	}
+
 
 
 	@Override

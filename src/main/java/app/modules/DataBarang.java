@@ -8,10 +8,14 @@ import java.util.HashMap;
 import app.utils.*;
 
 public class DataBarang {
-	public static HashMap<String, ArrayList> data = new HashMap<>();
-	public static ArrayList<Barang> listBarang = new ArrayList<>();
+	public static HashMap<User, ArrayList<Barang>> data = new HashMap<>();
+	private static ArrayList<Barang> listBarang;
+	
+	public static ArrayList<Barang> barangUser;
 	
 	public static void initializeData() {
+		//Penjual
+		listBarang = new ArrayList<>();
 		listBarang.add(new Barang("Pai Coklat", "Makanan", DateUtils.parseDateStr("2025-05-23"), 50000));
 		listBarang.add(new Barang("Es Teh Manis", "Minuman", DateUtils.parseDateStr("2025-06-01"), 15000));
 		listBarang.add(new Barang("Roti Tawar", "Makanan", DateUtils.parseDateStr("2025-05-30"), 20000));
@@ -27,7 +31,11 @@ public class DataBarang {
 		listBarang.add(new Barang("Mie Instan", "Makanan", DateUtils.parseDateStr("2025-06-07"), 12000));
 		listBarang.add(new Barang("Soda Lemon", "Minuman", DateUtils.parseDateStr("2025-06-11"), 26000));
 		listBarang.add(new Barang("Donat Gula", "Makanan", DateUtils.parseDateStr("2025-06-04"), 16000));
+		User ursula = new Seller("URSULA", "12");
+		data.put(ursula, listBarang);
 
+		//Donatur
+		listBarang = new ArrayList<>();
 		listBarang.add(new Barang("Bakso Sapi", "Makanan", DateUtils.parseDateStr("2025-06-13"), 35000));
 		listBarang.add(new Barang("Lemon Tea", "Minuman", DateUtils.parseDateStr("2025-06-06"), 17000));
 		listBarang.add(new Barang("Ayam Goreng", "Makanan", DateUtils.parseDateStr("2025-06-17"), 45000));
@@ -55,6 +63,73 @@ public class DataBarang {
 		listBarang.add(new Barang("Kue Lapis", "Makanan", DateUtils.parseDateStr("2025-07-07"), 21000));
 		listBarang.add(new Barang("Sirup Melon", "Minuman", DateUtils.parseDateStr("2025-07-08"), 11000));
 		listBarang.add(new Barang("Kue Cubit", "Makanan", DateUtils.parseDateStr("2025-07-09"), 16000));
+		User ralsna = new Donator("RALSNA", "12");
+		data.put(ralsna, listBarang);
+		
+		//Pembeli
+		listBarang = new ArrayList<>();
+		listBarang.add(new Barang("Pai Coklat", "Makanan", DateUtils.parseDateStr("2025-05-23"), 50000));
+		listBarang.add(new Barang("Teh Botol", "Minuman", DateUtils.parseDateStr("2025-06-15"), 8000));
+		listBarang.add(new Barang("Laptop Asus", "Elektronik", DateUtils.parseDateStr("2026-01-01"), 12000000));
+		listBarang.add(new Barang("Sabun Mandi", "Kebutuhan", DateUtils.parseDateStr("2025-07-01"), 12000));
+		listBarang.add(new Barang("Kemeja Batik", "Pakaian", DateUtils.parseDateStr("2025-08-10"), 150000));
+		listBarang.add(new Barang("Coklat SilverQueen", "Makanan", DateUtils.parseDateStr("2025-06-05"), 25000));
+		listBarang.add(new Barang("Air Mineral", "Minuman", DateUtils.parseDateStr("2025-07-20"), 5000));
+		listBarang.add(new Barang("Mouse Logitech", "Elektronik", DateUtils.parseDateStr("2026-02-01"), 350000));
+		listBarang.add(new Barang("Handuk", "Kebutuhan", DateUtils.parseDateStr("2025-09-30"), 40000));
+		listBarang.add(new Barang("Celana Jeans", "Pakaian", DateUtils.parseDateStr("2025-10-15"), 200000));
+		User ilya = new Buyer("ILYA", "12");
+		data.put(ilya, listBarang);
+		
+		//Penerima
+		listBarang = new ArrayList<>();
+		listBarang.add(new Barang("Biskuit Roma", "Makanan", DateUtils.parseDateStr("2025-06-25"), 18000));
+		listBarang.add(new Barang("Jus Mangga", "Minuman", DateUtils.parseDateStr("2025-07-18"), 12000));
+		listBarang.add(new Barang("Kipas Angin", "Elektronik", DateUtils.parseDateStr("2026-03-12"), 450000));
+		listBarang.add(new Barang("Pasta Gigi", "Kebutuhan", DateUtils.parseDateStr("2025-08-03"), 15000));
+		listBarang.add(new Barang("Jaket Hoodie", "Pakaian", DateUtils.parseDateStr("2025-11-22"), 250000));
+		User usha = new Donator("USHA", "12");
+		data.put(usha, listBarang);
+
+
+	}
+	
+	public static int getIndexUser(String username) {
+		int index = 0;
+		for (User u : data.keySet()) {
+			if(u.getUsername().equals(username)) {
+				return index;
+			}
+			index++;
+		}
+		return 0;
+	}
+	
+	public static void getUser(User user) {
+		if (barangUser != null) {
+			barangUser.clear();		
+			System.out.println("ini kosong");
+		}
+		barangUser = new ArrayList<>();
+			for (User u : data.keySet()) {
+				if (u.getUsername().equals(user.getUsername()) && u.getRole().equals(user.getRole())) {
+					barangUser = new ArrayList<>(data.get(u));
+					System.out.println("ini diambild ari barang");
+					break;
+				}
+				else if (!user.getBarang().isEmpty()) {
+						barangUser = user.getBarang();
+						System.out.println("ini ambil dari user");
+				} else if (!barangUser.isEmpty()){
+					barangUser = new ArrayList<>();
+				}
+				
+			}
+			
+		System.out.println("Data for user " + user.getUsername() + " | " + user.getRole() + ":");
+		for (Barang b : barangUser) {
+			System.out.println("- " + b.getName());
+		}
 	}
 	
 }

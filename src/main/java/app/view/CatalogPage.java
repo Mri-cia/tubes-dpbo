@@ -6,6 +6,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.*;
 
@@ -115,7 +116,7 @@ public class CatalogPage extends Page {
 		goBack(back);
 	    
 	}
-	
+	/*
 	private void tradedGoods(JPanel tablePanel, Dimension tableSize) {
         // Convert item list to table data
         String[] columns = {"Nama", "Tipe", "Kadaluarsa", "Price (IDR)"};
@@ -143,20 +144,26 @@ public class CatalogPage extends Page {
         revalidate();
         repaint();
 	}
-	
+	*/
 	private void donatedGoods(JPanel tablePanel, Dimension tableSize) {
         // Convert item list to table data
 		DataBarang.initializeData();
         String[] columns = {"Nama", "Tipe", "Kadaluarsa", "Price (IDR)"};
-        Object[][] data = new Object[DataBarang.listBarang.size()][5];
+        
+        ArrayList<Barang> allItems = new ArrayList<>();
+        for (ArrayList<Barang> list : DataBarang.data.values()) {
+			allItems.addAll(list);
+		}
+        
+        Object[][] data = new Object[allItems.size()][4];
+        
 
-        for (int i = 0; i < DataBarang.listBarang.size(); i++) {
-            Barang item = DataBarang.listBarang.get(i);
-            data[i][0] = item.getName();
-            data[i][1] = item.getType();
-            data[i][2] = item.getDate();
-            data[i][3] = item.getHarga();
-            data[i][4] = new CusButton("edit");
+        for (int i = 0; i < allItems.size(); i++) {
+        		Barang item = allItems.get(i);
+        		data[i][0] = item.getName();
+        		data[i][1] = item.getType();
+        		data[i][2] = item.getDate();
+        		data[i][3] = item.getHarga();
         }
 
         if (table != null) {
