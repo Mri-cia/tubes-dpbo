@@ -2,6 +2,9 @@ package app.view;
 
 import javax.swing.*;
 import javax.swing.border.*;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
+
 import java.awt.*;
 import java.awt.event.*;
 
@@ -24,7 +27,9 @@ public class LoginPage extends Page  {
 	String pass;
 	
 	JComboBox<String> roleSelect;
-
+	
+	CusButton submitButton;
+	
 	
 	public LoginPage(ActionListener userPenjual, ActionListener userPembeli) {
 		
@@ -137,7 +142,7 @@ public class LoginPage extends Page  {
 		
 		//--Button Panel--//
 		buttonPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 60, 10));
-		CusButton submitButton = new CusButton("Submit", 13, false);
+		submitButton = new CusButton("Submit", 13, false);
 		//Dropdown
 		String[] roles = {"Penjual", "Pembeli", "Donatur", "Penerima"};
 		roleSelect = new JComboBox<>(roles); 
@@ -153,16 +158,52 @@ public class LoginPage extends Page  {
 		buttonPanel.add(roleSelect);
 		buttonPanel.add(submitButton);
 		
+		verification();
+		
+		pageDirection(userPenjual, userPembeli);
 		
 		
-		//DropdownSelection
-		roleSelect.addActionListener(e -> {
-		    if (roleSelect.getSelectedItem() != null && validateForm()) {
-		    	submitButton.setEnabled(true);
+	}
+	
+	private void verification() {
+		DocumentListener inputListener = new DocumentListener() {
+		    public void insertUpdate(DocumentEvent e) {
+		        checkFields();
 		    }
-		});
+
+		    public void removeUpdate(DocumentEvent e) {
+		        checkFields();
+		    }
+
+		    public void changedUpdate(DocumentEvent e) {
+		        checkFields();
+		    }
+		};
+
+		nameField.getDocument().addDocumentListener(inputListener);
+		passField.getDocument().addDocumentListener(inputListener);
+		roleSelect.addActionListener(e -> checkFields());
+
+	}
+	
+	private void checkFields() {
+		String name = nameField.getText().trim();
+		String pass = new String(passField.getPassword());
+		boolean allValid = !name.isEmpty() && !pass.isEmpty() && roleSelect.getSelectedItem() != null;
 		
-		
+		submitButton.setEnabled(allValid);
+	}
+	
+	//Validating if the text field is filled and not the same as placeholder
+	private boolean validateForm() {
+		getForm();
+	    boolean isNameValid = !name.equals("");
+	    boolean isPassValid = !pass.equals("");
+	    
+	    return isNameValid && isPassValid;
+	}
+	
+	private void pageDirection(ActionListener userPenjual, ActionListener userPembeli) {
 		//OnClicked submit button
 		submitButton.addActionListener(e -> {
 			String selectedRole = (String)roleSelect.getSelectedItem();
@@ -195,16 +236,6 @@ public class LoginPage extends Page  {
 			
 			submitButton.setEnabled(false);
 		});
-		
-	}
-	
-	//Validating if the text field is filled and not the same as placeholder
-	private boolean validateForm() {
-		getForm();
-	    boolean isNameValid = !name.equals("");
-	    boolean isPassValid = !pass.equals("");
-	    
-	    return isNameValid && isPassValid;
 	}
 	
 	private void getForm() {
