@@ -88,7 +88,7 @@ public class DataBarang {
 		listBarang.add(new Barang("Kipas Angin", "Elektronik", DateUtils.parseDateStr("2026-03-12"), 450000));
 		listBarang.add(new Barang("Pasta Gigi", "Kebutuhan", DateUtils.parseDateStr("2025-08-03"), 15000));
 		listBarang.add(new Barang("Jaket Hoodie", "Pakaian", DateUtils.parseDateStr("2025-11-22"), 250000));
-		User usha = new Donator("USHA", "12");
+		User usha = new Recipient("USHA", "12");
 		data.put(usha, listBarang);
 
 
