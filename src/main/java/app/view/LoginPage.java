@@ -8,7 +8,10 @@ import javax.swing.event.DocumentListener;
 import java.awt.*;
 import java.awt.event.*;
 
-import app.components.CusButton;
+import app.components.CButton;
+import app.components.CDropDown;
+import app.components.CPasswordField;
+import app.components.CTextField;
 import app.modules.*;
 
 public class LoginPage extends Page  {
@@ -20,19 +23,18 @@ public class LoginPage extends Page  {
 	JLabel nameLabel;
 	JLabel passLabel;
 	
-	JTextField nameField;
-	JPasswordField passField;
+	CTextField nameField;
+	CPasswordField passField;
 	
 	String name;;
 	String pass;
 	
-	JComboBox<String> roleSelect;
+	CDropDown<String> roleSelect;
 	
-	CusButton submitButton;
+	CButton submitButton;
 	
 	
 	public LoginPage(ActionListener userPenjual, ActionListener userPembeli) {
-		
 		
 		
 		//--MainPanel setup--//
@@ -106,10 +108,11 @@ public class LoginPage extends Page  {
 		namePanel.setLayout(new GridBagLayout());
 		GridBagConstraints nameGBC = new GridBagConstraints();
 		nameLabel = new JLabel("Username");
-		nameField = new JTextField();
+		nameField = new CTextField("Ursula", colors[2]);
 		
 		nameLabel.setPreferredSize(new Dimension(250, 10));
 		nameField.setPreferredSize(new Dimension(250, 25));
+		
 		
 		nameGBC.insets = new Insets(0, 0, 10, 0);
 		
@@ -124,7 +127,7 @@ public class LoginPage extends Page  {
 		passPanel.setLayout(new GridBagLayout());
 		GridBagConstraints passGBC = new GridBagConstraints();
 		passLabel = new JLabel("Password");
-		passField = new JPasswordField();
+		passField = new CPasswordField("Y813K", colors[2]);
 		passField.setEchoChar('*');
 		
 		passLabel.setPreferredSize(new Dimension(250, 10));
@@ -142,14 +145,12 @@ public class LoginPage extends Page  {
 		
 		//--Button Panel--//
 		buttonPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 60, 10));
-		submitButton = new CusButton("Submit", 13, false);
+		submitButton = new CButton("Submit", 13, false);
+		
 		//Dropdown
 		String[] roles = {"Penjual", "Pembeli", "Donatur", "Penerima"};
-		roleSelect = new JComboBox<>(roles); 
-		
-		roleSelect.setBackground(getBackground());
-		roleSelect.setForeground(new Color(0x404040));
-		roleSelect.setBorder(BorderFactory.createEmptyBorder());
+		roleSelect = new CDropDown<>(roles); 
+		roleSelect.setPreferredSize(new Dimension(90, 27));
 		
 		
 		submitButton.setPreferredSize(new Dimension(100, 40));

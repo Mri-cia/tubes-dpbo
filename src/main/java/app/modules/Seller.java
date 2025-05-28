@@ -11,6 +11,7 @@ public class Seller extends User {
 	
 	public void tambahBarang(Barang barang) {
 		this.barang.add(barang);
+		System.out.println(barang);
 	}
 	
 	public void editBarang(Barang barang) {

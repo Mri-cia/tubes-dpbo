@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 import javax.swing.*;
 
-import app.components.CusButton;
+import app.components.CButton;
 import app.modules.Barang;
 import app.modules.DataBarang;
 
@@ -19,7 +19,7 @@ public class CatalogPage extends Page {
 	JTable table;
 	JScrollPane scroller;
 	
-	CusButton backBtn;
+	CButton backBtn;
 	
 	public CatalogPage(ActionListener back) {
 	    // --MainPanel setup--//
@@ -93,16 +93,16 @@ public class CatalogPage extends Page {
 		
 		//--leftBtnPanel--//
 		leftBtnPanel.setLayout(new FlowLayout(FlowLayout.LEADING, 9, 5));
-		backBtn = new CusButton("Back", 12);
+		backBtn = new CButton("Back", 12);
 		backBtn.setPreferredSize(new Dimension(100, 30));
 		leftBtnPanel.add(backBtn);
 		
 		
 		//--rightBtnPanel--//
 		rightBtnPanel.setLayout(new FlowLayout(FlowLayout.TRAILING, 9, 5));
-		CusButton addBtn = new CusButton("add", 12);
-		CusButton editBtn = new CusButton("edit", 12);
-		CusButton deleteBtn = new CusButton("Lorem", 12);
+		CButton addBtn = new CButton("add", 12);
+		CButton editBtn = new CButton("edit", 12);
+		CButton deleteBtn = new CButton("Lorem", 12);
 		
 		addBtn.setPreferredSize(new Dimension(100, 30));
 		editBtn.setPreferredSize(new Dimension(100, 30));

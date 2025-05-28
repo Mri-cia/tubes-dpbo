@@ -92,7 +92,7 @@ public class SellerPage extends ProfilePages{
 		
 		//--logoutPanel--//
 		logoutPanel.setLayout(new BoxLayout(logoutPanel, BoxLayout.Y_AXIS));
-		CusButton logoutBtn = new CusButton("Back");
+		CButton logoutBtn = new CButton("Back");
 		
 		logoutBtn.setHoverEnabled(false);
 		
@@ -170,9 +170,9 @@ public class SellerPage extends ProfilePages{
 		
 		//--rightBtnPanel--//
 		rightBtnPanel.setLayout(new FlowLayout(FlowLayout.TRAILING, 10, 5));
-		CusButton addBtn = new CusButton("add", 12);
-		CusButton editBtn = new CusButton("edit", 12);
-		CusButton deleteBtn = new CusButton(new ImageIcon("C:\\Users\\rawik\\Documents\\Kuliah\\DPBO\\Tubes\\src\\main\\java\\assets\\delete_icon.png"));
+		CButton addBtn = new CButton("add", 12);
+		CButton editBtn = new CButton("edit", 12);
+		CButton deleteBtn = new CButton(new ImageIcon("C:\\Users\\rawik\\Documents\\Kuliah\\DPBO\\Tubes\\src\\main\\java\\assets\\delete_icon.png"));
 		
 		addBtn.setPreferredSize(new Dimension(100, 30));
 		editBtn.setPreferredSize(new Dimension(100, 30));

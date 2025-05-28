@@ -10,12 +10,17 @@ import app.utils.DateUtils;
 import app.components.*;
 
 public class AddGoodsPage extends ProfilePages {
-	private String role;
+  private String role;
 	
-	JLabel nameLabel = new JLabel();
-	JLabel roleLabel = new JLabel();
+  JLabel nameLabel = new JLabel();
+  JLabel roleLabel = new JLabel();
+  
+  CTextField nameField;
+  CTextField typeField;
+  CTextField priceField;
+  CTextField expireField;
 
-  CusButton submitButton;
+  CButton submitButton;
 
   public AddGoodsPage(ActionListener a) {
     // --MainPanel setup--//
@@ -24,7 +29,7 @@ public class AddGoodsPage extends ProfilePages {
     JPanel lineProfile = new JPanel();
     JPanel nameProfile = new JPanel();
     JPanel backPanel = new JPanel();
-
+    
     JPanel formPanel = new JPanel();
 
     // Sizing
@@ -71,7 +76,7 @@ public class AddGoodsPage extends ProfilePages {
 
     // --backPanel--//
     backPanel.setLayout(new BoxLayout(backPanel, BoxLayout.Y_AXIS));
-    CusButton backBtn = new CusButton("back", 12);
+    CButton backBtn = new CButton("back", 12);
 
     backBtn.addActionListener(e -> {
       a.actionPerformed(e);
@@ -111,7 +116,7 @@ public class AddGoodsPage extends ProfilePages {
     namePanel.setLayout(new GridBagLayout());
     GridBagConstraints nameGBC = new GridBagConstraints();
     JLabel nameLabel = new JLabel("Nama Barang : ");
-    JTextField nameField = new JTextField("Kopi/Burger");
+    nameField = new CTextField("Kopi/Burger", colors[2]);
 
     nameLabel.setPreferredSize(new Dimension(100, 15));
     nameField.setPreferredSize(new Dimension(350, 25));
@@ -178,7 +183,7 @@ public class AddGoodsPage extends ProfilePages {
 
     // --Button Panel--//
     buttonPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 7, 0));
-    submitButton = new CusButton("Submit", 13, false);
+    submitButton = new CButton("Submit", 13, false);
 
     submitButton.setPreferredSize(new Dimension(100, 40));
     
@@ -205,6 +210,10 @@ public class AddGoodsPage extends ProfilePages {
 	    	roleLabel.setText(user.getRole().toUpperCase());
 	        // you can dynamically update label text if needed
 	    }
+	}
+	
+	private void addBarang() {
+		
 	}
 
 }

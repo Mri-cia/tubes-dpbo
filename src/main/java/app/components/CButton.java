@@ -5,7 +5,7 @@ import javax.swing.border.*;
 import java.awt.*;
 import java.awt.event.*;
 
-public class CusButton extends JButton {
+public class CButton extends JButton {
 	private int fontSize = 10;
 	private boolean isEnabled = true;
 	private boolean isAllowedHover = true;
@@ -16,75 +16,38 @@ public class CusButton extends JButton {
 		setFocusable(false);
 		setFont(new Font("ARIAL", Font.BOLD, fontSize));
 		setBorder(null);
-		setBackground(new Color(0x404040));
-		setForeground(new Color(0xf5f5f5));
+		setBackground(new Color(0x3f3f46));
+		setForeground(new Color(0xf4f4f5));
 	}
 	
-	public void hoverEffect() {
-		addMouseListener(new MouseAdapter() {
-			
-			@Override
-			public void mouseEntered(MouseEvent e) {
-				if(isEnabled && isAllowedHover) {
-					defaultStyle();
-
-				}
-			}
-
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				defaultStyle();
-			}
-
-			@Override
-			public void mousePressed(MouseEvent e) {
-				setBackground(new Color(0xffffff));
-				setForeground(Color.black);
-				setCursor(new Cursor(Cursor.HAND_CURSOR));
-				setOpaque(true);
-				repaint();
-			}
-
-			@Override
-			public void mouseReleased(MouseEvent e) {
-				defaultStyle();
-			}
-
-			@Override
-			public void mouseExited(MouseEvent e) {
-				defaultStyle();
-			}
-		});
-	}
-	
-	public CusButton(String text) {
+	public CButton(String text) {
 		defaultStyle();
-		hoverEffect();
+		
 		setText(text);
 		setEnabled(isEnabled);
 	}
 	
-	public CusButton(ImageIcon icon) {
+	public CButton(ImageIcon icon) {
 		defaultStyle();
-		hoverEffect();
+		
 		setIcon((Icon)icon);
 		setEnabled(isEnabled);
 	}
 	
-	public CusButton(String text, int fontSize) {
+	public CButton(String text, int fontSize) {
 		this.fontSize = fontSize;
 		defaultStyle();
-		hoverEffect();
+		
 		setText(text);
 		setEnabled(isEnabled);
 	}
 	
-	public CusButton(String text, int fontSize, boolean isEnabled) {
+	public CButton(String text, int fontSize, boolean isEnabled) {
 		this.fontSize = fontSize;
 		this.radius = radius;
 		this.isEnabled = isEnabled;
 		defaultStyle();
-		hoverEffect();
+		
 		setText(text);
 		setEnabled(isEnabled);
 	}

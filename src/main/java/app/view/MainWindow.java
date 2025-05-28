@@ -21,6 +21,8 @@ public class MainWindow extends JFrame {
     setResizable(false);
     setLocationRelativeTo(null);
     
+    setBackground(new Color(0xfafafa));
+    
     DataBarang.initializeData(); //Inisialisasi data awal
     managePages();
 

@@ -4,7 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
-import app.components.CusButton;
+import app.components.CButton;
 import app.components.GoodsTable;
 import app.modules.Barang;
 import app.modules.DataBarang;
@@ -92,7 +92,7 @@ public class BuyerPage extends ProfilePages {
 		
 		//--logoutPanel--//
 		logoutPanel.setLayout(new BoxLayout(logoutPanel, BoxLayout.Y_AXIS));
-		CusButton logoutBtn = new CusButton("back");
+		CButton logoutBtn = new CButton("back");
 		
 		logoutBtn.setHoverEnabled(false);
 		
@@ -206,7 +206,7 @@ public class BuyerPage extends ProfilePages {
 		
 		//--rightBtnPanel--//
 		rightBtnPanel.setLayout(new FlowLayout(FlowLayout.TRAILING, 10, 5));
-		CusButton deleteBtn = new CusButton("To Catalog...", 13);
+		CButton deleteBtn = new CButton("To Catalog...", 13);
 		
 		deleteBtn.addActionListener(catalog);
 		
