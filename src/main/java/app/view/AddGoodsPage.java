@@ -3,8 +3,10 @@ package app.view;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.time.LocalDate;
 
 import app.modules.*;
+import app.utils.DateUtils;
 import app.components.*;
 
 public class AddGoodsPage extends ProfilePages {
@@ -81,6 +83,7 @@ public class AddGoodsPage extends ProfilePages {
     formPanel.setLayout(new BoxLayout(formPanel, BoxLayout.Y_AXIS));
     JPanel namePanel = new JPanel();
     JPanel typePanel = new JPanel();
+    JPanel pricePanel = new JPanel();
     JPanel datePanel = new JPanel();
     JPanel buttonPanel = new JPanel();
 
@@ -88,6 +91,7 @@ public class AddGoodsPage extends ProfilePages {
     
     namePanel.setMaximumSize(new Dimension((int)(widthLimit/1.5), 40));
     typePanel.setMaximumSize(new Dimension((int)(widthLimit/1.5), 40));
+    pricePanel.setMaximumSize(new Dimension((int)(widthLimit/1.5), 40));
     datePanel.setMaximumSize(new Dimension((int)(widthLimit/1.5), 40));
     buttonPanel.setMaximumSize(new Dimension((int)(widthLimit/1.5), 40));
 
@@ -96,20 +100,21 @@ public class AddGoodsPage extends ProfilePages {
     formPanel.add(Box.createRigidArea(new Dimension(0, 10)));
     formPanel.add(typePanel);
     formPanel.add(Box.createRigidArea(new Dimension(0, 10)));
+    formPanel.add(pricePanel);
+    formPanel.add(Box.createRigidArea(new Dimension(0, 10)));
     formPanel.add(datePanel);
     formPanel.add(Box.createRigidArea(new Dimension(0, 10)));
     formPanel.add(buttonPanel);
     formPanel.add(Box.createRigidArea(new Dimension(0, 10)));
 
-    // --Username Panel--//
+    // --Goods name Panel--//
     namePanel.setLayout(new GridBagLayout());
     GridBagConstraints nameGBC = new GridBagConstraints();
     JLabel nameLabel = new JLabel("Nama Barang : ");
-    JTextField nameField = new JTextField("Username");
+    JTextField nameField = new JTextField("Kopi/Burger");
 
     nameLabel.setPreferredSize(new Dimension(100, 15));
     nameField.setPreferredSize(new Dimension(350, 25));
-
 
     nameGBC.gridx = 1;
     nameGBC.anchor = GridBagConstraints.WEST;
@@ -136,6 +141,23 @@ public class AddGoodsPage extends ProfilePages {
     typeGBC.weightx = 1.0;
     typePanel.add(typeField, typeGBC);
     
+    // --Price Panel--//
+    pricePanel.setLayout(new GridBagLayout());
+    GridBagConstraints priceGBC = new GridBagConstraints();
+    JLabel priceLabel = new JLabel("Harga Barang : ");
+    JTextField priceField = new JTextField("10000");
+
+    priceLabel.setPreferredSize(new Dimension(100, 15));
+    priceField.setPreferredSize(new Dimension(350, 25));
+
+    priceGBC.gridx = 1;
+    priceGBC.anchor = GridBagConstraints.WEST;
+    pricePanel.add(priceLabel, priceGBC);
+    priceGBC.gridx = 2;
+    priceGBC.anchor = GridBagConstraints.EAST;
+    priceGBC.weightx = 1.0;
+    pricePanel.add(priceField, priceGBC);
+    
     // --Date Panel--//
     datePanel.setLayout(new GridBagLayout());
     GridBagConstraints dateGBC = new GridBagConstraints();
@@ -159,7 +181,15 @@ public class AddGoodsPage extends ProfilePages {
     submitButton = new CusButton("Submit", 13, false);
 
     submitButton.setPreferredSize(new Dimension(100, 40));
-
+    
+    submitButton.addActionListener(e-> {
+      String name = nameField.getText().trim();
+      String type = typeField.getText().trim();
+      int price = Integer.parseInt(priceField.getText().trim());
+      LocalDate date = DateUtils.parseDateStr(dateField.getText().trim());
+      Barang barang = new Barang(name, type, date, price);
+    });
+    
     buttonPanel.add(submitButton);
   }
   
