@@ -8,6 +8,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.event.ActionListener;
+import java.awt.event.HierarchyEvent;
 import java.util.ArrayList;
 
 import javax.swing.*;
@@ -31,9 +32,13 @@ public class CatalogPage extends Page {
 	
 	ActionListener login;
 	
+	private boolean hasShownError = false;
+	
 	public CatalogPage(ActionListener login, ActionListener back, JFrame mainFrame) {
 		this.mainFrame = mainFrame;
 		this.login = login;
+		
+
 		
 	    // --MainPanel setup--//
 	    setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
@@ -126,6 +131,21 @@ public class CatalogPage extends Page {
 		rightBtnPanel.add(deleteBtn);
 		
 		goBack(back);
+		
+		addHierarchyListener(e -> {
+		    boolean isShowing = (e.getChangeFlags() & HierarchyEvent.SHOWING_CHANGED) != 0;
+		    if (isShowing && isShowing()) {        
+		    	SwingUtilities.invokeLater(() -> {
+		            if (user == null && !hasShownError) {
+		                hasShownError = true; // Prevent repeated popups
+		                checkUserAccess();
+	            }
+	        });
+		    }
+		});
+
+		
+		
 	}
 	private void tradedGoods() {
 		modelPanel.removeAll(); //refresh panel
@@ -159,7 +179,7 @@ public class CatalogPage extends Page {
 				for (Barang b : DataBarang.data.get(u)) {
 					allItems.add(b);
 				}
-			}
+			} 
 		}
 		
 		donatedTable = new GoodsTable(modelPanel, columns, allItems, widthLimit, heightLimit);
@@ -174,17 +194,14 @@ public class CatalogPage extends Page {
 		});
 	}	
 	
-	@Override
-	public void addNotify() {
-	    super.addNotify();
-
+	public void checkUserAccess() {
 	    // Error pop up when enter catalogue without an account 
-	    if (this.user == null) {
+	    if (this.user == null) { 
 	        SwingUtilities.invokeLater(() -> {
 	            try {
 	                throw new AppException(ErrorMessage.NO_ROLE_FOUND.getMessage());
 	            } catch (AppException e) {
-	            	CErrorDialog currentError =  new CErrorDialog(mainFrame, e.getMessage(), 2);
+	            	CErrorDialog currentError =  new CErrorDialog(mainFrame, e.getMessage(), 2); 
 	            	currentError.setBtn1("Go to Login");
 	            	currentError.setBtn2("Exit");
 	            	currentError.setBtn1Action(login);

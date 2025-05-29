@@ -8,13 +8,15 @@ import app.modules.User;
 import app.exception.*;
 
 import java.awt.*;
+import java.util.HashMap;
 
 public class MainWindow extends JFrame {
-  private CardLayout cardLayout = new CardLayout();
-  private JPanel mainPane = new JPanel(cardLayout);
+  private CardLayout cardLayout;
+  private JPanel mainPane;
   private static Dimension winSize = new Dimension(800, 600);
   public static double winWidth = winSize.getWidth();
   public static double winHeight = winSize.getHeight();
+  
 
   public MainWindow() {
     setSize(winSize);
@@ -27,10 +29,12 @@ public class MainWindow extends JFrame {
     
     DataBarang.initializeData(); //Inisialisasi data awal
     managePages();
-
   }
   
   private void managePages() {
+	  cardLayout = new CardLayout();
+	  mainPane = new JPanel(cardLayout);
+	  
 	  Page winTambahBarang;
 	  Page winKatalog;
 	  Page winPenj;
@@ -75,17 +79,15 @@ public class MainWindow extends JFrame {
 	  mainPane.add(winKatalog, "Katalog");
 	  
 	  add(mainPane);
-	  cardLayout.show(mainPane, "Login"); // untuk testing layout
+	  cardLayout.show(mainPane, "Login");// untuk testing layout
 	  setVisible(true);
   }
   
-
   
   
   //--Metode untuk class user terisi atau tidak
-//  private void checkUserClass() {
+//  private void checkUserClass() { 
 //	  User user = LoginPage.getCurrentUser();
 //	  System.out.println(user.getUsername() + user.getPassword()); 
 //  }
-
 }
