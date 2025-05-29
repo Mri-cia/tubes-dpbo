@@ -26,5 +26,12 @@ public abstract class Page extends JPanel{
 			new Color(0x09090b),
 	};
 	
+	protected User user;
 	
+    public void setUser(User user){
+        this.user = user;
+        updateUserInfo();
+    }
+    
+    protected void updateUserInfo() {};
 }

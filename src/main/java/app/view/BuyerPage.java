@@ -10,7 +10,7 @@ import app.modules.Barang;
 import app.modules.DataBarang;
 import app.modules.User;
 
-public class BuyerPage extends ProfilePages {
+public class BuyerPage extends Page {
 	private String role;
 	private int itemsBought = 0;
 	private int moneySpent = 0;

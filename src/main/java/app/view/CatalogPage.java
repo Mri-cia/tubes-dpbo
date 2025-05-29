@@ -19,7 +19,7 @@ import app.exception.AppException;
 import app.exception.ErrorMessage;
 import app.modules.*;
 
-public class CatalogPage extends ProfilePages {
+public class CatalogPage extends Page {
 	JFrame mainFrame;
 
 	JTable table;
@@ -172,17 +172,7 @@ public class CatalogPage extends ProfilePages {
 		backBtn.addActionListener(e -> {
 			back.actionPerformed(e);
 		});
-	}
-	
-//	public void errorPopup() {
-//	    try {
-//	    	if (user == null) {
-//	    		throw new AppException(ErrorMessage.NO_ROLE_FOUND.getMessage());
-//	    	}
-//		} catch (AppException e) {
-//			e.showPopup();
-//		}
-//	}
+	}	
 	
 	@Override
 	public void addNotify() {
@@ -218,10 +208,5 @@ public class CatalogPage extends ProfilePages {
 	    	donatedGoods();
 	    }
 	}
-	
-	@Override
-	protected void updateUserInfo() {
-		// TODO Auto-generated method stub
-		
-	}
+
 }

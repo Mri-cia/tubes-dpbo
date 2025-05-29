@@ -10,7 +10,7 @@ import java.awt.event.*;
 import app.modules.*;
 import app.components.*;
 
-public class SellerPage extends ProfilePages{
+public class SellerPage extends Page{
 	int totalItem = 0;
 	int value = 0;
 	int expiring = 0;

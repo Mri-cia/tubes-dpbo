@@ -31,11 +31,10 @@ public class MainWindow extends JFrame {
   }
   
   private void managePages() {
-	  ProfilePages winTambahBarang;
-	  ProfilePages winKatalog;
-	  ProfilePages winPenj;
-	  ProfilePages winPem;
-	  
+	  Page winTambahBarang;
+	  Page winKatalog;
+	  Page winPenj;
+	  Page winPem;
 	  Page winLogin;
 	  
 	  

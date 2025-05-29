@@ -9,7 +9,7 @@ import app.modules.*;
 import app.utils.DateUtils;
 import app.components.*;
 
-public class AddGoodsPage extends ProfilePages {
+public class AddGoodsPage extends Page {
   private String role;
 	
   JLabel nameLabel = new JLabel();
