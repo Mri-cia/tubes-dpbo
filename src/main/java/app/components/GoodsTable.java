@@ -45,19 +45,54 @@ public class GoodsTable extends JScrollPane{
 	        model.setRowCount(0); // Clear existing rows
 	    }
 	    
-	    // Add rows from DataBarang.barangUser
-	    for (Barang item : DataBarang.barangUser) {
-	        Object[] row = {
-	            item.getName(),
-	            item.getType(),
-	            item.getDate(),
-	            item.getHarga()
-	        };
-	        model.addRow(row);
-	    }
+	    	// Add rows from DataBarang.barangUser
+	    	for (Barang item : DataBarang.barangUser) {
+	    		Object[] row = {
+	    				item.getName(),
+	    				item.getType(),
+	    				item.getDate(),
+	    				item.getHarga()
+	    		};
+	    		model.addRow(row);
+	    	}
+	    
 		
 		tableStyle();
 	}
+	
+	public GoodsTable(JPanel panel, String[] headerTitle, ArrayList<Barang> data, int widthLimit, int heightLimit) {
+		
+	    // Create or reuse DefaultTableModel
+	    DefaultTableModel model;
+	    if (table == null) {
+	        model = new DefaultTableModel(headerTitle, 0);
+	        table = new JTable(model);
+	        setViewportView(table);;
+	        
+	        setPreferredSize(new Dimension((int)(widthLimit * 0.8), 260));
+	        panel.setLayout(new BorderLayout()); // Make sure layout is BorderLayout to use CENTER properly
+	        panel.add(this, BorderLayout.CENTER);
+	    } else {
+	        // If table already exists, get model and clear rows
+	        model = (DefaultTableModel) table.getModel();
+	        model.setRowCount(0); // Clear existing rows
+	    }
+	    	// Add rows from DataBarang.data
+    		for (Barang item : data) {
+    			Object[] row = {
+    					item.getName(),
+    					item.getType(),
+    					item.getDate(),
+    					item.getHarga()
+    			};
+    			model.addRow(row);
+    		}
+	    
+		
+		tableStyle();
+	}
+	
+
 	
 	public void setTableSize(Dimension tableSize) {
 		this.tableSize = tableSize;

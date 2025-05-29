@@ -194,6 +194,7 @@ public class SellerPage extends ProfilePages{
 		tablePanel.add(modelPanel);
 
 		String[] columns = {"Nama", "Tipe", "Kadaluarsa", "Price (IDR)"};
+
 	    
 		Dimension tableSize = new Dimension((int)(widthLimit * 0.9), 400);
 		GoodsTable sellerTable = new GoodsTable(modelPanel, columns, widthLimit, heightLimit);

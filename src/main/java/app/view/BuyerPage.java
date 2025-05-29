@@ -233,7 +233,7 @@ public class BuyerPage extends ProfilePages {
 	    }
 		
 		@Override
-		public void setUser(User user) {
+		public void setUser(User user){
 		    this.user = user;
 		    DataBarang.getUser(user); // <-- Tambahkan ini
 		    updateUserInfo();

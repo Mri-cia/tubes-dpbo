@@ -18,6 +18,7 @@ public class CButton extends JButton {
 		setBorder(null);
 		setBackground(new Color(0x3f3f46));
 		setForeground(new Color(0xf4f4f5));
+		setVisible(true);
 	}
 	
 	public CButton(String text) {
@@ -51,6 +52,10 @@ public class CButton extends JButton {
 		setText(text);
 		setEnabled(isEnabled);
 	}
+	
+//	public void setSize(int x, int y) {
+//		setPreferredSize(new Dimension(x,y));
+//	}
 	
 	public void setIconSize(int x, int y) {
 		Image image = ((Image) this.getIcon()).getScaledInstance(20, 20, Image.SCALE_SMOOTH);

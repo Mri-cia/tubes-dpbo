@@ -5,7 +5,7 @@ import app.modules.User;
 public abstract class ProfilePages extends Page{
 	protected User user;
 	
-    public void setUser(User user) {
+    public void setUser(User user){
         this.user = user;
         updateUserInfo();
     }

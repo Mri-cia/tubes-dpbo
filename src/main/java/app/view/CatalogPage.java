@@ -2,6 +2,8 @@ package app.view;
 
 import java.awt.BorderLayout;
 import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.DefaultTableModel;
+
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
@@ -11,17 +13,28 @@ import java.util.ArrayList;
 import javax.swing.*;
 
 import app.components.CButton;
-import app.modules.Barang;
-import app.modules.DataBarang;
+import app.components.CErrorDialog;
+import app.components.GoodsTable;
+import app.exception.AppException;
+import app.exception.ErrorMessage;
+import app.modules.*;
 
-public class CatalogPage extends Page {
+public class CatalogPage extends ProfilePages {
+	JFrame mainFrame;
 
 	JTable table;
 	JScrollPane scroller;
 	
+	JPanel modelPanel = new JPanel();
+	GoodsTable donatedTable;
 	CButton backBtn;
 	
-	public CatalogPage(ActionListener back) {
+	ActionListener login;
+	
+	public CatalogPage(ActionListener login, ActionListener back, JFrame mainFrame) {
+		this.mainFrame = mainFrame;
+		this.login = login;
+		
 	    // --MainPanel setup--//
 	    setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 	    JPanel titlePanel = new JPanel();
@@ -31,6 +44,7 @@ public class CatalogPage extends Page {
 	    //	Sizing
 	    titlePanel.setPreferredSize(new Dimension(0, 30));
 	    tablePanel.setPreferredSize(new Dimension(0, (int)(heightLimit * 0.58)));
+		modelPanel.setPreferredSize(new Dimension((int)(widthLimit * 0.9), 400));
 	    
 	    add(Box.createRigidArea(new Dimension(0, 20)));
 	    add(titlePanel);
@@ -38,6 +52,7 @@ public class CatalogPage extends Page {
 	    add(tablePanel);
 	    add(buttonPanel);
 	    
+		tablePanel.add(modelPanel);
 	    
 	    //Testing Layout
 	    //titlePanel.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.black));
@@ -54,9 +69,6 @@ public class CatalogPage extends Page {
 	    titlePanel.add(title);
 	    
 	    
-	    //--Table Panel--//
-	    Dimension tableSize = new Dimension((int)(widthLimit * 0.9), 400);
-	    donatedGoods(tablePanel, tableSize);
 	    
 	    
 		//--Button Panel--//
@@ -114,85 +126,43 @@ public class CatalogPage extends Page {
 		rightBtnPanel.add(deleteBtn);
 		
 		goBack(back);
-	    
 	}
-	/*
-	private void tradedGoods(JPanel tablePanel, Dimension tableSize) {
-        // Convert item list to table data
+	private void tradedGoods() {
+		modelPanel.removeAll(); //refresh panel
+
+		// Convert item list to table data
         String[] columns = {"Nama", "Tipe", "Kadaluarsa", "Price (IDR)"};
-        Object[][] data = new Object[DataBarang.listBarang.size()][4];
 
-        for (int i = 0; i < DataBarang.listBarang.size(); i++) {
-            Barang item = DataBarang.listBarang.get(i);
-            data[i][0] = item.getName();
-            data[i][1] = item.getType();
-            data[i][2] = item.getDate();
-            data[i][3] = item.getHarga();
-        }
-
-        if (table != null) {
-            remove(scroller);
-        }
-
-        table = new JTable(data, columns);
-        scroller = new JScrollPane(table);
-        
-        scroller.setPreferredSize(tableSize);
-        
-        tablePanel.add(scroller, BorderLayout.CENTER);
+		ArrayList<Barang> allItems = new ArrayList<>();
+		for (User u : DataBarang.data.keySet()) {
+			if (u instanceof Seller) {
+				for (Barang b : DataBarang.data.get(u)) {
+					allItems.add(b);
+				}
+			}
+		}
+		
+		donatedTable = new GoodsTable(modelPanel, columns, allItems, widthLimit, heightLimit);
 
         revalidate();
         repaint();
 	}
-	*/
-	private void donatedGoods(JPanel tablePanel, Dimension tableSize) {
+	private void donatedGoods() {
+		modelPanel.removeAll(); //refresh panel
+		
         // Convert item list to table data
-		DataBarang.initializeData();
         String[] columns = {"Nama", "Tipe", "Kadaluarsa", "Price (IDR)"};
         
-        ArrayList<Barang> allItems = new ArrayList<>();
-        for (ArrayList<Barang> list : DataBarang.data.values()) {
-			allItems.addAll(list);
+		ArrayList<Barang> allItems = new ArrayList<>();
+		for (User u : DataBarang.data.keySet()) {
+			if (u instanceof Donator) {
+				for (Barang b : DataBarang.data.get(u)) {
+					allItems.add(b);
+				}
+			}
 		}
-        
-        Object[][] data = new Object[allItems.size()][4];
-        
-
-        for (int i = 0; i < allItems.size(); i++) {
-        		Barang item = allItems.get(i);
-        		data[i][0] = item.getName();
-        		data[i][1] = item.getType();
-        		data[i][2] = item.getDate();
-        		data[i][3] = item.getHarga();
-        }
-
-        if (table != null) {
-            remove(scroller);
-        }
-
-        table = new JTable(data, columns);
-        scroller = new JScrollPane(table);
-        
-        table.getTableHeader().setPreferredSize(new Dimension(table.getTableHeader().getWidth(), 38));
-        table.setRowHeight(30);
-        
-        table.setBackground(getBackground());
-        scroller.setPreferredSize(tableSize);
-        
-        // Center all columns
-        DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
-        centerRenderer.setHorizontalAlignment(JLabel.CENTER);
-
-        for (int i = 1; i < table.getColumnCount(); i++) {
-            table.getColumnModel().getColumn(i).setCellRenderer(centerRenderer);
-        }
-        
-        // Hide scrollbar UI but keep scroll functionality
-        scroller.getVerticalScrollBar().setPreferredSize(new Dimension(0, 0));
-        scroller.getHorizontalScrollBar().setPreferredSize(new Dimension(0, 0));
-        
- 
-        tablePanel.add(scroller, BorderLayout.CENTER);
+		
+		donatedTable = new GoodsTable(modelPanel, columns, allItems, widthLimit, heightLimit);
 
         revalidate();
         repaint();
@@ -202,5 +172,56 @@ public class CatalogPage extends Page {
 		backBtn.addActionListener(e -> {
 			back.actionPerformed(e);
 		});
+	}
+	
+//	public void errorPopup() {
+//	    try {
+//	    	if (user == null) {
+//	    		throw new AppException(ErrorMessage.NO_ROLE_FOUND.getMessage());
+//	    	}
+//		} catch (AppException e) {
+//			e.showPopup();
+//		}
+//	}
+	
+	@Override
+	public void addNotify() {
+	    super.addNotify();
+
+	    // Error pop up when enter catalogue without an account 
+	    if (this.user == null) {
+	        SwingUtilities.invokeLater(() -> {
+	            try {
+	                throw new AppException(ErrorMessage.NO_ROLE_FOUND.getMessage());
+	            } catch (AppException e) {
+	            	CErrorDialog currentError =  new CErrorDialog(mainFrame, e.getMessage(), 2);
+	            	currentError.setBtn1("Go to Login");
+	            	currentError.setBtn2("Exit");
+	            	currentError.setBtn1Action(login);
+	            	currentError.setBtn2Action(event -> System.exit(0));
+	            	currentError.setVisible(true);
+	            }
+	        });
+	    }
+	}
+	
+	@Override
+	public void setUser(User user){
+	    this.user = user;
+	    DataBarang.getUser(user);
+	    updateUserInfo();
+
+
+	    if (user instanceof Seller || user instanceof Buyer) {
+		    tradedGoods();
+	    } else if (user instanceof Donator || user instanceof Recipient) {
+	    	donatedGoods();
+	    }
+	}
+	
+	@Override
+	protected void updateUserInfo() {
+		// TODO Auto-generated method stub
+		
 	}
 }
