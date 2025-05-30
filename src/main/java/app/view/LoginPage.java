@@ -7,18 +7,27 @@ import javax.swing.event.DocumentListener;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.util.EventListener;
 
 import app.components.CButton;
 import app.components.CDropDown;
 import app.components.CPasswordField;
 import app.components.CTextField;
+import app.exception.ErrorMessage;
 import app.modules.*;
+import app.utils.Colors;
 
 public class LoginPage extends Page  {
 	
 	static User currentUser;
 	
-	ImageIcon loginIcon;
+	private String name;
+	private String pass;
+
+	private ImageIcon loginIcon;
+	
+	private JPanel centerPanel;
+	private JPanel errorPanel;
 	
 	JLabel nameLabel;
 	JLabel passLabel;
@@ -26,16 +35,16 @@ public class LoginPage extends Page  {
 	CTextField nameField;
 	CPasswordField passField;
 	
-	String name;;
-	String pass;
-	
 	CDropDown<String> roleSelect;
 	
 	CButton submitButton;
 	
+	ActionListener pagePenj;
+	ActionListener pagePem;
 	
 	public LoginPage(ActionListener userPenjual, ActionListener userPembeli) {
-		
+	    this.pagePenj = userPenjual;
+	    this.pagePem = userPembeli;
 		
 		//--MainPanel setup--//
 		setLayout(new BorderLayout());
@@ -43,10 +52,11 @@ public class LoginPage extends Page  {
 		JPanel footPanel = new JPanel();
 		JPanel leftPanel = new JPanel();
 		JPanel rightPanel = new JPanel();
-		JPanel centerPanel = new JPanel();
+		
+		centerPanel = new JPanel();
 		
 		//testing boundaries
-		//centerPanel.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.black));
+//		centerPanel.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.black));
 		
 		//Uniform sizing
 		int outerWidth = (int)(widthLimit * 0.15);
@@ -74,7 +84,7 @@ public class LoginPage extends Page  {
 		//logoPanel.setBackground(Color.blue);
 		//namePanel.setBackground(Color.red);
 		//passPanel.setBackground(Color.yellow);
-		//buttonPanel.setBackground(Color.pink);
+//		buttonPanel.setBackground(Color.pink);
 		
 		//Sizing
 		logoPanel.setPreferredSize(new Dimension(0, 150));
@@ -159,14 +169,14 @@ public class LoginPage extends Page  {
 		buttonPanel.add(roleSelect);
 		buttonPanel.add(submitButton);
 		
-		verification();
+
 		
-		pageDirection(userPenjual, userPembeli);
-		
+		validation();
+
 		
 	}
 	
-	private void verification() {
+	private void validation() {
 		DocumentListener inputListener = new DocumentListener() {
 		    public void insertUpdate(DocumentEvent e) {
 		        checkFields();
@@ -184,7 +194,45 @@ public class LoginPage extends Page  {
 		nameField.getDocument().addDocumentListener(inputListener);
 		passField.getDocument().addDocumentListener(inputListener);
 		roleSelect.addActionListener(e -> checkFields());
+		
 
+
+		verification();
+	}
+	
+	private void verification() {
+		
+		submitButton.addActionListener(e -> {
+			getForm();
+			String selectedRole = (String)roleSelect.getSelectedItem();
+			DataUser.setUserRole(name, pass, selectedRole);
+			if (DataUser.verifyUser()) {
+				if (errorPanel != null) {
+				    centerPanel.remove(errorPanel);
+				}
+				pageDirection(selectedRole, e);
+			} else {
+				if (errorPanel != null) {
+				    centerPanel.remove(errorPanel);
+				}
+				errorPanel = new JPanel();
+				errorPanel.setMaximumSize(new Dimension((int)(centerPanel.getWidth() * 0.5), 50));
+				errorPanel.setBackground(Colors.RED.getShade(3));
+				centerPanel.add(errorPanel);
+				
+				errorPanel.setLayout(new GridBagLayout());
+				JLabel message = new JLabel(DataUser.Error);
+				message.setForeground(Colors.RED.getShade(9));
+				errorPanel.add(message);
+				
+				centerPanel.revalidate();
+				centerPanel.repaint();
+			}
+			for (int i = 0; i < DataUser.getUsers().size(); i++) {
+				System.out.println(DataUser.getDataUser(i).getUsername() + ": " + DataUser.getDataUser(i).getRole());
+			}
+			System.out.println("==============");
+		});
 	}
 	
 	private void checkFields() {
@@ -195,48 +243,37 @@ public class LoginPage extends Page  {
 		submitButton.setEnabled(allValid);
 	}
 	
-	//Validating if the text field is filled and not the same as placeholder
-	private boolean validateForm() {
-		getForm();
-	    boolean isNameValid = !name.equals("");
-	    boolean isPassValid = !pass.equals("");
-	    
-	    return isNameValid && isPassValid;
-	}
+
 	
-	private void pageDirection(ActionListener userPenjual, ActionListener userPembeli) {
-		//OnClicked submit button
-		submitButton.addActionListener(e -> {
-			String selectedRole = (String)roleSelect.getSelectedItem();
-			getForm();
-			switch(selectedRole) {
-			case "Penjual":
-				currentUser = new Seller(name, pass);
-				userPenjual.actionPerformed(e);
-				break;
-			case "Donatur":
-				currentUser = new Donator(name, pass);
-				userPenjual.actionPerformed(e);
-				break;
-				
-			case "Pembeli":
-				currentUser = new Buyer(name, pass);
-		        userPembeli.actionPerformed(e);
-		        break;
-			case "Penerima":
-				currentUser = new Recipient(name, pass);
-		        userPembeli.actionPerformed(e);
-		        break;
-		    
-		    default:
-		    	break;
-			}
+	private void pageDirection(String selectedRole, ActionEvent e) {
+		getForm();
+		switch(selectedRole) {
+		case "Penjual":
+			currentUser = new Seller(name, pass);
+			pagePenj.actionPerformed(e);
+			break;
+		case "Donatur":
+			currentUser = new Donator(name, pass);
+			pagePenj.actionPerformed(e);
+			break;
 			
-			nameField.setText(null);
-			passField.setText(null);
-			
-			submitButton.setEnabled(false);
-		});
+		case "Pembeli":
+			currentUser = new Buyer(name, pass);
+	        pagePem.actionPerformed(e);
+	        break;
+		case "Penerima":
+			currentUser = new Recipient(name, pass);
+	        pagePem.actionPerformed(e);
+	        break;
+	    
+	    default:
+	    	break;
+		}
+		
+		nameField.setText(null);
+		passField.setText(null);
+		
+		submitButton.setEnabled(false);
 	}
 	
 	private void getForm() {
@@ -247,4 +284,6 @@ public class LoginPage extends Page  {
 	static User getCurrentUser() {
 		return currentUser;
 	}
+	
+
 }

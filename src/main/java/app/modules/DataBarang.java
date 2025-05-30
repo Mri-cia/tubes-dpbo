@@ -31,7 +31,7 @@ public class DataBarang {
 		listBarang.add(new Barang("Mie Instan", "Makanan", DateUtils.parseDateStr("2025-06-07"), 12000));
 		listBarang.add(new Barang("Soda Lemon", "Minuman", DateUtils.parseDateStr("2025-06-11"), 26000));
 		listBarang.add(new Barang("Donat Gula", "Makanan", DateUtils.parseDateStr("2025-06-04"), 16000));
-		User ursula = new Seller("URSULA", "12");
+		User ursula = DataUser.getDataUser(0);
 		data.put(ursula, listBarang);
 
 		//Donatur
@@ -63,7 +63,7 @@ public class DataBarang {
 		listBarang.add(new Barang("Kue Lapis", "Makanan", DateUtils.parseDateStr("2025-07-07"), 21000));
 		listBarang.add(new Barang("Sirup Melon", "Minuman", DateUtils.parseDateStr("2025-07-08"), 11000));
 		listBarang.add(new Barang("Kue Cubit", "Makanan", DateUtils.parseDateStr("2025-07-09"), 16000));
-		User ralsna = new Donator("RALSNA", "12");
+		User ralsna = DataUser.getDataUser(1);
 		data.put(ralsna, listBarang);
 		
 		//Pembeli
@@ -78,7 +78,7 @@ public class DataBarang {
 		listBarang.add(new Barang("Mouse Logitech", "Elektronik", DateUtils.parseDateStr("2026-02-01"), 350000));
 		listBarang.add(new Barang("Handuk", "Kebutuhan", DateUtils.parseDateStr("2025-09-30"), 40000));
 		listBarang.add(new Barang("Celana Jeans", "Pakaian", DateUtils.parseDateStr("2025-10-15"), 200000));
-		User ilya = new Buyer("ILYA", "12");
+		User ilya = DataUser.getDataUser(2);
 		data.put(ilya, listBarang);
 		
 		//Penerima
@@ -88,7 +88,7 @@ public class DataBarang {
 		listBarang.add(new Barang("Kipas Angin", "Elektronik", DateUtils.parseDateStr("2026-03-12"), 450000));
 		listBarang.add(new Barang("Pasta Gigi", "Kebutuhan", DateUtils.parseDateStr("2025-08-03"), 15000));
 		listBarang.add(new Barang("Jaket Hoodie", "Pakaian", DateUtils.parseDateStr("2025-11-22"), 250000));
-		User usha = new Recipient("USHA", "12");
+		User usha = DataUser.getDataUser(3);
 		data.put(usha, listBarang);
 
 
@@ -108,28 +108,28 @@ public class DataBarang {
 	public static void getUser(User user) {
 		if (barangUser != null) {
 			barangUser.clear();		
-			System.out.println("ini kosong");
+//			System.out.println("ini kosong");
 		}
 		barangUser = new ArrayList<>();
 			for (User u : data.keySet()) {
 				if (u.getUsername().equals(user.getUsername()) && u.getRole().equals(user.getRole())) {
 					barangUser = new ArrayList<>(data.get(u));
-					System.out.println("ini diambild ari barang");
+//					System.out.println("ini diambild ari barang");
 					break;
 				}
 				else if (!user.getBarang().isEmpty()) {
 						barangUser = user.getBarang();
-						System.out.println("ini ambil dari user");
+//						System.out.println("ini ambil dari user");
 				} else if (!barangUser.isEmpty()){
 					barangUser = new ArrayList<>();
 				}
 				
 			}
 			
-		System.out.println("Data for user " + user.getUsername() + " | " + user.getRole() + ":");
-		for (Barang b : barangUser) {
-			System.out.println("- " + b.getName());
-		}
+//		System.out.println("Data for user " + user.getUsername() + " | " + user.getRole() + ":");
+//		for (Barang b : barangUser) {
+//			System.out.println("- " + b.getName());
+//		}
 	}
 	
 }

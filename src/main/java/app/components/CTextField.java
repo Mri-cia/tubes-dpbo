@@ -2,6 +2,7 @@ package app.components;
 
 import java.awt.*;
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 import javax.swing.plaf.basic.BasicTextFieldUI;
 
 public class CTextField extends JTextField{
@@ -11,7 +12,7 @@ public class CTextField extends JTextField{
 		super();
 		this.placeholder = placeholder;
 		setBackground(getBackground);
-		setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Color.black));
+		setBorder(BorderFactory.createCompoundBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Color.black), new EmptyBorder(0, 5, 0, 0)));
 	}
 	
 	public void setPlaceholder(String placeholder) {

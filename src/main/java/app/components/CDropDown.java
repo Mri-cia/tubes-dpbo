@@ -7,6 +7,7 @@ import java.awt.Graphics2D;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.border.EmptyBorder;
 import javax.swing.plaf.basic.BasicComboBoxUI;
 
 public class CDropDown<E> extends JComboBox<E> {
@@ -16,6 +17,7 @@ public class CDropDown<E> extends JComboBox<E> {
         setUI(createCustomUI());
         setOpaque(true);
         setFocusable(false); // Optional: disables focus border
+        setBorder(new EmptyBorder(0,5,0,0));
     }
     
     @Override

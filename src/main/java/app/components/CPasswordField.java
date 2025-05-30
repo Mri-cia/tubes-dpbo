@@ -8,6 +8,7 @@ import java.awt.Insets;
 
 import javax.swing.BorderFactory;
 import javax.swing.JPasswordField;
+import javax.swing.border.EmptyBorder;
 
 public class CPasswordField extends JPasswordField {
 	private String placeholder;
@@ -17,7 +18,7 @@ public class CPasswordField extends JPasswordField {
 		super();
 		this.placeholder = placeholder;
 		setBackground(getBackground);
-		setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Color.black));
+		setBorder(BorderFactory.createCompoundBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Color.black), new EmptyBorder(0, 5, 0, 0)));
 	}
 	
 	public void setPlaceholder(String placeholder) {

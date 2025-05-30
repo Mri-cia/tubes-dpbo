@@ -3,6 +3,7 @@ package app.view;
 import javax.swing.*;
 
 import app.modules.DataBarang;
+import app.modules.DataUser;
 import app.modules.User;
 
 import app.exception.*;
@@ -27,6 +28,7 @@ public class MainWindow extends JFrame {
     
     setBackground(new Color(0xfafafa));
     
+    DataUser.initData();
     DataBarang.initializeData(); //Inisialisasi data awal
     managePages();
   }
@@ -79,7 +81,7 @@ public class MainWindow extends JFrame {
 	  mainPane.add(winKatalog, "Katalog");
 	  
 	  add(mainPane);
-	  cardLayout.show(mainPane, "Login");// untuk testing layout
+	  cardLayout.show(mainPane, "Katalog");// untuk testing layout
 	  setVisible(true);
   }
   
