@@ -16,6 +16,7 @@ import javax.swing.table.DefaultTableModel;
 
 import app.modules.Barang;
 import app.modules.DataBarang;
+import app.utils.CurrencyFormat;
 
 public class GoodsTable extends JScrollPane{
 	private JTable table;
@@ -51,7 +52,7 @@ public class GoodsTable extends JScrollPane{
 	    				item.getName(),
 	    				item.getType(),
 	    				item.getDate(),
-	    				item.getHarga()
+	    				CurrencyFormat.formatInt(item.getHarga())
 	    		};
 	    		model.addRow(row);
 	    	}
@@ -83,7 +84,7 @@ public class GoodsTable extends JScrollPane{
     					item.getName(),
     					item.getType(),
     					item.getDate(),
-    					item.getHarga()
+	    				CurrencyFormat.formatInt(item.getHarga())
     			};
     			model.addRow(row);
     		}
@@ -134,7 +135,7 @@ public class GoodsTable extends JScrollPane{
             table.getColumnModel().getColumn(i).setCellRenderer(centerRenderer);
         }
 
-        table.getColumnModel().getColumn(3).setCellRenderer(rightRenderer);
+        //table.getColumnModel().getColumn(3).setCellRenderer(rightRenderer);
         
         // Hide scrollbar UI but keep scroll functionality
         getVerticalScrollBar().setPreferredSize(new Dimension(0, 0));
