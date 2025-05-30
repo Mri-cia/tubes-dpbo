@@ -228,10 +228,10 @@ public class LoginPage extends Page  {
 				centerPanel.revalidate();
 				centerPanel.repaint();
 			}
-			for (int i = 0; i < DataUser.getUsers().size(); i++) {
-				System.out.println(DataUser.getDataUser(i).getUsername() + ": " + DataUser.getDataUser(i).getRole());
-			}
-			System.out.println("==============");
+//			for (int i = 0; i < DataUser.getUsers().size(); i++) {
+//				System.out.println(DataUser.getDataUser(i).getUsername() + ": " + DataUser.getDataUser(i).getRole());
+//			}
+//			System.out.println("=============="); //incase need to check users
 		});
 	}
 	
