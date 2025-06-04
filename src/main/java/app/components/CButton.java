@@ -62,9 +62,4 @@ public class CButton extends JButton {
 		this.setIcon((Icon) image);
 	}
 	
-	public void setHoverEnabled(boolean isAllowedHover) {
-		this.isAllowedHover = isAllowedHover;
-	}
-
-	
 }

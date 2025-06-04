@@ -31,21 +31,6 @@ public class User {
 	public ArrayList<Barang> getBarang() {
 		return barang;
 	}
-	
-    //Override equals
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof User)) return false;
-        User user = (User) o;
-        return Objects.equals(username, user.username) &&
-        		Objects.equals(role, user.role);
-    }
 
-    // 🔹 Override hashCode
-    @Override
-    public int hashCode() {
-        return Objects.hash(username, role);
-    }
 
 }

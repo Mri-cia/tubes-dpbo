@@ -31,7 +31,7 @@ public enum Colors {
 		new Color(0x450a0a)
 	);
 	
-	private final Color[] colorShades;
+	private Color[] colorShades;
 
 	Colors(Color... shades) {
 		if (shades.length != 11) {
