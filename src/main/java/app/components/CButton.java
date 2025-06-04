@@ -8,9 +8,6 @@ import java.awt.event.*;
 public class CButton extends JButton {
 	private int fontSize = 10;
 	private boolean isEnabled = true;
-	private boolean isAllowedHover = true;
-	private int radius = 0;
-	private int opacity = 255;
 	
 	private void defaultStyle() {
 		setFocusable(false);
@@ -45,7 +42,6 @@ public class CButton extends JButton {
 	
 	public CButton(String text, int fontSize, boolean isEnabled) {
 		this.fontSize = fontSize;
-		this.radius = radius;
 		this.isEnabled = isEnabled;
 		defaultStyle();
 		
