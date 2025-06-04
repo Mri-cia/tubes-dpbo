@@ -2,22 +2,11 @@ package app.modules;
 
 import java.util.ArrayList;
 
-public class Donator extends User implements Contributor {
+public class Donator extends User {
 
 	public Donator(String username, String password) {
 		super(username, password, "Donator");
 		this.barang = new ArrayList<>();
 	}
-	public void addBarang(Barang barang) {
-        this.barang.add(barang);
-    }
-
-	@Override
-	public int getBarangNumber() {
-		return barang.size();
-	}
-	 public ArrayList<Barang> getAllGoods() {
-	        return new ArrayList<>(barang);
-	 }
 
 }
