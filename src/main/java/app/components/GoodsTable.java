@@ -17,6 +17,7 @@ import javax.swing.table.DefaultTableModel;
 import app.modules.Barang;
 import app.modules.DataBarang;
 import app.utils.CurrencyFormat;
+import app.view.CatalogPage;
 
 public class GoodsTable extends JScrollPane{
 	private JTable table;
@@ -28,8 +29,15 @@ public class GoodsTable extends JScrollPane{
 	private int rowSize = 30;
 	
 	
-	public GoodsTable(JPanel panel, String[] headerTitle, int widthLimit, int heightLimit) {
-		
+	public GoodsTable(JPanel panel, Dimension tableSize, String[] headerTitle, ArrayList<Barang> data, String tableType) {
+		if(tableType.equalsIgnoreCase("profile")) {
+			profileTable(panel, headerTitle, tableSize, data);
+		} else if(tableType.equalsIgnoreCase("catalog")) {
+			catalogTable(panel, headerTitle, tableSize, data);
+		}
+	}
+	
+	public void profileTable(JPanel panel, String[] headerTitle, Dimension tableSize, ArrayList<Barang> data) {
 	    // Create or reuse DefaultTableModel
 	    DefaultTableModel model;
 	    if (table == null) {
@@ -37,7 +45,7 @@ public class GoodsTable extends JScrollPane{
 	        table = new JTable(model);
 	        setViewportView(table);;
 	        
-	        setPreferredSize(new Dimension((int)(widthLimit * 0.8), 260));
+	        setPreferredSize(new Dimension((int)(tableSize.getWidth() * 0.8), 260));
 	        panel.setLayout(new BorderLayout()); // Make sure layout is BorderLayout to use CENTER properly
 	        panel.add(this, BorderLayout.CENTER);
 	    } else {
@@ -47,12 +55,12 @@ public class GoodsTable extends JScrollPane{
 	    }
 	    
 	    	// Add rows from DataBarang.barangUser
-	    	for (Barang item : DataBarang.barangUser) {
+	    	for (Barang item : data) {
 	    		Object[] row = {
 	    				item.getName(),
 	    				item.getType(),
 	    				item.getDate(),
-	    				CurrencyFormat.formatInt(item.getHarga())
+	    				item.getPrice()
 	    		};
 	    		model.addRow(row);
 	    	}
@@ -61,7 +69,7 @@ public class GoodsTable extends JScrollPane{
 		tableStyle();
 	}
 	
-	public GoodsTable(JPanel panel, String[] headerTitle, ArrayList<Barang> data, int widthLimit, int heightLimit) {
+	public void catalogTable(JPanel panel, String[] headerTitle, Dimension tableSize, ArrayList<Barang> data) {
 		
 	    // Create or reuse DefaultTableModel
 	    DefaultTableModel model;
@@ -70,7 +78,7 @@ public class GoodsTable extends JScrollPane{
 	        table = new JTable(model);
 	        setViewportView(table);;
 	        
-	        setPreferredSize(new Dimension((int)(widthLimit * 0.8), 260));
+	        setPreferredSize(new Dimension((int)(tableSize.getWidth() * 0.8), 260));
 	        panel.setLayout(new BorderLayout()); // Make sure layout is BorderLayout to use CENTER properly
 	        panel.add(this, BorderLayout.CENTER);
 	    } else {
@@ -84,7 +92,7 @@ public class GoodsTable extends JScrollPane{
     					item.getName(),
     					item.getType(),
     					item.getDate(),
-	    				CurrencyFormat.formatInt(item.getHarga())
+	    				item.getPrice()
     			};
     			model.addRow(row);
     		}

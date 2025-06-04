@@ -6,6 +6,7 @@ import javax.swing.table.DefaultTableModel;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.util.ArrayList;
 
 import app.modules.*;
 import app.components.*;
@@ -93,8 +94,6 @@ public class SellerPage extends Page{
 		//--logoutPanel--//
 		logoutPanel.setLayout(new BoxLayout(logoutPanel, BoxLayout.Y_AXIS));
 		CButton logoutBtn = new CButton("Back");
-		
-		logoutBtn.setHoverEnabled(false);
 		
 		logoutBtn.setMaximumSize(new Dimension(38, 50));
 		
@@ -194,10 +193,10 @@ public class SellerPage extends Page{
 		tablePanel.add(modelPanel);
 
 		String[] columns = {"Nama", "Tipe", "Kadaluarsa", "Price (IDR)"};
-
+		ArrayList<Barang> data = DataBarang.barangUser;
 	    
 		Dimension tableSize = new Dimension((int)(widthLimit * 0.9), 400);
-		GoodsTable sellerTable = new GoodsTable(modelPanel, columns, widthLimit, heightLimit);
+		GoodsTable sellerTable = new GoodsTable(modelPanel, tableSize, columns, data, "profile");
 				
 	    revalidate();
 	    repaint();

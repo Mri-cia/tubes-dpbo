@@ -37,12 +37,34 @@ public class Barang {
 		return name;
 	}
 	
-	public int getHarga() {
-		return harga;
+	public String getPrice() {
+		return CurrencyFormat.formatInt(harga);
 	}
 	
 	public String getType() {
 		return type;
 	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
+
+	public void setKadaluarsa(String kadaluarsa) {
+		this.kadaluarsa = DateUtils.parseDateStr(kadaluarsa);
+	}
+
+	public void setHarga(int harga) {
+		this.harga = harga;
+	}
+
+	public void setToday(LocalDate today) {
+		this.today = today;
+	}
+	
+	
 	
 }

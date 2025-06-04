@@ -27,6 +27,7 @@ public class CatalogPage extends Page {
 	JScrollPane scroller;
 	
 	JPanel modelPanel = new JPanel();
+	
 	GoodsTable donatedTable;
 	CButton backBtn;
 	
@@ -162,7 +163,7 @@ public class CatalogPage extends Page {
 			}
 		}
 		
-		donatedTable = new GoodsTable(modelPanel, columns, allItems, widthLimit, heightLimit);
+		donatedTable = new GoodsTable(modelPanel, new Dimension(widthLimit, heightLimit), columns, allItems, "catalog");
 
         revalidate();
         repaint();
@@ -181,8 +182,8 @@ public class CatalogPage extends Page {
 				}
 			} 
 		}
-		
-		donatedTable = new GoodsTable(modelPanel, columns, allItems, widthLimit, heightLimit);
+
+		donatedTable = new GoodsTable(modelPanel, new Dimension(widthLimit, heightLimit), columns, allItems, "catalog");
 
         revalidate();
         repaint();

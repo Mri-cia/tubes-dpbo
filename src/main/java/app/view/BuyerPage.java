@@ -3,12 +3,15 @@ package app.view;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.util.ArrayList;
 
 import app.components.CButton;
 import app.components.GoodsTable;
 import app.modules.Barang;
 import app.modules.DataBarang;
+import app.modules.DataUser;
 import app.modules.User;
+import app.utils.Colors;
 
 public class BuyerPage extends Page {
 	private String role;
@@ -21,6 +24,7 @@ public class BuyerPage extends Page {
 
 	JPanel tablePanel = new JPanel();
 	JPanel modelPanel = new JPanel();
+	
 
 	JLabel nameLabel = new JLabel();
 	JLabel roleLabel = new JLabel();
@@ -93,8 +97,6 @@ public class BuyerPage extends Page {
 		//--logoutPanel--//
 		logoutPanel.setLayout(new BoxLayout(logoutPanel, BoxLayout.Y_AXIS));
 		CButton logoutBtn = new CButton("back");
-		
-		logoutBtn.setHoverEnabled(false);
 		
 		logoutBtn.setMaximumSize(new Dimension(38, 50));
 		
@@ -224,10 +226,10 @@ public class BuyerPage extends Page {
 			tablePanel.add(modelPanel);
 
 			String[] columns = {"Nama", "Tipe", "Kadaluarsa", "Price (IDR)"};
+			ArrayList<Barang> data = DataBarang.barangUser;
 		    
 			Dimension tableSize = new Dimension((int)(widthLimit * 0.9), 400);
-			GoodsTable sellerTable = new GoodsTable(modelPanel, columns, widthLimit, heightLimit);
-					
+			GoodsTable sellerTable = new GoodsTable(modelPanel, tableSize, columns, data, "profile");
 		    revalidate();
 		    repaint();
 	    }
