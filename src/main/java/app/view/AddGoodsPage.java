@@ -133,7 +133,7 @@ public class AddGoodsPage extends Page {
     typePanel.setLayout(new GridBagLayout());
     GridBagConstraints typeGBC = new GridBagConstraints();
     JLabel typeLabel = new JLabel("Tipe Barang : ");
-    JTextField typeField = new JTextField("Tipe Barang");
+    CTextField typeField = new CTextField("Tipe Barang", colors[2]);
 
     typeLabel.setPreferredSize(new Dimension(100, 15));
     typeField.setPreferredSize(new Dimension(350, 25));
@@ -150,7 +150,7 @@ public class AddGoodsPage extends Page {
     pricePanel.setLayout(new GridBagLayout());
     GridBagConstraints priceGBC = new GridBagConstraints();
     JLabel priceLabel = new JLabel("Harga Barang : ");
-    JTextField priceField = new JTextField("10000");
+    CTextField priceField = new CTextField("10000", colors[2]);
 
     priceLabel.setPreferredSize(new Dimension(100, 15));
     priceField.setPreferredSize(new Dimension(350, 25));
@@ -167,7 +167,7 @@ public class AddGoodsPage extends Page {
     datePanel.setLayout(new GridBagLayout());
     GridBagConstraints dateGBC = new GridBagConstraints();
     JLabel dateLabel = new JLabel("Tanggal Kadaluarsa : ");
-    JTextField dateField = new JTextField("01-01-2001");
+    CTextField dateField = new CTextField("01-01-2001", colors[2]);
 
     dateLabel.setPreferredSize(new Dimension(150, 15));
     dateField.setPreferredSize(new Dimension(350, 25));
