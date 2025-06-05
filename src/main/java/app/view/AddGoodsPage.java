@@ -136,7 +136,7 @@ public class AddGoodsPage extends Page {
 
     nameGBC.gridx = 1;
     nameGBC.anchor = GridBagConstraints.WEST;
-    namePanel.add(nameLabel, nameGBC);
+    namePanel.add(nameGLabel, nameGBC);
     nameGBC.gridx = 2;
     nameGBC.anchor = GridBagConstraints.EAST;
     nameGBC.weightx = 1.0;
