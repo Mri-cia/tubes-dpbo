@@ -35,7 +35,7 @@ public class CatalogPage extends Page {
 	
 	private boolean hasShownError = false;
 	
-	public CatalogPage(ActionListener login, ActionListener back, JFrame mainFrame) {
+	public CatalogPage(ActionListener login, ActionListener backPenjual, ActionListener backPembeli, JFrame mainFrame) {
 		this.mainFrame = mainFrame;
 		this.login = login;
 		
@@ -131,7 +131,7 @@ public class CatalogPage extends Page {
 //		rightBtnPanel.add(editBtn);
 //		rightBtnPanel.add(deleteBtn);
 		
-		goBack(back);
+		goBack(backPenjual, backPembeli);
 		
 		addHierarchyListener(e -> {
 		    boolean isShowing = (e.getChangeFlags() & HierarchyEvent.SHOWING_CHANGED) != 0;
@@ -140,8 +140,8 @@ public class CatalogPage extends Page {
 		            if (user == null && !hasShownError) {
 		                hasShownError = true; // Prevent repeated popups
 		                checkUserAccess();
-	            }
-	        });
+		            }
+		    	});
 		    }
 		});
 
@@ -190,9 +190,13 @@ public class CatalogPage extends Page {
         repaint();
 	}
 	
-	private void goBack(ActionListener back) {
+	private void goBack(ActionListener backPenjual, ActionListener backPembeli) {
 		backBtn.addActionListener(e -> {
-			back.actionPerformed(e);
+			if (user instanceof Seller || user instanceof Donator) {
+				backPenjual.actionPerformed(e);
+			} else if (user instanceof Buyer || user instanceof Recipient) {
+				backPembeli.actionPerformed(e);
+			}
 		});
 	}	
 	

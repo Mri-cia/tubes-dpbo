@@ -25,6 +25,7 @@ public class SellerPage extends Page{
 	private JLabel nameLabel = new JLabel("URSULA");
 	private JLabel roleLabel = new JLabel("Penjual");
 	
+	private CButton catalogBtn;
 	private CButton addBtn;
 	private CButton editBtn;
 	
@@ -172,6 +173,13 @@ public class SellerPage extends Page{
 		buttonPanel.add(rightBtnPanel);
 		buttonPanel.add(outerRight);
 		
+		//--leftBtnPanel--//
+		leftBtnPanel.setLayout(new FlowLayout(FlowLayout.LEADING, 9, 5));
+		catalogBtn = new CButton("To Catalog", 12);
+		catalogBtn.setPreferredSize(new Dimension(100, 30));
+		leftBtnPanel.add(catalogBtn);
+		
+		catalogBtn.addActionListener(catalog);
 		
 		//--rightBtnPanel--//
 		rightBtnPanel.setLayout(new FlowLayout(FlowLayout.TRAILING, 10, 5));
@@ -209,10 +217,10 @@ public class SellerPage extends Page{
 	    revalidate();
 	    repaint();
 	    
-	    editButton();
+	    editBtnAction();
 	}
 	
-	private void editButton() {
+	private void editBtnAction() {
 		editBtn.addActionListener(e -> {
 			if (sellerTable.isEditing()) {
 				sellerTable.saveEditedCell();
@@ -227,7 +235,7 @@ public class SellerPage extends Page{
 			sellerTable.repaint();
 		});
 	}
-		
+
 	@Override
 	public void setUser(User user) {
 	    this.user = user;

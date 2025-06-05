@@ -51,6 +51,7 @@ public class MainWindow extends JFrame {
 	  
 	  winKatalog = new CatalogPage(
 			  e -> cardLayout.show(mainPane, "Login"),
+			  e -> cardLayout.show(mainPane, "Penjual"),
 			  e -> cardLayout.show(mainPane, "Pembeli"),
 			  this
 			  );
