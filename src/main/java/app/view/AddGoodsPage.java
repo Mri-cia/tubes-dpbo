@@ -1,26 +1,41 @@
 package app.view;
 
 import javax.swing.*;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
+
 import java.awt.*;
 import java.awt.event.*;
 import java.time.LocalDate;
 
 import app.modules.*;
+import app.utils.Colors;
 import app.utils.DateUtils;
 import app.components.*;
 
 public class AddGoodsPage extends Page {
   private String role;
-	
+
   JLabel nameLabel = new JLabel();
   JLabel roleLabel = new JLabel();
-  
+
+  JLabel nameGLabel;
+  JLabel typeLabel;
+  JLabel priceLabel;
+  JLabel dateLabel;
+
   CTextField nameField;
   CTextField typeField;
   CTextField priceField;
-  CTextField expireField;
+  CTextField dateField;
+
+  String name, type;
+  int price;
+  LocalDate expire;
 
   CButton submitButton;
+  JPanel formPanel = new JPanel();
+  private JPanel errorPanel;
 
   public AddGoodsPage(ActionListener a) {
     // --MainPanel setup--//
@@ -29,8 +44,6 @@ public class AddGoodsPage extends Page {
     JPanel lineProfile = new JPanel();
     JPanel nameProfile = new JPanel();
     JPanel backPanel = new JPanel();
-    
-    JPanel formPanel = new JPanel();
 
     // Sizing
     profilePanel.setPreferredSize(new Dimension(0, 100));
@@ -41,10 +54,10 @@ public class AddGoodsPage extends Page {
     add(backPanel);
     add(Box.createRigidArea(new Dimension(0, 20)));
     add(formPanel);
-    
-    
-    //testing style
-    //backPanel.setBorder(BorderFactory.createMatteBorder(0, 0, 0, 3, Color.black));
+
+    // testing style
+    // backPanel.setBorder(BorderFactory.createMatteBorder(0, 0, 0, 3,
+    // Color.black));
 
     // --Profile Panel--//
     profilePanel.setLayout(new BoxLayout(profilePanel, BoxLayout.X_AXIS));
@@ -93,12 +106,12 @@ public class AddGoodsPage extends Page {
     JPanel buttonPanel = new JPanel();
 
     // Sizing
-    
-    namePanel.setMaximumSize(new Dimension((int)(widthLimit/1.5), 40));
-    typePanel.setMaximumSize(new Dimension((int)(widthLimit/1.5), 40));
-    pricePanel.setMaximumSize(new Dimension((int)(widthLimit/1.5), 40));
-    datePanel.setMaximumSize(new Dimension((int)(widthLimit/1.5), 40));
-    buttonPanel.setMaximumSize(new Dimension((int)(widthLimit/1.5), 40));
+
+    namePanel.setMaximumSize(new Dimension((int) (widthLimit / 1.5), 40));
+    typePanel.setMaximumSize(new Dimension((int) (widthLimit / 1.5), 40));
+    pricePanel.setMaximumSize(new Dimension((int) (widthLimit / 1.5), 40));
+    datePanel.setMaximumSize(new Dimension((int) (widthLimit / 1.5), 40));
+    buttonPanel.setMaximumSize(new Dimension((int) (widthLimit / 1.5), 40));
 
     formPanel.add(Box.createRigidArea(new Dimension(0, 10)));
     formPanel.add(namePanel);
@@ -115,7 +128,7 @@ public class AddGoodsPage extends Page {
     // --Goods name Panel--//
     namePanel.setLayout(new GridBagLayout());
     GridBagConstraints nameGBC = new GridBagConstraints();
-    JLabel nameLabel = new JLabel("Nama Barang : ");
+    nameGLabel = new JLabel("Nama Barang : ");
     nameField = new CTextField("Kopi/Burger", colors[2]);
 
     nameLabel.setPreferredSize(new Dimension(100, 15));
@@ -128,12 +141,12 @@ public class AddGoodsPage extends Page {
     nameGBC.anchor = GridBagConstraints.EAST;
     nameGBC.weightx = 1.0;
     namePanel.add(nameField, nameGBC);
-    
+
     // --Type Panel--//
     typePanel.setLayout(new GridBagLayout());
     GridBagConstraints typeGBC = new GridBagConstraints();
-    JLabel typeLabel = new JLabel("Tipe Barang : ");
-    CTextField typeField = new CTextField("Tipe Barang", colors[2]);
+    typeLabel = new JLabel("Tipe Barang : ");
+    typeField = new CTextField("Tipe Barang", colors[2]);
 
     typeLabel.setPreferredSize(new Dimension(100, 15));
     typeField.setPreferredSize(new Dimension(350, 25));
@@ -145,12 +158,12 @@ public class AddGoodsPage extends Page {
     typeGBC.anchor = GridBagConstraints.EAST;
     typeGBC.weightx = 1.0;
     typePanel.add(typeField, typeGBC);
-    
+
     // --Price Panel--//
     pricePanel.setLayout(new GridBagLayout());
     GridBagConstraints priceGBC = new GridBagConstraints();
-    JLabel priceLabel = new JLabel("Harga Barang : ");
-    CTextField priceField = new CTextField("10000", colors[2]);
+    priceLabel = new JLabel("Harga Barang : ");
+    priceField = new CTextField("10000", colors[2]);
 
     priceLabel.setPreferredSize(new Dimension(100, 15));
     priceField.setPreferredSize(new Dimension(350, 25));
@@ -162,16 +175,16 @@ public class AddGoodsPage extends Page {
     priceGBC.anchor = GridBagConstraints.EAST;
     priceGBC.weightx = 1.0;
     pricePanel.add(priceField, priceGBC);
-    
+
     // --Date Panel--//
     datePanel.setLayout(new GridBagLayout());
     GridBagConstraints dateGBC = new GridBagConstraints();
-    JLabel dateLabel = new JLabel("Tanggal Kadaluarsa : ");
-    CTextField dateField = new CTextField("01-01-2001", colors[2]);
+    dateLabel = new JLabel("Tanggal Kadaluarsa : ");
+    dateField = new CTextField("2026-10-23", colors[2]);
 
     dateLabel.setPreferredSize(new Dimension(150, 15));
     dateField.setPreferredSize(new Dimension(350, 25));
-    
+
     dateGBC.gridx = 1;
     dateGBC.anchor = GridBagConstraints.WEST;
     datePanel.add(dateLabel, dateGBC);
@@ -180,40 +193,120 @@ public class AddGoodsPage extends Page {
     dateGBC.weightx = 1.0;
     datePanel.add(dateField, dateGBC);
 
-
     // --Button Panel--//
     buttonPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 7, 0));
     submitButton = new CButton("Submit", 13, false);
 
     submitButton.setPreferredSize(new Dimension(100, 40));
-    
-    submitButton.addActionListener(e-> {
-      String name = nameField.getText().trim();
-      String type = typeField.getText().trim();
-      int price = Integer.parseInt(priceField.getText().trim());
-      LocalDate date = DateUtils.parseDateStr(dateField.getText().trim());
-      Barang barang = new Barang(name, type, date, price);
-    });
-    
-    buttonPanel.add(submitButton);
-  }
-  
-	public void setRole(String role) {
-		this.role = role;
-	}
-	
-	@Override
-	protected void updateUserInfo() {
-	    if (user != null) {
-	        // Update UI 
-	    	nameLabel.setText(user.getUsername().toUpperCase());
-	    	roleLabel.setText(user.getRole().toUpperCase());
-	        // you can dynamically update label text if needed
-	    }
-	}
-	
-	private void addBarang() {
-		
-	}
 
+    buttonPanel.add(submitButton);
+
+    validation();
+  }
+
+  public void setRole(String role) {
+    this.role = role;
+  }
+
+  @Override
+  protected void updateUserInfo() {
+    if (user != null) {
+      // Update UI
+      nameLabel.setText(user.getUsername().toUpperCase());
+      roleLabel.setText(user.getRole().toUpperCase());
+      // you can dynamically update label text if needed
+    }
+  }
+
+  private void getForm() {
+    name = nameField.getText().trim();
+    type = typeField.getText().trim();
+    price = Integer.parseInt(priceField.getText().trim());
+    expire = DateUtils.parseDateStr(dateField.getText().trim());
+  }
+
+  private void verification() {
+
+    submitButton.addActionListener(e -> {
+      getForm();
+      if (!name.isEmpty() || !type.isEmpty() || price > 1 || expire.isAfter(LocalDate.now())) {
+        if (errorPanel != null) {
+          formPanel.remove(errorPanel);
+        }
+        // Tambah barang
+      } else {
+        if (errorPanel != null) {
+          formPanel.remove(errorPanel);
+        }
+        errorPanel = new JPanel();
+        errorPanel.setMaximumSize(new Dimension((int) (formPanel.getWidth() * 0.5), 50));
+        errorPanel.setBackground(Colors.RED.getShade(3));
+        formPanel.add(errorPanel);
+
+        errorPanel.setLayout(new GridBagLayout());
+        JLabel message = new JLabel(DataUser.Error);
+        message.setForeground(Colors.RED.getShade(9));
+        errorPanel.add(message);
+
+        formPanel.revalidate();
+        formPanel.repaint();
+      }
+    });
+  }
+
+  private void checkFields() {
+    String name = nameField.getText().trim();
+    String type = typeField.getText().trim();
+    String priceString = priceField.getText().trim();
+    String expireString = dateField.getText().trim();
+
+    int price = 0;
+    boolean priceValid = false;
+
+    try {
+      price = Integer.parseInt(priceString);
+      priceValid = price > 1;
+    } catch (NumberFormatException e) {
+      priceValid = false;
+    }
+
+    LocalDate expire = null;
+    boolean dateValid = false;
+
+    if (expireString.length() == 10) {
+      try {
+        expire = DateUtils.parseDateStr(expireString);
+        dateValid = expire != null && expire.isAfter(LocalDate.now());
+      } catch (Exception e) {
+        dateValid = false;
+      }
+    }
+
+    boolean allValid = !name.isEmpty() && !type.isEmpty() && priceValid && dateValid;
+
+    submitButton.setEnabled(allValid);
+  }
+
+  private void validation() {
+    DocumentListener inputListener = new DocumentListener() {
+      public void insertUpdate(DocumentEvent e) {
+        checkFields();
+      }
+
+      public void removeUpdate(DocumentEvent e) {
+        checkFields();
+      }
+
+      public void changedUpdate(DocumentEvent e) {
+        checkFields();
+      }
+    };
+
+    nameField.getDocument().addDocumentListener(inputListener);
+    typeField.getDocument().addDocumentListener(inputListener);
+    priceField.getDocument().addDocumentListener(inputListener);
+    dateField.getDocument().addDocumentListener(inputListener);
+
+    verification();
+  }
 }
