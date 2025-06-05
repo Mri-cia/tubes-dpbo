@@ -229,7 +229,7 @@ public class AddGoodsPage extends Page {
 
     submitButton.addActionListener(e -> {
       getForm();
-      if (!name.isEmpty() || !type.isEmpty() || price > 1 || expire.isAfter(LocalDate.now())) {
+      if (type.equalsIgnoreCase("makanan") || type.equalsIgnoreCase("minuman")) {
         if (errorPanel != null) {
           formPanel.remove(errorPanel);
         }
@@ -244,7 +244,7 @@ public class AddGoodsPage extends Page {
         formPanel.add(errorPanel);
 
         errorPanel.setLayout(new GridBagLayout());
-        JLabel message = new JLabel(DataUser.Error);
+        JLabel message = new JLabel("Tipe barang harus minuman/makanan");
         message.setForeground(Colors.RED.getShade(9));
         errorPanel.add(message);
 
