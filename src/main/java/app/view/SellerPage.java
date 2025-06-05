@@ -6,6 +6,8 @@ import javax.swing.table.DefaultTableModel;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.io.File;
+import java.net.URL;
 import java.util.ArrayList;
 
 import app.modules.*;
@@ -15,14 +17,16 @@ public class SellerPage extends Page{
 	int totalItem = 0;
 	int value = 0;
 	int expiring = 0;
-	JTable table;
-	JScrollPane scroller;
 	
 	private JPanel tablePanel = new JPanel();
 	private JPanel modelPanel = new JPanel();
+	private GoodsTable sellerTable;
 
 	private JLabel nameLabel = new JLabel("URSULA");
 	private JLabel roleLabel = new JLabel("Penjual");
+	
+	private CButton addBtn;
+	private CButton editBtn;
 	
 	public SellerPage(ActionListener logout, ActionListener b, ActionListener catalog) {
 		
@@ -93,7 +97,9 @@ public class SellerPage extends Page{
 		
 		//--logoutPanel--//
 		logoutPanel.setLayout(new BoxLayout(logoutPanel, BoxLayout.Y_AXIS));
-		CButton logoutBtn = new CButton("Back");
+
+		URL logoutIconURL = getClass().getResource("/app/view/assets/logout_icon.png");
+		CButton logoutBtn = new CButton(new ImageIcon(logoutIconURL));
 		
 		logoutBtn.setMaximumSize(new Dimension(38, 50));
 		
@@ -169,9 +175,11 @@ public class SellerPage extends Page{
 		
 		//--rightBtnPanel--//
 		rightBtnPanel.setLayout(new FlowLayout(FlowLayout.TRAILING, 10, 5));
-		CButton addBtn = new CButton("add", 12);
-		CButton editBtn = new CButton("edit", 12);
-		CButton deleteBtn = new CButton(new ImageIcon("C:\\Users\\rawik\\Documents\\Kuliah\\DPBO\\Tubes\\src\\main\\java\\assets\\delete_icon.png"));
+		addBtn = new CButton("add", 12);
+		editBtn = new CButton("edit", 12);
+		
+		URL deleteIconURL = getClass().getResource("/app/view/assets/delete_icon.png");
+		CButton deleteBtn = new CButton(new ImageIcon(deleteIconURL));
 		
 		addBtn.setPreferredSize(new Dimension(100, 30));
 		editBtn.setPreferredSize(new Dimension(100, 30));
@@ -196,10 +204,28 @@ public class SellerPage extends Page{
 		ArrayList<Barang> data = DataBarang.barangUser;
 	    
 		Dimension tableSize = new Dimension((int)(widthLimit * 0.9), 400);
-		GoodsTable sellerTable = new GoodsTable(modelPanel, tableSize, columns, data, "profile");
+		sellerTable = new GoodsTable(modelPanel, tableSize, columns, data, "profile");
 				
 	    revalidate();
 	    repaint();
+	    
+	    editButton();
+	}
+	
+	private void editButton() {
+		editBtn.addActionListener(e -> {
+			if (sellerTable.isEditing()) {
+				sellerTable.saveEditedCell();
+			}
+			int editedRow = sellerTable.getEditedRow();
+			int editedColumn = sellerTable.getEditedColumn();
+			String editedValue = sellerTable.getEditedCellValue();
+			
+			DataBarang.editBarang(editedRow, editedColumn, editedValue);
+			
+			sellerTable.revalidate();
+			sellerTable.repaint();
+		});
 	}
 		
 	@Override

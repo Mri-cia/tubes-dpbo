@@ -54,7 +54,7 @@ public class Barang {
 	}
 
 	public void setKadaluarsa(String kadaluarsa) {
-		this.kadaluarsa = DateUtils.parseDateStr(kadaluarsa);
+		this.kadaluarsa = DateUtils.parseEditedDate(kadaluarsa);
 	}
 
 	public void setHarga(int harga) {

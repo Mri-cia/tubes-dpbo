@@ -21,7 +21,7 @@ import app.view.CatalogPage;
 
 public class GoodsTable extends JScrollPane{
 	private JTable table;
-	
+	private boolean isEditable = true;
 	
 	private Dimension tableSize = new Dimension();
 	private int headerSize = 40;
@@ -41,7 +41,12 @@ public class GoodsTable extends JScrollPane{
 	    // Create or reuse DefaultTableModel
 	    DefaultTableModel model;
 	    if (table == null) {
-	        model = new DefaultTableModel(headerTitle, 0);
+	        model = new DefaultTableModel(headerTitle, 0) {
+	            @Override
+	            public boolean isCellEditable(int rowIndex, int columnIndex) {
+	                return isEditable; // Disable editing
+	            }
+	        };
 	        table = new JTable(model);
 	        setViewportView(table);;
 	        
@@ -74,7 +79,12 @@ public class GoodsTable extends JScrollPane{
 	    // Create or reuse DefaultTableModel
 	    DefaultTableModel model;
 	    if (table == null) {
-	        model = new DefaultTableModel(headerTitle, 0);
+	        model = new DefaultTableModel(headerTitle, 0) {
+	            @Override
+	            public boolean isCellEditable(int rowIndex, int columnIndex) {
+	                return isEditable; // Disable editing
+	            }
+	        };
 	        table = new JTable(model);
 	        setViewportView(table);;
 	        
@@ -99,24 +109,6 @@ public class GoodsTable extends JScrollPane{
 	    
 		
 		tableStyle();
-	}
-	
-
-	
-	public void setTableSize(Dimension tableSize) {
-		this.tableSize = tableSize;
-	}
-	
-	public void setHeaderSize(int size) {
-		this.headerSize = size;
-	}
-	
-	public void setHeaderFontSize(int fontSize) {
-		this.headerFontSize = fontSize;
-	}
-	
-	public void setRowHeight(int rowSize) {
-		this.rowSize = rowSize;
 	}
 	
 	private void tableStyle() {
@@ -149,4 +141,51 @@ public class GoodsTable extends JScrollPane{
         getVerticalScrollBar().setPreferredSize(new Dimension(0, 0));
         getHorizontalScrollBar().setPreferredSize(new Dimension(0, 0));
 	}
+	
+	public boolean isEditing() {
+		return table.isEditing();
+	}
+	
+	public void saveEditedCell() {
+		if (table.isEditing()) {
+		    table.getCellEditor().stopCellEditing();
+		}
+	}
+	
+	public int getEditedRow() {
+		return table.getSelectedRow();
+	}
+	
+	public int getEditedColumn() {
+		return table.getSelectedColumn();
+	}
+	
+	public String getEditedCellValue() {
+		return (String)table.getValueAt(table.getSelectedRow(), table.getSelectedColumn());
+	}
+	
+	public void setEditEnabled(boolean set) {
+		this.isEditable = set;
+	}
+	
+
+	
+	public void setTableSize(Dimension tableSize) {
+		this.tableSize = tableSize;
+	}
+	
+	public void setHeaderSize(int size) {
+		this.headerSize = size;
+	}
+	
+	public void setHeaderFontSize(int fontSize) {
+		this.headerFontSize = fontSize;
+	}
+	
+	public void setRowHeight(int rowSize) {
+		this.rowSize = rowSize;
+	}
+
+	
+	
 }

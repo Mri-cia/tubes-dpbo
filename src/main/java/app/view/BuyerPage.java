@@ -3,6 +3,7 @@ package app.view;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.net.URL;
 import java.util.ArrayList;
 
 import app.components.CButton;
@@ -96,7 +97,9 @@ public class BuyerPage extends Page {
 		
 		//--logoutPanel--//
 		logoutPanel.setLayout(new BoxLayout(logoutPanel, BoxLayout.Y_AXIS));
-		CButton logoutBtn = new CButton("back");
+
+		URL logoutIconURL = getClass().getResource("/app/view/assets/logout_icon.png");
+		CButton logoutBtn = new CButton(new ImageIcon(logoutIconURL));
 		
 		logoutBtn.setMaximumSize(new Dimension(38, 50));
 		
@@ -229,7 +232,9 @@ public class BuyerPage extends Page {
 			ArrayList<Barang> data = DataBarang.barangUser;
 		    
 			Dimension tableSize = new Dimension((int)(widthLimit * 0.9), 400);
-			GoodsTable sellerTable = new GoodsTable(modelPanel, tableSize, columns, data, "profile");
+			GoodsTable buyerTable = new GoodsTable(modelPanel, tableSize, columns, data, "profile");
+			buyerTable.setEditEnabled(false);
+			
 		    revalidate();
 		    repaint();
 	    }

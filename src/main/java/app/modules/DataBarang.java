@@ -8,6 +8,8 @@ import java.util.HashMap;
 import app.utils.*;
 
 public class DataBarang {
+	private static User currentUser;
+	
 	public static HashMap<User, ArrayList<Barang>> data = new HashMap<>();
 	private static ArrayList<Barang> listBarang;
 	
@@ -106,6 +108,12 @@ public class DataBarang {
 	}
 	
 	public static void getUser(User user) {
+		if (currentUser != null) {
+			currentUser = null;
+		}
+		
+		currentUser = user;
+		
 		if (barangUser != null) {
 			barangUser.clear();		
 //			System.out.println("ini kosong");
@@ -130,6 +138,34 @@ public class DataBarang {
 //		for (Barang b : barangUser) {
 //			System.out.println("- " + b.getName());
 //		}
+	}
+	
+	public static void editBarang(int row, int column, String editedValue) {
+		for (User u : data.keySet()) {
+			if (u.getUsername().equals(currentUser.getUsername()) && u.getRole().equals(currentUser.getRole())) {
+				switch(column) {
+				case 0:
+					data.get(u).get(row).setName(editedValue);
+					barangUser.get(row).setName(editedValue);
+					break;
+				case 1:
+					data.get(u).get(row).setType(editedValue);
+					barangUser.get(row).setType(editedValue);
+					break;
+				case 2:
+					data.get(u).get(row).setKadaluarsa(editedValue);
+					barangUser.get(row).setKadaluarsa(editedValue);
+					break;
+				case 3:
+					data.get(u).get(row).setHarga(Integer.parseInt(editedValue));
+					barangUser.get(row).setHarga(Integer.parseInt(editedValue));
+					break;
+				}
+//				System.out.println("ini diambild ari barang");
+//				break;
+			}
+			
+		}
 	}
 	
 }

@@ -9,6 +9,11 @@ public class DateUtils {
         return LocalDate.parse(dateStr, inputFormatter);
     }
     
+    public static LocalDate parseEditedDate(String dateStr) {
+        DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("dd MMM yyyy");
+        return LocalDate.parse(dateStr, inputFormatter);
+    }
+    
     public static String formatLocalDate(LocalDate date) {
         DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("dd MMM yyyy");
         return date.format(outputFormatter);

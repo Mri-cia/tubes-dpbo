@@ -28,7 +28,7 @@ public class CatalogPage extends Page {
 	
 	JPanel modelPanel = new JPanel();
 	
-	GoodsTable donatedTable;
+	GoodsTable catalogTable;
 	CButton backBtn;
 	
 	ActionListener login;
@@ -118,18 +118,18 @@ public class CatalogPage extends Page {
 		
 		//--rightBtnPanel--//
 		rightBtnPanel.setLayout(new FlowLayout(FlowLayout.TRAILING, 9, 5));
-		CButton addBtn = new CButton("add", 12);
-		CButton editBtn = new CButton("edit", 12);
-		CButton deleteBtn = new CButton("Lorem", 12);
-		
-		addBtn.setPreferredSize(new Dimension(100, 30));
-		editBtn.setPreferredSize(new Dimension(100, 30));
-		deleteBtn.setPreferredSize(new Dimension(100, 30));
-		
-		
-		rightBtnPanel.add(addBtn);
-		rightBtnPanel.add(editBtn);
-		rightBtnPanel.add(deleteBtn);
+//		CButton addBtn = new CButton("add", 12);
+//		CButton editBtn = new CButton("edit", 12);
+//		CButton deleteBtn = new CButton("Lorem", 12);
+//		
+//		addBtn.setPreferredSize(new Dimension(100, 30));
+//		editBtn.setPreferredSize(new Dimension(100, 30));
+//		deleteBtn.setPreferredSize(new Dimension(100, 30));
+//		
+//		
+//		rightBtnPanel.add(addBtn);
+//		rightBtnPanel.add(editBtn);
+//		rightBtnPanel.add(deleteBtn);
 		
 		goBack(back);
 		
@@ -148,6 +148,7 @@ public class CatalogPage extends Page {
 		
 		
 	}
+	
 	private void tradedGoods() {
 		modelPanel.removeAll(); //refresh panel
 
@@ -163,7 +164,7 @@ public class CatalogPage extends Page {
 			}
 		}
 		
-		donatedTable = new GoodsTable(modelPanel, new Dimension(widthLimit, heightLimit), columns, allItems, "catalog");
+		catalogTable = new GoodsTable(modelPanel, new Dimension(widthLimit, heightLimit), columns, allItems, "catalog");
 
         revalidate();
         repaint();
@@ -183,7 +184,7 @@ public class CatalogPage extends Page {
 			} 
 		}
 
-		donatedTable = new GoodsTable(modelPanel, new Dimension(widthLimit, heightLimit), columns, allItems, "catalog");
+		catalogTable = new GoodsTable(modelPanel, new Dimension(widthLimit, heightLimit), columns, allItems, "catalog");
 
         revalidate();
         repaint();
@@ -225,6 +226,8 @@ public class CatalogPage extends Page {
 	    } else if (user instanceof Donator || user instanceof Recipient) {
 	    	donatedGoods();
 	    }
+	    
+	    catalogTable.setEditEnabled(false);
 	}
 
 }
