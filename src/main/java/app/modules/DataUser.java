@@ -52,19 +52,21 @@ public class DataUser {
 	}
 	
 	public static boolean verifyUser() {
-		if (checkUser(trialUser)) {
-			if (checkPassChar(trialUser.getPassword())) {
-				Error = ErrorMessage.PASSWORD_TOO_SHORT.getMessage();
-				return false;
-			} else if (checkPassword(trialUser)) {
-				return true;
-			} else {
-				Error = ErrorMessage.WRONG_PASSWORD.getMessage();
-				return false;
-			}
+		if (checkPassChar(trialUser.getPassword())) {
+			Error = ErrorMessage.PASSWORD_TOO_SHORT.getMessage();
+			return false;
 		} else {
-			users.add(trialUser);
-			return true;
+			if (checkUser(trialUser)) {
+				if (checkPassword(trialUser)) {
+					return true;
+				} else {
+					Error = ErrorMessage.WRONG_PASSWORD.getMessage();
+					return false;
+				}
+			} else {
+				users.add(trialUser);
+				return true;
+			}
 		}
 	}
 	
