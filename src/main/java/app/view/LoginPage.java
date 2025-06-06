@@ -17,7 +17,7 @@ import app.exception.ErrorMessage;
 import app.modules.*;
 import app.utils.Colors;
 
-public class LoginPage extends Page  {
+public class LoginPage extends Page implements updatedPage  {
 	
 	static User currentUser;
 	
@@ -42,9 +42,7 @@ public class LoginPage extends Page  {
 	ActionListener pagePenj;
 	ActionListener pagePem;
 	
-	public LoginPage(ActionListener userPenjual, ActionListener userPembeli) {
-	    this.pagePenj = userPenjual;
-	    this.pagePem = userPembeli;
+	public LoginPage() {
 		
 		//--MainPanel setup--//
 		setLayout(new BorderLayout());
@@ -59,12 +57,12 @@ public class LoginPage extends Page  {
 //		centerPanel.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.black));
 		
 		//Uniform sizing
-		int outerWidth = (int)(widthLimit * 0.15);
-		int outerHeight = (int)(heightLimit * 0.1);
-		headPanel.setPreferredSize(new Dimension((int)widthLimit, outerHeight));
-		footPanel.setPreferredSize(new Dimension((int)widthLimit, outerHeight));
-		leftPanel.setPreferredSize(new Dimension(outerWidth, (int)heightLimit));
-		rightPanel.setPreferredSize(new Dimension(outerWidth, (int)heightLimit));
+		int outerWidth = (int)(WIDTH_LIMIT * 0.15);
+		int outerHeight = (int)(HEIGHT_LIMIT * 0.1);
+		headPanel.setPreferredSize(new Dimension((int)WIDTH_LIMIT, outerHeight));
+		footPanel.setPreferredSize(new Dimension((int)WIDTH_LIMIT, outerHeight));
+		leftPanel.setPreferredSize(new Dimension(outerWidth, (int)HEIGHT_LIMIT));
+		rightPanel.setPreferredSize(new Dimension(outerWidth, (int)HEIGHT_LIMIT));
 		
 		add(headPanel, BorderLayout.NORTH);
 		add(footPanel, BorderLayout.SOUTH);
@@ -118,7 +116,7 @@ public class LoginPage extends Page  {
 		namePanel.setLayout(new GridBagLayout());
 		GridBagConstraints nameGBC = new GridBagConstraints();
 		nameLabel = new JLabel("Username");
-		nameField = new CTextField("Ursula", colors[2]);
+		nameField = new CTextField("Ursula", Colors.ZINC.getShade(2));
 		
 		nameLabel.setPreferredSize(new Dimension(250, 10));
 		nameField.setPreferredSize(new Dimension(250, 25));
@@ -137,7 +135,7 @@ public class LoginPage extends Page  {
 		passPanel.setLayout(new GridBagLayout());
 		GridBagConstraints passGBC = new GridBagConstraints();
 		passLabel = new JLabel("Password");
-		passField = new CPasswordField("Y813K", colors[2]);
+		passField = new CPasswordField("Y813K", Colors.ZINC.getShade(2));
 		passField.setEchoChar('*');
 		
 		passLabel.setPreferredSize(new Dimension(250, 10));
@@ -283,6 +281,25 @@ public class LoginPage extends Page  {
 	
 	static User getCurrentUser() {
 		return currentUser;
+	}
+
+	@Override
+	public void setUser(User user) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void updateUserInfo() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setAction(ActionListener... args) {
+	    this.pagePenj = args[0];
+	    this.pagePem = args[1];
+		
 	}
 	
 

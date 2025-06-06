@@ -14,8 +14,7 @@ import app.modules.DataUser;
 import app.modules.User;
 import app.utils.Colors;
 
-public class BuyerPage extends Page {
-	private String role;
+public class BuyerPage extends Page implements updatedPage {
 	private int itemsBought = 0;
 	private int moneySpent = 0;
 	private int moneySaved = 0;
@@ -30,7 +29,10 @@ public class BuyerPage extends Page {
 	JLabel nameLabel = new JLabel();
 	JLabel roleLabel = new JLabel();
 	
-	public BuyerPage(ActionListener logout, ActionListener catalog) {
+	ActionListener logout;
+	ActionListener catalog;
+	
+	public BuyerPage() {
 		//--MainPanel setup--//
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		JPanel profilePanel = new JPanel();
@@ -47,7 +49,7 @@ public class BuyerPage extends Page {
 		//Sizing
 		profilePanel.setPreferredSize(new Dimension(0, 100));
 		statPanel.setMaximumSize(new Dimension(Integer.MAX_VALUE, 1));
-		tablePanel.setPreferredSize(new Dimension((int)(widthLimit * 0.08), 200));
+		tablePanel.setPreferredSize(new Dimension((int)(WIDTH_LIMIT * 0.08), 200));
 		
 		add(Box.createRigidArea(new Dimension(0, 20)));
 		add(profilePanel);
@@ -225,13 +227,13 @@ public class BuyerPage extends Page {
 	// Mengambil data dari class DataBarang dan tambahkan ke tabel
 		private void refreshTable(JPanel tablePanel) {
 			modelPanel.removeAll(); //refresh panel
-			modelPanel.setPreferredSize(new Dimension((int)(widthLimit * 0.9), 230));
+			modelPanel.setPreferredSize(new Dimension((int)(WIDTH_LIMIT * 0.9), 230));
 			tablePanel.add(modelPanel);
 
 			String[] columns = {"Nama", "Tipe", "Kadaluarsa", "Price (IDR)"};
 			ArrayList<Barang> data = DataBarang.barangUser;
 		    
-			Dimension tableSize = new Dimension((int)(widthLimit * 0.9), 400);
+			Dimension tableSize = new Dimension((int)(WIDTH_LIMIT * 0.9), 400);
 			GoodsTable buyerTable = new GoodsTable(modelPanel, tableSize, columns, data, "profile");
 			buyerTable.setEditEnabled(false);
 			
@@ -249,13 +251,20 @@ public class BuyerPage extends Page {
 
 		
 		@Override
-		protected void updateUserInfo() {
+		public void updateUserInfo() {
 		    if (user != null) {
 		        // Update UI 
 		    	nameLabel.setText(user.getUsername().toUpperCase());
 		    	roleLabel.setText(user.getRole().toUpperCase());
 		        // you can dynamically update label text if needed
 		    }
+		}
+
+		@Override
+		public void setAction(ActionListener... args) {
+			this.logout = args[0];
+			this.catalog = args[1];
+			
 		}
 			
 }

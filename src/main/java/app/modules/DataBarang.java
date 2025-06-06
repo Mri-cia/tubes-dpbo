@@ -140,25 +140,42 @@ public class DataBarang {
 //		}
 	}
 	
+	public static void addBarang(Barang barang, String type) {
+		if (type.equalsIgnoreCase("add")){
+			
+			for (User u : data.keySet()) {
+				if (u.getUsername().equals(currentUser.getUsername()) && u.getRole().equals(currentUser.getRole())) {
+					System.out.println("barang udah masuk");
+					data.get(u).add(barang);
+					barangUser.add(barang);
+				}
+			}
+		} else if (type.equalsIgnoreCase("buy")) {
+			for (User u : data.keySet()) {
+				if (u.getUsername().equals(currentUser.getUsername()) && u.getRole().equals(currentUser.getRole())) {
+					data.get(u).add(barang);
+				}
+			}
+		}
+	}
+	
+
+	
 	public static void editBarang(int row, int column, String editedValue) {
 		for (User u : data.keySet()) {
 			if (u.getUsername().equals(currentUser.getUsername()) && u.getRole().equals(currentUser.getRole())) {
 				switch(column) {
 				case 0:
 					data.get(u).get(row).setName(editedValue);
-					barangUser.get(row).setName(editedValue);
 					break;
 				case 1:
 					data.get(u).get(row).setType(editedValue);
-					barangUser.get(row).setType(editedValue);
 					break;
 				case 2:
 					data.get(u).get(row).setKadaluarsa(editedValue);
-					barangUser.get(row).setKadaluarsa(editedValue);
 					break;
 				case 3:
 					data.get(u).get(row).setHarga(Integer.parseInt(editedValue));
-					barangUser.get(row).setHarga(Integer.parseInt(editedValue));
 					break;
 				}
 //				System.out.println("ini diambild ari barang");

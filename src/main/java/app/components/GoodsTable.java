@@ -35,6 +35,8 @@ public class GoodsTable extends JScrollPane{
 		} else if(tableType.equalsIgnoreCase("catalog")) {
 			catalogTable(panel, headerTitle, tableSize, data);
 		}
+		
+		triggerUpdate();
 	}
 	
 	public void profileTable(JPanel panel, String[] headerTitle, Dimension tableSize, ArrayList<Barang> data) {
@@ -140,6 +142,10 @@ public class GoodsTable extends JScrollPane{
         // Hide scrollbar UI but keep scroll functionality
         getVerticalScrollBar().setPreferredSize(new Dimension(0, 0));
         getHorizontalScrollBar().setPreferredSize(new Dimension(0, 0));
+	}
+	
+	public void triggerUpdate() {
+		((DefaultTableModel) table.getModel()).fireTableDataChanged();
 	}
 	
 	public boolean isEditing() {

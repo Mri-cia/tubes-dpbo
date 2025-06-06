@@ -20,7 +20,8 @@ import app.exception.AppException;
 import app.exception.ErrorMessage;
 import app.modules.*;
 
-public class CatalogPage extends Page {
+public class CatalogPage extends Page implements updatedPage {
+	
 	JFrame mainFrame;
 
 	JTable table;
@@ -32,10 +33,12 @@ public class CatalogPage extends Page {
 	CButton backBtn;
 	
 	ActionListener login;
+	ActionListener backPenjual;
+	ActionListener backPembeli;
 	
 	private boolean hasShownError = false;
 	
-	public CatalogPage(ActionListener login, ActionListener backPenjual, ActionListener backPembeli, JFrame mainFrame) {
+	public CatalogPage(JFrame mainFrame) {
 		this.mainFrame = mainFrame;
 		this.login = login;
 		
@@ -49,8 +52,8 @@ public class CatalogPage extends Page {
 	    
 	    //	Sizing
 	    titlePanel.setPreferredSize(new Dimension(0, 30));
-	    tablePanel.setPreferredSize(new Dimension(0, (int)(heightLimit * 0.58)));
-		modelPanel.setPreferredSize(new Dimension((int)(widthLimit * 0.9), 400));
+	    tablePanel.setPreferredSize(new Dimension(0, (int)(HEIGHT_LIMIT * 0.58)));
+		modelPanel.setPreferredSize(new Dimension((int)(WIDTH_LIMIT * 0.9), 400));
 	    
 	    add(Box.createRigidArea(new Dimension(0, 20)));
 	    add(titlePanel);
@@ -70,7 +73,7 @@ public class CatalogPage extends Page {
 	    titlePanel.setLayout(new BoxLayout(titlePanel, BoxLayout.X_AXIS));
 	    JLabel title = new JLabel("KATALOG BARANG");
 	    
-	    title.setFont(defaultFont);
+	    title.setFont(DEFAULT_FONT);
 	    
 	    titlePanel.add(title);
 	    
@@ -92,7 +95,7 @@ public class CatalogPage extends Page {
 		
 		
 		//Btn panel sizing
-		int outerWidth = -(int)(widthLimit * 0.08);
+		int outerWidth = -(int)(WIDTH_LIMIT * 0.08);
 		
 		outerLeft.setPreferredSize(new Dimension(outerWidth,0));
 		outerRight.setPreferredSize(new Dimension(outerWidth,0));
@@ -164,7 +167,7 @@ public class CatalogPage extends Page {
 			}
 		}
 		
-		catalogTable = new GoodsTable(modelPanel, new Dimension(widthLimit, heightLimit), columns, allItems, "catalog");
+		catalogTable = new GoodsTable(modelPanel, new Dimension(WIDTH_LIMIT, HEIGHT_LIMIT), columns, allItems, "catalog");
 
         revalidate();
         repaint();
@@ -184,7 +187,7 @@ public class CatalogPage extends Page {
 			} 
 		}
 
-		catalogTable = new GoodsTable(modelPanel, new Dimension(widthLimit, heightLimit), columns, allItems, "catalog");
+		catalogTable = new GoodsTable(modelPanel, new Dimension(WIDTH_LIMIT, HEIGHT_LIMIT), columns, allItems, "catalog");
 
         revalidate();
         repaint();
@@ -232,6 +235,20 @@ public class CatalogPage extends Page {
 	    }
 	    
 	    catalogTable.setEditEnabled(false);
+	}
+
+	@Override
+	public void updateUserInfo() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setAction(ActionListener... args) {
+		this.login = args[0];
+		this.backPenjual = args[1];
+		this.backPembeli = args[2];
+		
 	}
 
 }

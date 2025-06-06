@@ -37,38 +37,36 @@ public class MainWindow extends JFrame {
 	  cardLayout = new CardLayout();
 	  mainPane = new JPanel(cardLayout);
 	  
-	  Page winTambahBarang;
-	  Page winKatalog;
-	  Page winPenj;
-	  Page winPem;
-	  Page winLogin;
+	  AddGoodsPage winTambahBarang = new AddGoodsPage();
+	  CatalogPage winKatalog = new CatalogPage(this);
+	  SellerPage winPenj = new SellerPage();
+	  BuyerPage winPem = new BuyerPage();
+	  LoginPage winLogin = new LoginPage();
 	  
 	  
-	  
-	  winTambahBarang = new AddGoodsPage(
-			  e -> cardLayout.show(mainPane, "Penjual")
+	  winTambahBarang.setAction(
+			  e -> {cardLayout.show(mainPane, "Penjual");}
 			  );
 	  
-	  winKatalog = new CatalogPage(
+	  winKatalog.setAction(
 			  e -> cardLayout.show(mainPane, "Login"),
 			  e -> cardLayout.show(mainPane, "Penjual"),
-			  e -> cardLayout.show(mainPane, "Pembeli"),
-			  this
+			  e -> cardLayout.show(mainPane, "Pembeli")
 			  );
 	  
-	  winPenj = new SellerPage(
+	  winPenj.setAction(
 			  e -> cardLayout.show(mainPane, "Login"),
 			  e -> {winTambahBarang.setUser(LoginPage.getCurrentUser()); cardLayout.show(mainPane, "TambahBarang");},
 			  e -> {winKatalog.setUser(LoginPage.getCurrentUser()); cardLayout.show(mainPane, "Katalog");}
 			  );
 	  
-	  winPem = new BuyerPage(
+	  winPem.setAction(
 			  e -> cardLayout.show(mainPane, "Login"), 
 			  e -> {winKatalog.setUser(LoginPage.getCurrentUser()); cardLayout.show(mainPane, "Katalog");}
 			  );
 	  
 	  
-	  winLogin = new LoginPage(
+	  winLogin.setAction(
 			  e -> {winPenj.setUser(LoginPage.getCurrentUser()); cardLayout.show(mainPane, "Penjual");},
 			  e -> {winPem.setUser(LoginPage.getCurrentUser()); cardLayout.show(mainPane, "Pembeli");}
 			  );

@@ -13,43 +13,51 @@ import java.util.ArrayList;
 import app.modules.*;
 import app.components.*;
 
-public class SellerPage extends Page{
+public class SellerPage extends Page implements updatedPage {
+	
 	int totalItem = 0;
 	int value = 0;
 	int expiring = 0;
-	
+
 	private JPanel tablePanel = new JPanel();
 	private JPanel modelPanel = new JPanel();
 	private GoodsTable sellerTable;
 
 	private JLabel nameLabel = new JLabel("URSULA");
 	private JLabel roleLabel = new JLabel("Penjual");
-	
+
 	private CButton catalogBtn;
 	private CButton addBtn;
 	private CButton editBtn;
 	
-	public SellerPage(ActionListener logout, ActionListener b, ActionListener catalog) {
-		
-		//--MainPanel setup--//
+	ActionListener logout;
+	ActionListener tambahBarang;
+	ActionListener catalog;
+
+	public SellerPage() {
+
+		// --MainPanel setup--//
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		JPanel profilePanel = new JPanel();
 		JPanel statPanel = new JPanel();
 		JPanel buttonPanel = new JPanel();
-		
-		//testing boundaries
-		//profilePanel.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.black));
-		//tablePanel.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.black));
-		//buttonPanel.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.black));
-		
+
+		// testing boundaries
+		// profilePanel.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1,
+		// Color.black));
+		// tablePanel.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1,
+		// Color.black));
+		// buttonPanel.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1,
+		// Color.black));
+
 		statPanel.setBorder(BorderFactory.createMatteBorder(2, 0, 2, 0, Color.black));
-		
-		//Sizing
+
+		// Sizing
 		profilePanel.setPreferredSize(new Dimension(0, 100));
 		statPanel.setMaximumSize(new Dimension(Integer.MAX_VALUE, 1));
-		
-		tablePanel.setPreferredSize(new Dimension(widthLimit, 200));
-		
+
+		tablePanel.setPreferredSize(new Dimension(WIDTH_LIMIT, 200));
+
 		add(Box.createRigidArea(new Dimension(0, 20)));
 		add(profilePanel);
 		add(Box.createRigidArea(new Dimension(0, 10)));
@@ -58,168 +66,159 @@ public class SellerPage extends Page{
 		add(tablePanel);
 		add(Box.createRigidArea(new Dimension(0, 5)));
 		add(buttonPanel);
-		
-		
-		//--Profile Panel--//
+
+		// --Profile Panel--//
 		profilePanel.setLayout(new BoxLayout(profilePanel, BoxLayout.X_AXIS));
 		JPanel lineProfile = new JPanel();
 		JPanel nameProfile = new JPanel();
 		JPanel logoutPanel = new JPanel();
-		
-		//testing boundaries
-		//logoutPanel.setBackground(Color.red);
-		
+
+		// testing boundaries
+		// logoutPanel.setBackground(Color.red);
+
 		lineProfile.setBorder(BorderFactory.createMatteBorder(0, 0, 0, 3, Color.black));
-		
+
 		lineProfile.setMaximumSize(new Dimension(100, 80));
 		nameProfile.setMaximumSize(new Dimension(1000, 80));
 		logoutPanel.setMaximumSize(new Dimension(200, 80));
-		
+
 		profilePanel.add(lineProfile);
 		profilePanel.add(Box.createRigidArea(new Dimension(10, 0)));
 		profilePanel.add(nameProfile);
 		profilePanel.add(Box.createRigidArea(new Dimension(10, 0)));
 		profilePanel.add(logoutPanel);
 		profilePanel.add(Box.createRigidArea(new Dimension(50, 0)));
-		
-		
-		//--nameProfile Panel--//
+
+		// --nameProfile Panel--//
 		nameProfile.setLayout(new BoxLayout(nameProfile, BoxLayout.Y_AXIS));
 		nameLabel = new JLabel();
 		roleLabel = new JLabel();
-		
+
 		nameLabel.setFont(new Font("ARIAL", Font.BOLD, 40));
 		roleLabel.setFont(new Font("ARIAL", Font.BOLD, 20));
-		
+
 		nameProfile.add(nameLabel);
 		nameProfile.add(Box.createRigidArea(new Dimension(0, 7)));
 		nameProfile.add(roleLabel);
-		
-		
-		//--logoutPanel--//
+
+		// --logoutPanel--//
 		logoutPanel.setLayout(new BoxLayout(logoutPanel, BoxLayout.Y_AXIS));
 
 		URL logoutIconURL = getClass().getResource("/app/view/assets/logout_icon.png");
 		CButton logoutBtn = new CButton(new ImageIcon(logoutIconURL));
-		
+
 		logoutBtn.setMaximumSize(new Dimension(38, 50));
-		
+
 		logoutBtn.setAlignmentX(JButton.RIGHT_ALIGNMENT);
-		
+
 		logoutBtn.addActionListener(logout);
-		
+
 		logoutPanel.add(logoutBtn);
-		
-		
-		//--Statistic Panel--//
+
+		// --Statistic Panel--//
 		statPanel.setLayout(new BoxLayout(statPanel, BoxLayout.Y_AXIS));
 		JLabel statLabel = new JLabel("Statistics");
 		JPanel numberPanel = new JPanel();
-		
+
 		statLabel.setFont(new Font("ARIAL", Font.BOLD, 15));
-		
-		
+
 		statLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
 		numberPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
-		
 
 		statPanel.add(Box.createRigidArea(new Dimension(0, 7)));
 		statPanel.add(statLabel);
 		statPanel.add(Box.createRigidArea(new Dimension(0, 20)));
 		statPanel.add(numberPanel);
 		statPanel.add(Box.createRigidArea(new Dimension(0, 25)));
-		
-		
-		//--numberPanel--//
+
+		// --numberPanel--//
 		numberPanel.setLayout(new BoxLayout(numberPanel, BoxLayout.X_AXIS));
 		JLabel goodsListed = new JLabel("Goods Listed: " + totalItem);
 		JLabel goodsValue = new JLabel("Value of Goods: " + value);
 		JLabel goodsExpiring = new JLabel("Expiring Goods: " + expiring);
-		
+
 		goodsListed.setFont(new Font("ARIAL", Font.BOLD, 13));
 		goodsValue.setFont(new Font("ARIAL", Font.BOLD, 13));
 		goodsExpiring.setFont(new Font("ARIAL", Font.BOLD, 13));
-		
+
 		goodsValue.setAlignmentX(Component.CENTER_ALIGNMENT);
-		
+
 		numberPanel.add(goodsListed);
 		numberPanel.add(Box.createRigidArea(new Dimension(118, 0)));
 		numberPanel.add(goodsValue);
 		numberPanel.add(Box.createRigidArea(new Dimension(100, 0)));
 		numberPanel.add(goodsExpiring);
-		
-		
-		
-		//--Button Panel--//
+
+		// --Button Panel--//
 		buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.X_AXIS));
 		JPanel outerLeft = new JPanel();
 		JPanel outerRight = new JPanel();
 		JPanel leftBtnPanel = new JPanel();
 		JPanel rightBtnPanel = new JPanel();
-		
-		//testing boundaries
-		//outerLeft.setBackground(Color.red);
-		//outerRight.setBackground(Color.red);
-		//leftBtnPanel.setBackground(Color.DARK_GRAY);
-		//rightBtnPanel.setBackground(Color.blue);
-		
-		leftBtnPanel.setPreferredSize(new Dimension(275,0));
-		rightBtnPanel.setPreferredSize(new Dimension(275,0));
-		
+
+		// testing boundaries
+		// outerLeft.setBackground(Color.red);
+		// outerRight.setBackground(Color.red);
+		// leftBtnPanel.setBackground(Color.DARK_GRAY);
+		// rightBtnPanel.setBackground(Color.blue);
+
+		leftBtnPanel.setPreferredSize(new Dimension(275, 0));
+		rightBtnPanel.setPreferredSize(new Dimension(275, 0));
+
 		rightBtnPanel.setAlignmentY(JPanel.CENTER_ALIGNMENT);
-		
+
 		buttonPanel.add(outerLeft);
 		buttonPanel.add(leftBtnPanel);
 		buttonPanel.add(rightBtnPanel);
 		buttonPanel.add(outerRight);
-		
-		//--leftBtnPanel--//
+
+		// --leftBtnPanel--//
 		leftBtnPanel.setLayout(new FlowLayout(FlowLayout.LEADING, 9, 5));
 		catalogBtn = new CButton("To Catalog", 12);
 		catalogBtn.setPreferredSize(new Dimension(100, 30));
 		leftBtnPanel.add(catalogBtn);
-		
+
 		catalogBtn.addActionListener(catalog);
-		
-		//--rightBtnPanel--//
+
+		// --rightBtnPanel--//
 		rightBtnPanel.setLayout(new FlowLayout(FlowLayout.TRAILING, 10, 5));
 		addBtn = new CButton("add", 12);
 		editBtn = new CButton("edit", 12);
-		
+
 		URL deleteIconURL = getClass().getResource("/app/view/assets/delete_icon.png");
 		CButton deleteBtn = new CButton(new ImageIcon(deleteIconURL));
-		
+
 		addBtn.setPreferredSize(new Dimension(100, 30));
 		editBtn.setPreferredSize(new Dimension(100, 30));
 		deleteBtn.setPreferredSize(new Dimension(50, 30));
-		
+
 		addBtn.addActionListener(e -> {
-		  b.actionPerformed(e);
+			tambahBarang.actionPerformed(e);
 		});
-		
+
 		rightBtnPanel.add(addBtn);
 		rightBtnPanel.add(editBtn);
 		rightBtnPanel.add(deleteBtn);
 	}
-	
+
 	// Mengambil data dari class DataBarang dan tambahkan ke tabel
 	private void refreshTable(JPanel tablePanel) {
-		modelPanel.removeAll(); //refresh panel
-		modelPanel.setPreferredSize(new Dimension((int)(widthLimit * 0.9), 230));
+		modelPanel.removeAll(); // refresh panel
+		modelPanel.setPreferredSize(new Dimension((int) (WIDTH_LIMIT * 0.9), 230));
 		tablePanel.add(modelPanel);
 
-		String[] columns = {"Nama", "Tipe", "Kadaluarsa", "Price (IDR)"};
+		String[] columns = { "Nama", "Tipe", "Kadaluarsa", "Price (IDR)" };
 		ArrayList<Barang> data = DataBarang.barangUser;
-	    
-		Dimension tableSize = new Dimension((int)(widthLimit * 0.9), 400);
+
+		Dimension tableSize = new Dimension((int) (WIDTH_LIMIT * 0.9), 400);
 		sellerTable = new GoodsTable(modelPanel, tableSize, columns, data, "profile");
-				
-	    revalidate();
-	    repaint();
-	    
-	    editBtnAction();
+
+		revalidate();
+		repaint();
+
+		editBtnAction();
 	}
-	
+
 	private void editBtnAction() {
 		editBtn.addActionListener(e -> {
 			if (sellerTable.isEditing()) {
@@ -228,9 +227,9 @@ public class SellerPage extends Page{
 			int editedRow = sellerTable.getEditedRow();
 			int editedColumn = sellerTable.getEditedColumn();
 			String editedValue = sellerTable.getEditedCellValue();
-			
+
 			DataBarang.editBarang(editedRow, editedColumn, editedValue);
-			
+
 			sellerTable.revalidate();
 			sellerTable.repaint();
 		});
@@ -238,22 +237,27 @@ public class SellerPage extends Page{
 
 	@Override
 	public void setUser(User user) {
-	    this.user = user;
-	    DataBarang.getUser(user);
-	    updateUserInfo();
-	    refreshTable(tablePanel);
+		this.user = user;
+		DataBarang.getUser(user);
+		updateUserInfo();
+		refreshTable(tablePanel);
 	}
-
-
 
 	@Override
-	protected void updateUserInfo() {
-	    if (user != null) {
-	        // Update UI 
-	    	nameLabel.setText(user.getUsername().toUpperCase());
-	    	roleLabel.setText(user.getRole().toUpperCase());
-	        // you can dynamically update label text if needed
-	    }
+	public void updateUserInfo() {
+		if (user != null) {
+			// Update UI
+			nameLabel.setText(user.getUsername().toUpperCase());
+			roleLabel.setText(user.getRole().toUpperCase());
+			// you can dynamically update label text if needed
+		}
 	}
-	   
+
+	@Override
+	public void setAction(ActionListener... args) {
+		this.logout = args[0];
+		this.tambahBarang = args[1];
+		this.catalog = args[2];
+	}
+
 }
