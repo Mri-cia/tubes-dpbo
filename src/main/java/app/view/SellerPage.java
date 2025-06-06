@@ -26,6 +26,7 @@ public class SellerPage extends Page implements updatedPage {
 	private JLabel nameLabel = new JLabel("URSULA");
 	private JLabel roleLabel = new JLabel("Penjual");
 
+	private CButton logoutBtn;
 	private CButton catalogBtn;
 	private CButton addBtn;
 	private CButton editBtn;
@@ -105,13 +106,12 @@ public class SellerPage extends Page implements updatedPage {
 		logoutPanel.setLayout(new BoxLayout(logoutPanel, BoxLayout.Y_AXIS));
 
 		URL logoutIconURL = getClass().getResource("/app/view/assets/logout_icon.png");
-		CButton logoutBtn = new CButton(new ImageIcon(logoutIconURL));
+		logoutBtn = new CButton(new ImageIcon(logoutIconURL));
 
 		logoutBtn.setMaximumSize(new Dimension(38, 50));
 
 		logoutBtn.setAlignmentX(JButton.RIGHT_ALIGNMENT);
 
-		logoutBtn.addActionListener(logout);
 
 		logoutPanel.add(logoutBtn);
 
@@ -178,7 +178,6 @@ public class SellerPage extends Page implements updatedPage {
 		catalogBtn.setPreferredSize(new Dimension(100, 30));
 		leftBtnPanel.add(catalogBtn);
 
-		catalogBtn.addActionListener(catalog);
 
 		// --rightBtnPanel--//
 		rightBtnPanel.setLayout(new FlowLayout(FlowLayout.TRAILING, 10, 5));
@@ -192,9 +191,7 @@ public class SellerPage extends Page implements updatedPage {
 		editBtn.setPreferredSize(new Dimension(100, 30));
 		deleteBtn.setPreferredSize(new Dimension(50, 30));
 
-		addBtn.addActionListener(e -> {
-			tambahBarang.actionPerformed(e);
-		});
+
 
 		rightBtnPanel.add(addBtn);
 		rightBtnPanel.add(editBtn);
@@ -258,6 +255,11 @@ public class SellerPage extends Page implements updatedPage {
 		this.logout = args[0];
 		this.tambahBarang = args[1];
 		this.catalog = args[2];
+
+
+		logoutBtn.addActionListener(logout);
+		addBtn.addActionListener(tambahBarang);
+		catalogBtn.addActionListener(catalog);
 	}
 
 }

@@ -140,9 +140,7 @@ public class DataBarang {
 //		}
 	}
 	
-	public static void addBarang(Barang barang, String type) {
-		if (type.equalsIgnoreCase("add")){
-			
+	public static void addBarang(Barang barang) {
 			for (User u : data.keySet()) {
 				if (u.getUsername().equals(currentUser.getUsername()) && u.getRole().equals(currentUser.getRole())) {
 					System.out.println("barang udah masuk");
@@ -150,16 +148,15 @@ public class DataBarang {
 					barangUser.add(barang);
 				}
 			}
-		} else if (type.equalsIgnoreCase("buy")) {
-			for (User u : data.keySet()) {
-				if (u.getUsername().equals(currentUser.getUsername()) && u.getRole().equals(currentUser.getRole())) {
-					data.get(u).add(barang);
-				}
+	}
+	
+	public static void buyBarang(Barang barang, int selectedRow) {
+		for (User u : data.keySet()) {
+			if (u.getUsername().equals(currentUser.getUsername()) && u.getRole().equals(currentUser.getRole())) {
+				data.get(u).add(barang);
 			}
 		}
 	}
-	
-
 	
 	public static void editBarang(int row, int column, String editedValue) {
 		for (User u : data.keySet()) {
@@ -183,6 +180,29 @@ public class DataBarang {
 			}
 			
 		}
+	}
+	
+	
+	public static ArrayList<String> listSellerUser(String type) {
+		ArrayList<String> listUser = new ArrayList<>();
+		if(type.equalsIgnoreCase("trade")) {
+			for (User u : data.keySet()) {
+				if(u instanceof Seller) {
+					for (int i = 0; i < data.get(u).size(); i++) {
+						listUser.add(u.getUsername());
+					}
+				}
+			}
+		} else if(type.equalsIgnoreCase("donate")) {
+			for (User u : data.keySet()) {
+				if(u instanceof Donator) {
+					for (int i = 0; i < data.get(u).size(); i++) {
+						listUser.add(u.getUsername());
+					}
+				}
+			}
+		}
+		return listUser;
 	}
 	
 }

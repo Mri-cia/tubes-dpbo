@@ -133,8 +133,7 @@ public class CatalogPage extends Page implements updatedPage {
 //		rightBtnPanel.add(addBtn);
 //		rightBtnPanel.add(editBtn);
 //		rightBtnPanel.add(deleteBtn);
-		
-		goBack(backPenjual, backPembeli);
+
 		
 		addHierarchyListener(e -> {
 		    boolean isShowing = (e.getChangeFlags() & HierarchyEvent.SHOWING_CHANGED) != 0;
@@ -166,6 +165,7 @@ public class CatalogPage extends Page implements updatedPage {
 				}
 			}
 		}
+
 		
 		catalogTable = new GoodsTable(modelPanel, new Dimension(WIDTH_LIMIT, HEIGHT_LIMIT), columns, allItems, "catalog");
 
@@ -249,6 +249,8 @@ public class CatalogPage extends Page implements updatedPage {
 		this.backPenjual = args[1];
 		this.backPembeli = args[2];
 		
+		
+		goBack(backPenjual, backPembeli);
 	}
 
 }

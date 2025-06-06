@@ -22,12 +22,14 @@ public class BuyerPage extends Page implements updatedPage {
 	JTable table;
 	JScrollPane scroller;
 
+	JLabel nameLabel = new JLabel();
+	JLabel roleLabel = new JLabel();
+	
 	JPanel tablePanel = new JPanel();
 	JPanel modelPanel = new JPanel();
 	
-
-	JLabel nameLabel = new JLabel();
-	JLabel roleLabel = new JLabel();
+	private CButton logoutBtn;
+	private CButton catalogBtn;
 	
 	ActionListener logout;
 	ActionListener catalog;
@@ -101,13 +103,12 @@ public class BuyerPage extends Page implements updatedPage {
 		logoutPanel.setLayout(new BoxLayout(logoutPanel, BoxLayout.Y_AXIS));
 
 		URL logoutIconURL = getClass().getResource("/app/view/assets/logout_icon.png");
-		CButton logoutBtn = new CButton(new ImageIcon(logoutIconURL));
+		logoutBtn = new CButton(new ImageIcon(logoutIconURL));
 		
 		logoutBtn.setMaximumSize(new Dimension(38, 50));
 		
 		logoutBtn.setAlignmentX(JButton.RIGHT_ALIGNMENT);
 		
-		logoutBtn.addActionListener(logout);
 		
 		logoutPanel.add(logoutBtn);
 		
@@ -213,13 +214,12 @@ public class BuyerPage extends Page implements updatedPage {
 		
 		//--rightBtnPanel--//
 		rightBtnPanel.setLayout(new FlowLayout(FlowLayout.TRAILING, 10, 5));
-		CButton deleteBtn = new CButton("To Catalog...", 13);
+		catalogBtn = new CButton("To Catalog...", 13);
 		
-		deleteBtn.addActionListener(catalog);
 		
-		deleteBtn.setPreferredSize(new Dimension(150, 30));
+		catalogBtn.setPreferredSize(new Dimension(150, 30));
 		
-		rightBtnPanel.add(deleteBtn);
+		rightBtnPanel.add(catalogBtn);
 		
 		
 	}
@@ -264,7 +264,9 @@ public class BuyerPage extends Page implements updatedPage {
 		public void setAction(ActionListener... args) {
 			this.logout = args[0];
 			this.catalog = args[1];
-			
+
+			logoutBtn.addActionListener(logout);
+			catalogBtn.addActionListener(catalog);
 		}
 			
 }
