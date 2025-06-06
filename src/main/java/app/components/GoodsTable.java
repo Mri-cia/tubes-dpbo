@@ -158,15 +158,15 @@ public class GoodsTable extends JScrollPane{
 		}
 	}
 	
-	public int getEditedRow() {
+	public int getSelectedRow() {
 		return table.getSelectedRow();
 	}
 	
-	public int getEditedColumn() {
+	public int getSelectedColumn() {
 		return table.getSelectedColumn();
 	}
 	
-	public String getEditedCellValue() {
+	public String getSelectedCellValue() {
 		return (String)table.getValueAt(table.getSelectedRow(), table.getSelectedColumn());
 	}
 	

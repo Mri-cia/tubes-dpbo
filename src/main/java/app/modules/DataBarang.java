@@ -140,6 +140,15 @@ public class DataBarang {
 //		}
 	}
 	
+	public static User getUserStr(String username, String role) {
+		for (User u : data.keySet()) {
+			if(u.getUsername().equalsIgnoreCase(username) && u.getRole().equalsIgnoreCase(role)) {
+				return u;
+			}
+		}
+		return null;
+	}
+	
 	public static void addBarang(Barang barang) {
 			for (User u : data.keySet()) {
 				if (u.getUsername().equals(currentUser.getUsername()) && u.getRole().equals(currentUser.getRole())) {

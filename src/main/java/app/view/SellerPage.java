@@ -221,9 +221,9 @@ public class SellerPage extends Page implements updatedPage {
 			if (sellerTable.isEditing()) {
 				sellerTable.saveEditedCell();
 			}
-			int editedRow = sellerTable.getEditedRow();
-			int editedColumn = sellerTable.getEditedColumn();
-			String editedValue = sellerTable.getEditedCellValue();
+			int editedRow = sellerTable.getSelectedRow();
+			int editedColumn = sellerTable.getSelectedColumn();
+			String editedValue = sellerTable.getSelectedCellValue();
 
 			DataBarang.editBarang(editedRow, editedColumn, editedValue);
 

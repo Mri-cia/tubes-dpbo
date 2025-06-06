@@ -29,12 +29,19 @@ public class CatalogPage extends Page implements updatedPage {
 	
 	JPanel modelPanel = new JPanel();
 	
+	JPanel rightBtnPanel;
+	
 	GoodsTable catalogTable;
 	CButton backBtn;
+	CButton buyBtn;
+	
+	private ArrayList<String> listSeller;
+	private ArrayList<String> listDonator;
 	
 	ActionListener login;
 	ActionListener backPenjual;
 	ActionListener backPembeli;
+	ActionListener refresh;
 	
 	private boolean hasShownError = false;
 	
@@ -85,7 +92,7 @@ public class CatalogPage extends Page implements updatedPage {
 		JPanel outerLeft = new JPanel();
 		JPanel outerRight = new JPanel();
 		JPanel leftBtnPanel = new JPanel();
-		JPanel rightBtnPanel = new JPanel();
+		rightBtnPanel = new JPanel();
 		
 		//testing boundaries
 		//outerLeft.setBackground(Color.red);
@@ -123,7 +130,7 @@ public class CatalogPage extends Page implements updatedPage {
 		rightBtnPanel.setLayout(new FlowLayout(FlowLayout.TRAILING, 9, 5));
 //		CButton addBtn = new CButton("add", 12);
 //		CButton editBtn = new CButton("edit", 12);
-//		CButton deleteBtn = new CButton("Lorem", 12);
+		buyBtn = new CButton("Beli", 12);
 //		
 //		addBtn.setPreferredSize(new Dimension(100, 30));
 //		editBtn.setPreferredSize(new Dimension(100, 30));
@@ -132,7 +139,7 @@ public class CatalogPage extends Page implements updatedPage {
 //		
 //		rightBtnPanel.add(addBtn);
 //		rightBtnPanel.add(editBtn);
-//		rightBtnPanel.add(deleteBtn);
+
 
 		
 		addHierarchyListener(e -> {
@@ -165,13 +172,15 @@ public class CatalogPage extends Page implements updatedPage {
 				}
 			}
 		}
-
+		
+		listSeller = DataBarang.listSellerUser("trade");
 		
 		catalogTable = new GoodsTable(modelPanel, new Dimension(WIDTH_LIMIT, HEIGHT_LIMIT), columns, allItems, "catalog");
 
         revalidate();
         repaint();
 	}
+	
 	private void donatedGoods() {
 		modelPanel.removeAll(); //refresh panel
 		
@@ -186,11 +195,44 @@ public class CatalogPage extends Page implements updatedPage {
 				}
 			} 
 		}
+		
+		listDonator = DataBarang.listSellerUser("donate");
 
 		catalogTable = new GoodsTable(modelPanel, new Dimension(WIDTH_LIMIT, HEIGHT_LIMIT), columns, allItems, "catalog");
 
         revalidate();
         repaint();
+	}
+	
+	private void showBuyBtn() {
+		rightBtnPanel.remove(buyBtn);
+		if(user instanceof Buyer || user instanceof Recipient) {
+			rightBtnPanel.add(buyBtn);
+		}
+	}
+	
+	private void boughtAction() {
+		buyBtn.addActionListener(e -> {
+			int selectedRow = catalogTable.getSelectedRow();
+			if (user instanceof Buyer) {
+				String selectedSeller = listSeller.get(selectedRow);
+				User selectedUser = DataBarang.getUserStr(selectedSeller, "penjual");
+				
+				DataBarang.data.get(selectedUser).remove(selectedRow);
+				
+				
+			} else if (user instanceof Recipient) {
+				String selectedSeller = listSeller.get(selectedRow);
+				User selectedUser = DataBarang.getUserStr(selectedSeller, "Donator");
+				
+				DataBarang.data.get(selectedUser).remove(selectedRow);
+				
+			} 
+			catalogTable.triggerUpdate();
+			catalogTable.revalidate();
+			catalogTable.repaint();
+			
+		});
 	}
 	
 	private void goBack(ActionListener backPenjual, ActionListener backPembeli) {
@@ -235,6 +277,9 @@ public class CatalogPage extends Page implements updatedPage {
 	    }
 	    
 	    catalogTable.setEditEnabled(false);
+	    
+	    showBuyBtn();
+		boughtAction();
 	}
 
 	@Override
@@ -248,9 +293,11 @@ public class CatalogPage extends Page implements updatedPage {
 		this.login = args[0];
 		this.backPenjual = args[1];
 		this.backPembeli = args[2];
+		this.refresh = args[3];
 		
 		
 		goBack(backPenjual, backPembeli);
+		
 	}
 
 }

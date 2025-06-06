@@ -46,8 +46,9 @@ public class MainWindow extends JFrame {
 	  
 	  winKatalog.setAction(
 			  e -> cardLayout.show(mainPane, "Login"),
-			  e -> cardLayout.show(mainPane, "Penjual"),
-			  e -> cardLayout.show(mainPane, "Pembeli")
+			  e -> {winPenj.setUser(LoginPage.getCurrentUser()); cardLayout.show(mainPane, "Penjual");},
+			  e -> {winPem.setUser(LoginPage.getCurrentUser()); cardLayout.show(mainPane, "Pembeli");},
+			  e -> {winKatalog.setUser(LoginPage.getCurrentUser());}
 			  );
 	  
 	  winPenj.setAction(
