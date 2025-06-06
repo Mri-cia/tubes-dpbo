@@ -203,7 +203,7 @@ public class AddGoodsPage extends Page implements updatedPage {
 
 		buttonPanel.add(submitButton);
 
-		validation(back);
+
 	}
 
 	private void getForm() {
@@ -328,6 +328,7 @@ public class AddGoodsPage extends Page implements updatedPage {
 	@Override
 	public void setAction(ActionListener... args) {
 		this.back = args[0];
+		validation(back);
 	}
 
 }

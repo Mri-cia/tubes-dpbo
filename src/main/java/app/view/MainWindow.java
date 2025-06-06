@@ -44,10 +44,6 @@ public class MainWindow extends JFrame {
 	  LoginPage winLogin = new LoginPage();
 	  
 	  
-	  winTambahBarang.setAction(
-			  e -> {cardLayout.show(mainPane, "Penjual");}
-			  );
-	  
 	  winKatalog.setAction(
 			  e -> cardLayout.show(mainPane, "Login"),
 			  e -> cardLayout.show(mainPane, "Penjual"),
@@ -58,6 +54,10 @@ public class MainWindow extends JFrame {
 			  e -> cardLayout.show(mainPane, "Login"),
 			  e -> {winTambahBarang.setUser(LoginPage.getCurrentUser()); cardLayout.show(mainPane, "TambahBarang");},
 			  e -> {winKatalog.setUser(LoginPage.getCurrentUser()); cardLayout.show(mainPane, "Katalog");}
+			  );
+	  
+	  winTambahBarang.setAction(
+			  e -> {winPenj.setUser(LoginPage.getCurrentUser()); cardLayout.show(mainPane, "Penjual");}
 			  );
 	  
 	  winPem.setAction(
