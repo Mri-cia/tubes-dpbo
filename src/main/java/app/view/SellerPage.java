@@ -30,7 +30,7 @@ public class SellerPage extends Page implements updatedPage {
 	private CButton catalogBtn;
 	private CButton addBtn;
 	private CButton editBtn;
-	
+	private CButton deleteBtn;
 	ActionListener logout;
 	ActionListener tambahBarang;
 	ActionListener catalog;
@@ -185,7 +185,7 @@ public class SellerPage extends Page implements updatedPage {
 		editBtn = new CButton("edit", 12);
 
 		URL deleteIconURL = getClass().getResource("/app/view/assets/delete_icon.png");
-		CButton deleteBtn = new CButton(new ImageIcon(deleteIconURL));
+		deleteBtn = new CButton(new ImageIcon(deleteIconURL));
 
 		addBtn.setPreferredSize(new Dimension(100, 30));
 		editBtn.setPreferredSize(new Dimension(100, 30));
@@ -196,24 +196,30 @@ public class SellerPage extends Page implements updatedPage {
 		rightBtnPanel.add(addBtn);
 		rightBtnPanel.add(editBtn);
 		rightBtnPanel.add(deleteBtn);
+		
+
 	}
 
 	// Mengambil data dari class DataBarang dan tambahkan ke tabel
 	private void refreshTable(JPanel tablePanel) {
-		modelPanel.removeAll(); // refresh panel
-		modelPanel.setPreferredSize(new Dimension((int) (WIDTH_LIMIT * 0.9), 230));
-		tablePanel.add(modelPanel);
+	    tablePanel.removeAll(); // Clear old content from the tablePanel
 
-		String[] columns = { "Nama", "Tipe", "Kadaluarsa", "Price (IDR)" };
-		ArrayList<Barang> data = DataBarang.barangUser;
+	    modelPanel = new JPanel(); // Create a new instance to ensure old content is gone
+	    modelPanel.setPreferredSize(new Dimension((int) (WIDTH_LIMIT * 0.9), 230));
 
-		Dimension tableSize = new Dimension((int) (WIDTH_LIMIT * 0.9), 400);
-		sellerTable = new GoodsTable(modelPanel, tableSize, columns, data, "profile");
+	    String[] columns = { "Nama", "Tipe", "Kadaluarsa", "Price (IDR)" };
+	    ArrayList<Barang> data = DataBarang.barangUser;
 
-		revalidate();
-		repaint();
+	    Dimension tableSize = new Dimension((int) (WIDTH_LIMIT * 0.9), 400);
+	    sellerTable = new GoodsTable(modelPanel, tableSize, columns, data, "profile");
 
-		editBtnAction();
+	    tablePanel.add(modelPanel);
+
+	    tablePanel.revalidate();  // Ensure layout update
+	    tablePanel.repaint();     // Repaint for visual refresh
+
+	    editBtnAction();
+	    deleteBtnAction();
 	}
 
 	private void editBtnAction() {
@@ -231,12 +237,44 @@ public class SellerPage extends Page implements updatedPage {
 			sellerTable.repaint();
 		});
 	}
+	
+	private void deleteBtnAction() {
+		for (ActionListener al : deleteBtn.getActionListeners()) {
+			deleteBtn.removeActionListener(al);
+		}
+		deleteBtn.addActionListener(e -> {
+			int selectedRow = sellerTable.getSelectedRow();
+	        if (selectedRow >= 0) {
+	            DataBarang.data.get(user).remove(selectedRow);
+	            DataBarang.getUser(user); // Update barangUser
+	            refreshTable(tablePanel); // Refresh table view
+	        }
+		});
+	}
+	
+	private void logoutBtnAction() {
+		
+		for (ActionListener al : logoutBtn.getActionListeners()) {
+			logoutBtn.removeActionListener(al);
+		}
+		logoutBtn.addActionListener(logout);
+	}
+	
+	private void catalogAction() {
+		for (ActionListener al : catalogBtn.getActionListeners()) {
+			logoutBtn.removeActionListener(al);
+		}
+		catalogBtn.addActionListener(catalog);
+	}
+
 
 	@Override
 	public void setUser(User user) {
 		this.user = user;
 		DataBarang.getUser(user);
 		updateUserInfo();
+//	    // Ensures refresh happens after layout switch
+//	    SwingUtilities.invokeLater(() -> refreshTable(tablePanel));
 		refreshTable(tablePanel);
 	}
 
@@ -256,10 +294,11 @@ public class SellerPage extends Page implements updatedPage {
 		this.tambahBarang = args[1];
 		this.catalog = args[2];
 
-
+//		logoutBtnAction();
+//		catalogAction();
 		logoutBtn.addActionListener(logout);
-		addBtn.addActionListener(tambahBarang);
 		catalogBtn.addActionListener(catalog);
+		addBtn.addActionListener(tambahBarang);
 	}
 
 }

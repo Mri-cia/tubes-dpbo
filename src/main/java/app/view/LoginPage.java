@@ -204,6 +204,8 @@ public class LoginPage extends Page implements updatedPage  {
 			getForm();
 			String selectedRole = (String)roleSelect.getSelectedItem();
 			DataUser.setUserRole(name, pass, selectedRole);
+			
+			
 			if (DataUser.verifyUser()) {
 				if (errorPanel != null) {
 				    centerPanel.remove(errorPanel);
@@ -245,22 +247,23 @@ public class LoginPage extends Page implements updatedPage  {
 	
 	private void pageDirection(String selectedRole, ActionEvent e) {
 		getForm();
+		currentUser = DataUser.getActiveUser();
 		switch(selectedRole) {
 		case "Penjual":
-			currentUser = new Seller(name, pass);
+//			currentUser = new Seller(name, pass);
 			pagePenj.actionPerformed(e);
 			break;
 		case "Donatur":
-			currentUser = new Donator(name, pass);
+//			currentUser = new Donator(name, pass);
 			pagePenj.actionPerformed(e);
 			break;
 			
 		case "Pembeli":
-			currentUser = new Buyer(name, pass);
+//			currentUser = new Buyer(name, pass);
 	        pagePem.actionPerformed(e);
 	        break;
 		case "Penerima":
-			currentUser = new Recipient(name, pass);
+//			currentUser = new Recipient(name, pass);
 	        pagePem.actionPerformed(e);
 	        break;
 	    
@@ -268,7 +271,20 @@ public class LoginPage extends Page implements updatedPage  {
 	    	break;
 		}
 		
+//		DataUser.setDataUser(currentUser);;
 		DataBarang.addUserBarangList(currentUser);
+		
+//		for (User u : DataUser.getUsers()) {
+//			System.out.println(u.getUsername());
+//		}
+		
+//		for (User u : DataBarang.data.keySet()) {
+//			System.out.println(u.getUsername());
+//		}
+		
+//		for (Barang b : DataBarang.data.get(currentUser)) {
+//			System.out.print(b.getName() + "  ");
+//		}
 		
 		nameField.setText(null);
 		passField.setText(null);

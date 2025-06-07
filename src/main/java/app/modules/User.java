@@ -13,7 +13,7 @@ public class User {
 	public User(String username, String password, String role) {
 		this.username = username.toUpperCase();
 		this.password = password;
-		this.role = role;
+		this.role = role.toUpperCase();
 	}
 
 	public String getUsername() {
@@ -32,5 +32,19 @@ public class User {
 		return barang;
 	}
 
+    // Override equals to compare username and role
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof User)) return false;
+        User user = (User) o;
+        return username.equalsIgnoreCase(user.username) &&
+               role.equalsIgnoreCase(user.role);
+    }
 
+    // Override hashCode to match equals (username + role)
+    @Override
+    public int hashCode() {
+        return Objects.hash(username.toLowerCase(), role.toLowerCase());
+    }
 }

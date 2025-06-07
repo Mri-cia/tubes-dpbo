@@ -97,7 +97,23 @@ public class DataBarang {
 	}
 	
 	public static void addUserBarangList(User user) {
-		data.put(user, new ArrayList<>());
+		if (checkUserData(user)) {
+			data.put(user, new ArrayList<>());
+		}
+	}
+	
+	public static boolean checkUserData(User user) {
+		boolean check = false;
+		for (User u : data.keySet()) {			
+			if (!(u.getUsername().equals(user.getUsername()) && u.getRole().equals(user.getRole()))) {
+
+				check = true;
+			} 
+			else{
+				return false;
+			}
+		}
+		return check;
 	}
 	
 	public static int getIndexUser(String username) {
@@ -152,6 +168,8 @@ public class DataBarang {
 		}
 		return null;
 	}
+	
+
 	
 	public static void addBarang(Barang barang) {
 			for (User u : data.keySet()) {

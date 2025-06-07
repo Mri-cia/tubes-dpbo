@@ -11,6 +11,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
@@ -50,7 +51,9 @@ public class GoodsTable extends JScrollPane{
 	            }
 	        };
 	        table = new JTable(model);
-	        setViewportView(table);;
+	        setViewportView(table);
+	        table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+	        table.getTableHeader().setReorderingAllowed(false);
 	        
 	        setPreferredSize(new Dimension((int)(tableSize.getWidth() * 0.8), 260));
 	        panel.setLayout(new BorderLayout()); // Make sure layout is BorderLayout to use CENTER properly
@@ -109,7 +112,7 @@ public class GoodsTable extends JScrollPane{
     			model.addRow(row);
     		}
 	    
-		
+
 		tableStyle();
 	}
 	
@@ -142,6 +145,7 @@ public class GoodsTable extends JScrollPane{
         // Hide scrollbar UI but keep scroll functionality
         getVerticalScrollBar().setPreferredSize(new Dimension(0, 0));
         getHorizontalScrollBar().setPreferredSize(new Dimension(0, 0));
+
 	}
 	
 	public void triggerUpdate() {

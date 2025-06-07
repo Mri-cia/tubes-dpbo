@@ -10,7 +10,7 @@ import app.exception.ErrorMessage;
 
 public class DataUser {
 	private static Set<User> users = new LinkedHashSet<>();
-	private static User trialUser  = new User("", "", "");
+	private static User activeUser  = new User("", "", "");
 	
 	public static String Error;
 	
@@ -25,52 +25,56 @@ public class DataUser {
 		return users;
 	}
 	
+	public static User getActiveUser() {
+		return activeUser;
+	}
+	
 	public static User getDataUser(int index) {
 		ArrayList<User> userList = new ArrayList<>(users);
 		return userList.get(index);
 	}
 	
-	private static void setDataUser(User u) {
+	public static void setDataUser(User u) {
 		users.add(u);
 	}
 	
 	public static void setUserRole(String name, String pass, String selectedRole) {
 		switch(selectedRole) {
 		case "Penjual":
-			trialUser = new Seller(name, pass);
+			activeUser = new Seller(name, pass);
 			break;
 		case "Donatur":
-			trialUser = new Donator(name, pass);
+			activeUser = new Donator(name, pass);
 			break;
 		case "Pembeli":
-			trialUser = new Buyer(name, pass);
+			activeUser = new Buyer(name, pass);
 	        break;
 		case "Penerima":
-			trialUser = new Recipient(name, pass);
+			activeUser = new Recipient(name, pass);
 	        break;
 		}
 	}
 	
 	public static boolean verifyUser() {
-		if (checkPassChar(trialUser.getPassword())) {
+		if (checkPassChar(activeUser.getPassword())) {
 			Error = ErrorMessage.PASSWORD_TOO_SHORT.getMessage();
 			return false;
 		} else {
-			if (checkUser(trialUser)) {
-				if (checkPassword(trialUser)) {
+			if (checkUser(activeUser)) {
+				if (checkPassword(activeUser)) {
 					return true;
 				} else {
 					Error = ErrorMessage.WRONG_PASSWORD.getMessage();
 					return false;
 				}
 			} else {
-				users.add(trialUser);
+				users.add(activeUser);
 				return true;
 			}
 		}
 	}
 	
-	private static boolean checkUser(User u) {
+	public static boolean checkUser(User u) {
 		for (User user : users) {
 			boolean sameUser = user.getUsername().equalsIgnoreCase(u.getUsername());
 			boolean sameRole = user.getRole().equalsIgnoreCase(u.getRole());
