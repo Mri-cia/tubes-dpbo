@@ -22,7 +22,7 @@ public class Barang {
 	}
 	
 	public boolean isKadaluarsa() throws ParseException {
-		if(kadaluarsa.isAfter(today)) {
+		if(kadaluarsa.isBefore(today)) {
 			return true;
 		} else {
 			return false;
@@ -61,10 +61,6 @@ public class Barang {
 		this.harga = harga;
 	}
 
-	public void setToday(LocalDate today) {
-		this.today = today;
-	}
-	
 	
 	
 }

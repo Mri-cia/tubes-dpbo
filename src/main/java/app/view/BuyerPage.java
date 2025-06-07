@@ -9,16 +9,14 @@ import java.util.ArrayList;
 import app.components.CButton;
 import app.components.GoodsTable;
 import app.modules.Barang;
+import app.modules.Buyer;
 import app.modules.DataBarang;
 import app.modules.DataUser;
+import app.modules.Recipient;
 import app.modules.User;
 import app.utils.Colors;
 
 public class BuyerPage extends Page implements updatedPage {
-	private int itemsBought = 0;
-	private int moneySpent = 0;
-	private int moneySaved = 0;
-	private String mostType = "";
 	JTable table;
 	JScrollPane scroller;
 
@@ -27,6 +25,8 @@ public class BuyerPage extends Page implements updatedPage {
 	
 	JPanel tablePanel = new JPanel();
 	JPanel modelPanel = new JPanel();
+	
+	private JPanel numberPanel;
 	
 	private CButton logoutBtn;
 	private CButton catalogBtn;
@@ -116,7 +116,7 @@ public class BuyerPage extends Page implements updatedPage {
 		//--Statistic Panel--//
 		statPanel.setLayout(new BoxLayout(statPanel, BoxLayout.Y_AXIS));
 		JLabel statLabel = new JLabel("Statistics");
-		JPanel numberPanel = new JPanel();
+		numberPanel = new JPanel();
 		
 		statLabel.setFont(new Font("ARIAL", Font.BOLD, 15));
 		
@@ -131,63 +131,7 @@ public class BuyerPage extends Page implements updatedPage {
 		statPanel.add(numberPanel);
 		statPanel.add(Box.createRigidArea(new Dimension(0, 18)));
 		
-		//--numberPanel--//
-		numberPanel.setLayout(new BoxLayout(numberPanel, BoxLayout.X_AXIS));
-		JPanel numPaneLeft = new JPanel();
-		JPanel numPaneRight = new JPanel();
-		
-		//testingboundaries//
-		//numPaneLeft.setBackground(Color.red);
-		//numPaneRight.setBackground(Color.blue);
-		
-		numPaneLeft.setMaximumSize(new Dimension(Integer.MAX_VALUE, 50));
-		numPaneRight.setMaximumSize(new Dimension(Integer.MAX_VALUE, 50));
-		
-		numPaneRight.setAlignmentX(JPanel.CENTER_ALIGNMENT);
-		
-		numberPanel.add(numPaneLeft);
-		numberPanel.add(numPaneRight);
-		
-		//--numPaneLeft--//
-		numPaneLeft.setLayout(new BoxLayout(numPaneLeft, BoxLayout.Y_AXIS));
-		JLabel goodsBought = new JLabel("Total Goods Bought: " + itemsBought);
-		JLabel goodsType = new JLabel("Most Bought Type: " + mostType);
 
-		goodsBought.setFont(new Font("ARIAL", Font.BOLD, 13));
-		goodsType.setFont(new Font("ARIAL", Font.BOLD, 13));
-		
-		goodsBought.setPreferredSize(new Dimension(0, 15));
-		goodsType.setPreferredSize(new Dimension(0, 15));
-
-		goodsBought.setAlignmentX(Component.CENTER_ALIGNMENT);
-		goodsType.setAlignmentX(Component.CENTER_ALIGNMENT);
-		
-		numPaneLeft.add(goodsBought);
-		numPaneLeft.add(Box.createRigidArea(new Dimension(0, 20)));
-		numPaneLeft.add(goodsType);
-		
-		
-		//--numPaneRight--//
-		numPaneRight.setLayout(new BoxLayout(numPaneRight, BoxLayout.Y_AXIS));
-		JLabel moneySpent = new JLabel("Total Money Spent: " + this.moneySpent);
-		JLabel moneySaved = new JLabel("Total Money Saved: " + this.moneySaved);
-		
-		moneySpent.setFont(new Font("ARIAL", Font.BOLD, 13));
-		moneySaved.setFont(new Font("ARIAL", Font.BOLD, 13));
-		
-		moneySpent.setPreferredSize(new Dimension(0, 15));
-		moneySaved.setPreferredSize(new Dimension(0, 15));
-		
-		moneySpent.setAlignmentX(Component.CENTER_ALIGNMENT);
-		moneySaved.setAlignmentX(Component.CENTER_ALIGNMENT);
-		
-		numPaneRight.add(moneySpent);
-		numPaneRight.add(Box.createRigidArea(new Dimension(0, 20)));
-		numPaneRight.add(moneySaved);
-		
-		
-		
-		
 		//--Button Panel--//
 		buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.X_AXIS));
 		JPanel outerLeft = new JPanel();
@@ -224,6 +168,103 @@ public class BuyerPage extends Page implements updatedPage {
 		
 	}
 	
+	private void countingStatistic() {
+		//--numberPanel--//
+		numberPanel.setLayout(new BoxLayout(numberPanel, BoxLayout.X_AXIS));
+		
+		int totalItem = DataBarang.data.get(user).size();
+		
+		String goodsType = "";
+		int makan = 0;
+		int minum = 0;
+		for (Barang b : DataBarang.data.get(user)) {
+			if (b.getType().equalsIgnoreCase("makanan")) {
+				makan++;
+			} else if (b.getType().equalsIgnoreCase("minuman")) {
+				minum++;
+			}
+		}
+		if (makan > minum) {
+			goodsType = "Makanan";
+		} else if (makan < minum) {
+			goodsType = "Minuman";
+		} else {
+			goodsType = "Semua Jenis";
+		}
+		
+		if (user instanceof Buyer) {
+			JPanel numPaneLeft = new JPanel();
+			JPanel numPaneRight = new JPanel();
+			
+			//testingboundaries//
+			//numPaneLeft.setBackground(Color.red);
+			//numPaneRight.setBackground(Color.blue);
+			
+			numPaneLeft.setMaximumSize(new Dimension(Integer.MAX_VALUE, 50));
+			numPaneRight.setMaximumSize(new Dimension(Integer.MAX_VALUE, 50));
+			
+			numPaneRight.setAlignmentX(JPanel.CENTER_ALIGNMENT);
+			
+			numberPanel.add(numPaneLeft);
+			numberPanel.add(numPaneRight);
+			
+			//--numPaneLeft--//
+			numPaneLeft.setLayout(new BoxLayout(numPaneLeft, BoxLayout.Y_AXIS));
+			JLabel goodsBought = new JLabel("Total Goods Bought: " + totalItem);
+			JLabel mostType = new JLabel("Most Bought Type: " + goodsType);
+			
+			goodsBought.setFont(new Font("ARIAL", Font.BOLD, 13));
+			mostType.setFont(new Font("ARIAL", Font.BOLD, 13));
+			
+			goodsBought.setPreferredSize(new Dimension(0, 15));
+			mostType.setPreferredSize(new Dimension(0, 15));
+			
+			goodsBought.setAlignmentX(Component.CENTER_ALIGNMENT);
+			mostType.setAlignmentX(Component.CENTER_ALIGNMENT);
+			
+			numPaneLeft.add(goodsBought);
+			numPaneLeft.add(Box.createRigidArea(new Dimension(0, 20)));
+			numPaneLeft.add(mostType);
+			
+			
+			//--numPaneRight--//
+			
+			int spent = 0;
+			int saved = 0;
+			
+			numPaneRight.setLayout(new BoxLayout(numPaneRight, BoxLayout.Y_AXIS));
+			JLabel moneySpent = new JLabel("Total Money Spent: " + spent);
+			JLabel moneySaved = new JLabel("Total Money Saved: " + saved);
+			
+			moneySpent.setFont(new Font("ARIAL", Font.BOLD, 13));
+			moneySaved.setFont(new Font("ARIAL", Font.BOLD, 13));
+			
+			moneySpent.setPreferredSize(new Dimension(0, 15));
+			moneySaved.setPreferredSize(new Dimension(0, 15));
+			
+			moneySpent.setAlignmentX(Component.CENTER_ALIGNMENT);
+			moneySaved.setAlignmentX(Component.CENTER_ALIGNMENT);
+			
+			numPaneRight.add(moneySpent);
+			numPaneRight.add(Box.createRigidArea(new Dimension(0, 20)));
+			numPaneRight.add(moneySaved);
+		} else if(user instanceof Recipient) {
+			
+			
+			JLabel goodsBought = new JLabel("Barang Terdaftar: " + totalItem);
+			JLabel mostType = new JLabel("Barang Kadaluarsa: " + goodsType);
+			
+			goodsBought.setFont(new Font("ARIAL", Font.BOLD, 13));
+			mostType.setFont(new Font("ARIAL", Font.BOLD, 13));
+			
+			mostType.setAlignmentX(Component.CENTER_ALIGNMENT);
+			
+			numberPanel.add(goodsBought);
+			numberPanel.add(Box.createRigidArea(new Dimension(250, 0)));
+			numberPanel.add(mostType);
+		}
+	}
+	
 	// Mengambil data dari class DataBarang dan tambahkan ke tabel
 		private void refreshTable(JPanel tablePanel) {
 			modelPanel.removeAll(); //refresh panel
@@ -246,6 +287,7 @@ public class BuyerPage extends Page implements updatedPage {
 		    this.user = user;
 		    DataBarang.getUser(user); // <-- Tambahkan ini
 		    updateUserInfo();
+		    countingStatistic();
 		    refreshTable(tablePanel); // <-- Pastikan dipanggil di sini atau setelah ini
 		}
 

@@ -8,16 +8,17 @@ import java.awt.*;
 import java.awt.event.*;
 import java.io.File;
 import java.net.URL;
+import java.text.ParseException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 import app.modules.*;
+import app.utils.CurrencyFormat;
+import app.utils.DateUtils;
 import app.components.*;
 
 public class SellerPage extends Page implements updatedPage {
-	
-	int totalItem = 0;
-	int value = 0;
-	int expiring = 0;
+
 
 	private JPanel tablePanel = new JPanel();
 	private JPanel modelPanel = new JPanel();
@@ -25,6 +26,8 @@ public class SellerPage extends Page implements updatedPage {
 
 	private JLabel nameLabel = new JLabel("URSULA");
 	private JLabel roleLabel = new JLabel("Penjual");
+	
+	private JPanel numberPanel;
 
 	private CButton logoutBtn;
 	private CButton catalogBtn;
@@ -118,7 +121,7 @@ public class SellerPage extends Page implements updatedPage {
 		// --Statistic Panel--//
 		statPanel.setLayout(new BoxLayout(statPanel, BoxLayout.Y_AXIS));
 		JLabel statLabel = new JLabel("Statistics");
-		JPanel numberPanel = new JPanel();
+		numberPanel = new JPanel();
 
 		statLabel.setFont(new Font("ARIAL", Font.BOLD, 15));
 
@@ -131,23 +134,6 @@ public class SellerPage extends Page implements updatedPage {
 		statPanel.add(numberPanel);
 		statPanel.add(Box.createRigidArea(new Dimension(0, 25)));
 
-		// --numberPanel--//
-		numberPanel.setLayout(new BoxLayout(numberPanel, BoxLayout.X_AXIS));
-		JLabel goodsListed = new JLabel("Goods Listed: " + totalItem);
-		JLabel goodsValue = new JLabel("Value of Goods: " + value);
-		JLabel goodsExpiring = new JLabel("Expiring Goods: " + expiring);
-
-		goodsListed.setFont(new Font("ARIAL", Font.BOLD, 13));
-		goodsValue.setFont(new Font("ARIAL", Font.BOLD, 13));
-		goodsExpiring.setFont(new Font("ARIAL", Font.BOLD, 13));
-
-		goodsValue.setAlignmentX(Component.CENTER_ALIGNMENT);
-
-		numberPanel.add(goodsListed);
-		numberPanel.add(Box.createRigidArea(new Dimension(118, 0)));
-		numberPanel.add(goodsValue);
-		numberPanel.add(Box.createRigidArea(new Dimension(100, 0)));
-		numberPanel.add(goodsExpiring);
 
 		// --Button Panel--//
 		buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.X_AXIS));
@@ -197,6 +183,71 @@ public class SellerPage extends Page implements updatedPage {
 		rightBtnPanel.add(editBtn);
 		rightBtnPanel.add(deleteBtn);
 		
+
+	}
+	
+	private void countingStatistic() {
+		// --numberPanel--//
+		numberPanel.setLayout(new BoxLayout(numberPanel, BoxLayout.X_AXIS));
+		
+		
+		int totalItem = DataBarang.data.get(user).size();
+		
+		int expiring = 0;
+		for (Barang b : DataBarang.data.get(user)) {
+			try {
+				if(b.isKadaluarsa()) {
+					expiring++;
+				}
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+				System.out.println(e.getMessage());
+				e.printStackTrace();
+			}
+		}
+		
+		
+		if (user instanceof Seller) {
+			
+			int value = 0;
+			for (Barang b : DataBarang.data.get(user)) {
+				try {
+					value = value + CurrencyFormat.formatStr(b.getPrice());
+				} catch (ParseException e) {
+					e.printStackTrace();
+				}
+			}
+			
+			JLabel goodsListed = new JLabel("Barang Terdaftar: " + totalItem);
+			JLabel goodsValue = new JLabel("Nilai Barang: " + CurrencyFormat.formatInt(value));
+			JLabel goodsExpiring = new JLabel("Barang Kadaluarsa: " + expiring);
+			
+			goodsListed.setFont(new Font("ARIAL", Font.BOLD, 13));
+			goodsValue.setFont(new Font("ARIAL", Font.BOLD, 13));
+			goodsExpiring.setFont(new Font("ARIAL", Font.BOLD, 13));
+			
+			goodsValue.setAlignmentX(Component.CENTER_ALIGNMENT);
+			
+			numberPanel.add(goodsListed);
+			numberPanel.add(Box.createRigidArea(new Dimension(108, 0)));
+			numberPanel.add(goodsValue);
+			numberPanel.add(Box.createRigidArea(new Dimension(90, 0)));
+			numberPanel.add(goodsExpiring);
+			
+		} 
+		else if (user instanceof Donator) {
+			
+			JLabel goodsListed = new JLabel("Barang Terdaftar: " + totalItem);
+			JLabel goodsExpiring = new JLabel("Barang Kadaluarsa: " + expiring);
+			
+			goodsListed.setFont(new Font("ARIAL", Font.BOLD, 13));
+			goodsExpiring.setFont(new Font("ARIAL", Font.BOLD, 13));
+			
+			
+			numberPanel.add(goodsListed);
+			numberPanel.add(Box.createRigidArea(new Dimension(118, 0)));
+			numberPanel.add(goodsExpiring);
+		}
 
 	}
 
@@ -275,6 +326,7 @@ public class SellerPage extends Page implements updatedPage {
 		updateUserInfo();
 //	    // Ensures refresh happens after layout switch
 //	    SwingUtilities.invokeLater(() -> refreshTable(tablePanel));
+		countingStatistic();
 		refreshTable(tablePanel);
 	}
 
