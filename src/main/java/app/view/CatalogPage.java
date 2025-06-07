@@ -35,6 +35,9 @@ public class CatalogPage extends Page implements updatedPage {
 	CButton backBtn;
 	CButton buyBtn;
 	
+    
+	ArrayList<Barang> allItems;
+	ArrayList<User> userLists;
 	private ArrayList<String> listSeller;
 	private ArrayList<String> listDonator;
 	
@@ -164,11 +167,13 @@ public class CatalogPage extends Page implements updatedPage {
 		// Convert item list to table data
         String[] columns = {"Nama", "Tipe", "Kadaluarsa", "Price (IDR)"};
 
-		ArrayList<Barang> allItems = new ArrayList<>();
+		allItems = new ArrayList<>();
+		userLists = new ArrayList<>();
 		for (User u : DataBarang.data.keySet()) {
 			if (u instanceof Seller) {
 				for (Barang b : DataBarang.data.get(u)) {
 					allItems.add(b);
+					userLists.add(u);
 				}
 			}
 		}
@@ -186,12 +191,15 @@ public class CatalogPage extends Page implements updatedPage {
 		
         // Convert item list to table data
         String[] columns = {"Nama", "Tipe", "Kadaluarsa", "Price (IDR)"};
+
         
-		ArrayList<Barang> allItems = new ArrayList<>();
+		allItems = new ArrayList<>();
+		userLists = new ArrayList<>();
 		for (User u : DataBarang.data.keySet()) {
 			if (u instanceof Donator) {
 				for (Barang b : DataBarang.data.get(u)) {
 					allItems.add(b);
+					userLists.add(u);
 				}
 			} 
 		}
@@ -211,15 +219,24 @@ public class CatalogPage extends Page implements updatedPage {
 		}
 	}
 	
-	private void boughtAction() {
+	private void boughtAction() {    
+		// Remove all previous action listeners
+	    for (ActionListener al : buyBtn.getActionListeners()) {
+	        buyBtn.removeActionListener(al);
+	    }
 		buyBtn.addActionListener(e -> {
 			int selectedRow = catalogTable.getSelectedRow();
+			System.out.println(selectedRow);
+			Barang selectedBarang = allItems.get(selectedRow);
+			User itemOwner = userLists.get(selectedRow);
 			if (user instanceof Buyer) {
-				String selectedSeller = listSeller.get(selectedRow);
-				User selectedUser = DataBarang.getUserStr(selectedSeller, "penjual");
 				
-				DataBarang.data.get(selectedUser).remove(selectedRow);
+				DataBarang.buyBarang(selectedBarang, selectedRow);
 				
+				DataBarang.data.get(itemOwner).remove(selectedRow);
+				
+				//reload
+				tradedGoods();
 				
 			} else if (user instanceof Recipient) {
 				String selectedSeller = listSeller.get(selectedRow);
@@ -227,10 +244,10 @@ public class CatalogPage extends Page implements updatedPage {
 				
 				DataBarang.data.get(selectedUser).remove(selectedRow);
 				
+				//reload
+				donatedGoods();
 			} 
-			catalogTable.triggerUpdate();
-			catalogTable.revalidate();
-			catalogTable.repaint();
+
 			
 		});
 	}
