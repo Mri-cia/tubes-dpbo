@@ -302,7 +302,14 @@ public class AddGoodsPage extends Page implements updatedPage {
 
 	private ActionListener submitBarang() {
 		System.out.println("ini masuk");
-		return e -> DataBarang.addBarang(new Barang(name, type, expire, price));
+		return e -> {
+			DataBarang.addBarang(new Barang(name, type, expire, price));
+			
+			nameField.setText(null);;
+			typeField.setText(null);
+			priceField.setText(null);;
+			dateField.setText(null);
+			};
 	}
 
 	public void setRole(String role) {
