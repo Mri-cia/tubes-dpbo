@@ -239,10 +239,10 @@ public class CatalogPage extends Page implements updatedPage {
 				tradedGoods();
 				
 			} else if (user instanceof Recipient) {
-				String selectedSeller = listSeller.get(selectedRow);
-				User selectedUser = DataBarang.getUserStr(selectedSeller, "Donator");
 				
-				DataBarang.data.get(selectedUser).remove(selectedRow);
+				DataBarang.buyBarang(selectedBarang, selectedRow);
+				
+				DataBarang.data.get(itemOwner).remove(selectedRow);
 				
 				//reload
 				donatedGoods();

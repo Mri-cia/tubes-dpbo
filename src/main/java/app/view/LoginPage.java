@@ -268,6 +268,8 @@ public class LoginPage extends Page implements updatedPage  {
 	    	break;
 		}
 		
+		DataBarang.addUserBarangList(currentUser);
+		
 		nameField.setText(null);
 		passField.setText(null);
 		

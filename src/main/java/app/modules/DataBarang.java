@@ -96,6 +96,10 @@ public class DataBarang {
 
 	}
 	
+	public static void addUserBarangList(User user) {
+		data.put(user, new ArrayList<>());
+	}
+	
 	public static int getIndexUser(String username) {
 		int index = 0;
 		for (User u : data.keySet()) {
