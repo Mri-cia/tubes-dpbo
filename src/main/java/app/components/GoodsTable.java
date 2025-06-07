@@ -91,7 +91,9 @@ public class GoodsTable extends JScrollPane{
 	            }
 	        };
 	        table = new JTable(model);
-	        setViewportView(table);;
+	        setViewportView(table);
+	        table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+	        table.getTableHeader().setReorderingAllowed(false);
 	        
 	        setPreferredSize(new Dimension((int)(tableSize.getWidth() * 0.8), 260));
 	        panel.setLayout(new BorderLayout()); // Make sure layout is BorderLayout to use CENTER properly

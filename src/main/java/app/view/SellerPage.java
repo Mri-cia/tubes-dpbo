@@ -294,10 +294,9 @@ public class SellerPage extends Page implements updatedPage {
 		this.tambahBarang = args[1];
 		this.catalog = args[2];
 
-//		logoutBtnAction();
-//		catalogAction();
-		logoutBtn.addActionListener(logout);
-		catalogBtn.addActionListener(catalog);
+		logoutBtnAction();
+		catalogAction();
+
 		addBtn.addActionListener(tambahBarang);
 	}
 

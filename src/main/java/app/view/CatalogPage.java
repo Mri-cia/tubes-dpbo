@@ -9,6 +9,7 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.event.ActionListener;
 import java.awt.event.HierarchyEvent;
+import java.net.URL;
 import java.util.ArrayList;
 
 import javax.swing.*;
@@ -133,11 +134,11 @@ public class CatalogPage extends Page implements updatedPage {
 		rightBtnPanel.setLayout(new FlowLayout(FlowLayout.TRAILING, 9, 5));
 //		CButton addBtn = new CButton("add", 12);
 //		CButton editBtn = new CButton("edit", 12);
-		buyBtn = new CButton("Beli", 12);
-//		
-//		addBtn.setPreferredSize(new Dimension(100, 30));
-//		editBtn.setPreferredSize(new Dimension(100, 30));
-//		deleteBtn.setPreferredSize(new Dimension(100, 30));
+		URL shopIconURL = getClass().getResource("/app/view/assets/shop_icon.png");
+		buyBtn = new CButton(new ImageIcon(shopIconURL));
+
+
+		buyBtn.setPreferredSize(new Dimension(100, 30));
 //		
 //		
 //		rightBtnPanel.add(addBtn);
