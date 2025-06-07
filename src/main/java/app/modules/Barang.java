@@ -12,13 +12,17 @@ public class Barang {
 	private LocalDate kadaluarsa;
 	private int harga;
 	
+	private double discount = 0.1;
+	private double discountedPrice;
+	
 	private LocalDate today = LocalDate.now();
 	
-	public Barang(String name, String type, LocalDate kadaluarsa, int harga) {
+	public Barang(String name, String type, LocalDate kadaluarsa, double harga) {
 		this.name = name;
 		this.type = type;
 		this.kadaluarsa= kadaluarsa;
-		this.harga = harga;
+		this.harga = (int)harga;
+		this.discountedPrice = countDiscount(harga);
 	}
 	
 	public boolean isKadaluarsa() throws ParseException {
@@ -27,6 +31,18 @@ public class Barang {
 		} else {
 			return false;
 		}
+	}
+	
+	private double countDiscount(double harga) {
+		long days = DateUtils.countDays(today, kadaluarsa);
+		if (days < 7) {
+			this.discount = 0.6;
+		} else if (days < 21) {
+			this.discount = 0.4;
+		} else {
+			this.discount = 0.1;
+		}
+		return harga - (harga * discount);
 	}
 	
 	public String getDate() {
@@ -57,9 +73,22 @@ public class Barang {
 		this.kadaluarsa = DateUtils.parseEditedDate(kadaluarsa);
 	}
 
-	public void setHarga(int harga) {
-		this.harga = harga;
+	public void setHarga(double harga) {
+		this.harga = (int)countDiscount(harga);
 	}
+
+	public double getDiscount() {
+		return discount;
+	}
+
+	public void setDiscount(double discount) {
+		this.discount = discount;
+	}
+
+	public double getDiscountedPrice() {
+		return discountedPrice;
+	}
+
 
 	
 	

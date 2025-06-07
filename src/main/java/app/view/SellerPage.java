@@ -188,8 +188,8 @@ public class SellerPage extends Page implements updatedPage {
 	
 	private void countingStatistic() {
 		// --numberPanel--//
+		numberPanel.removeAll();
 		numberPanel.setLayout(new BoxLayout(numberPanel, BoxLayout.X_AXIS));
-		
 		
 		int totalItem = DataBarang.data.get(user).size();
 		
@@ -262,8 +262,27 @@ public class SellerPage extends Page implements updatedPage {
 	    ArrayList<Barang> data = DataBarang.barangUser;
 
 	    Dimension tableSize = new Dimension((int) (WIDTH_LIMIT * 0.9), 400);
-	    sellerTable = new GoodsTable(modelPanel, tableSize, columns, data, "profile");
-
+	    
+	    if(user instanceof Donator) {
+	    	sellerTable = new GoodsTable(
+	    			modelPanel, 
+	    			new Dimension(WIDTH_LIMIT, HEIGHT_LIMIT), 
+	    			columns, 
+	    			data, 
+	    			"catalog",
+	    			true
+	    			);
+	    } else {
+	    	sellerTable = new GoodsTable(
+	    			modelPanel, 
+	    			new Dimension(WIDTH_LIMIT, HEIGHT_LIMIT), 
+	    			columns, 
+	    			data, 
+	    			"catalog",
+	    			false
+	    			);
+	    }
+	    
 	    tablePanel.add(modelPanel);
 
 	    tablePanel.revalidate();  // Ensure layout update
@@ -326,8 +345,8 @@ public class SellerPage extends Page implements updatedPage {
 		updateUserInfo();
 //	    // Ensures refresh happens after layout switch
 //	    SwingUtilities.invokeLater(() -> refreshTable(tablePanel));
-		countingStatistic();
 		refreshTable(tablePanel);
+		countingStatistic();
 	}
 
 	@Override

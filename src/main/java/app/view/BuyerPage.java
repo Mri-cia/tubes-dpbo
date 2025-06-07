@@ -12,6 +12,7 @@ import app.modules.Barang;
 import app.modules.Buyer;
 import app.modules.DataBarang;
 import app.modules.DataUser;
+import app.modules.Donator;
 import app.modules.Recipient;
 import app.modules.User;
 import app.utils.Colors;
@@ -27,6 +28,8 @@ public class BuyerPage extends Page implements updatedPage {
 	JPanel modelPanel = new JPanel();
 	
 	private JPanel numberPanel;
+	
+	private GoodsTable buyerTable;
 	
 	private CButton logoutBtn;
 	private CButton catalogBtn;
@@ -275,9 +278,28 @@ public class BuyerPage extends Page implements updatedPage {
 			ArrayList<Barang> data = DataBarang.barangUser;
 		    
 			Dimension tableSize = new Dimension((int)(WIDTH_LIMIT * 0.9), 400);
-			GoodsTable buyerTable = new GoodsTable(modelPanel, tableSize, columns, data, "profile");
-			buyerTable.setEditEnabled(false);
 			
+		    if(user instanceof Donator) {
+		    	buyerTable = new GoodsTable(
+		    			modelPanel, 
+		    			new Dimension(WIDTH_LIMIT, HEIGHT_LIMIT), 
+		    			columns, 
+		    			data, 
+		    			"catalog",
+		    			true
+		    			);
+		    } else {
+		    	buyerTable = new GoodsTable(
+		    			modelPanel, 
+		    			new Dimension(WIDTH_LIMIT, HEIGHT_LIMIT), 
+		    			columns, 
+		    			data, 
+		    			"catalog",
+		    			false
+		    			);
+		    }
+			
+		    buyerTable.setEditEnabled(false);
 		    revalidate();
 		    repaint();
 	    }

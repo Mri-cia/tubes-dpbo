@@ -28,9 +28,11 @@ public class GoodsTable extends JScrollPane{
 	private int headerSize = 40;
 	private int headerFontSize = 12;
 	private int rowSize = 30;
+	private boolean isSetDonate = false;
 	
 	
-	public GoodsTable(JPanel panel, Dimension tableSize, String[] headerTitle, ArrayList<Barang> data, String tableType) {
+	public GoodsTable(JPanel panel, Dimension tableSize, String[] headerTitle, ArrayList<Barang> data, String tableType, boolean isSetDonate) {
+		this.isSetDonate = isSetDonate;
 		if(tableType.equalsIgnoreCase("profile")) {
 			profileTable(panel, headerTitle, tableSize, data);
 		} else if(tableType.equalsIgnoreCase("catalog")) {
@@ -64,16 +66,29 @@ public class GoodsTable extends JScrollPane{
 	        model.setRowCount(0); // Clear existing rows
 	    }
 	    
-	    	// Add rows from DataBarang.barangUser
-	    	for (Barang item : data) {
-	    		Object[] row = {
-	    				item.getName(),
-	    				item.getType(),
-	    				item.getDate(),
-	    				item.getPrice()
-	    		};
-	    		model.addRow(row);
-	    	}
+    	if (isSetDonate) {
+	    	// Add rows from DataBarang.data if donated
+    		for (Barang item : data) {
+    			Object[] row = {
+    					item.getName(),
+    					item.getType(),
+    					item.getDate(),
+	    				0
+    			};
+    			model.addRow(row);
+    		}
+    	} else {
+    		// Add rows from DataBarang.data
+    		for (Barang item : data) {
+    			Object[] row = {
+    					item.getName(),
+    					item.getType(),
+    					item.getDate(),
+    					item.getDiscountedPrice()
+    			};
+    			model.addRow(row);
+    		}
+    	}
 	    
 		
 		tableStyle();
@@ -103,20 +118,38 @@ public class GoodsTable extends JScrollPane{
 	        model = (DefaultTableModel) table.getModel();
 	        model.setRowCount(0); // Clear existing rows
 	    }
-	    	// Add rows from DataBarang.data
-    		for (Barang item : data) {
-    			Object[] row = {
-    					item.getName(),
-    					item.getType(),
-    					item.getDate(),
-	    				item.getPrice()
-    			};
-    			model.addRow(row);
-    		}
+	    
+	    	if (isSetDonate) {
+		    	// Add rows from DataBarang.data if donated
+	    		for (Barang item : data) {
+	    			item.setHarga(0);
+	    			Object[] row = {
+	    					item.getName(),
+	    					item.getType(),
+	    					item.getDate(),
+		    				0
+	    			};
+	    			model.addRow(row);
+	    		}
+	    	} else {
+	    		// Add rows from DataBarang.data
+	    		for (Barang item : data) {
+	    			Object[] row = {
+	    					item.getName(),
+	    					item.getType(),
+	    					item.getDate(),
+	    					item.getDiscountedPrice()
+	    			};
+	    			model.addRow(row);
+	    		}
+	    	}
+	    
 	    
 
 		tableStyle();
 	}
+	
+
 	
 	private void tableStyle() {
 	    //Table Styling
@@ -198,6 +231,9 @@ public class GoodsTable extends JScrollPane{
 		this.rowSize = rowSize;
 	}
 
+	public void setTableDonate(boolean isSetDonate) {
+		this.isSetDonate = isSetDonate;
+	}
 	
 	
 }

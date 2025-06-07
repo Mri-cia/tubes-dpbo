@@ -181,7 +181,14 @@ public class CatalogPage extends Page implements updatedPage {
 		
 		listSeller = DataBarang.listSellerUser("trade");
 		
-		catalogTable = new GoodsTable(modelPanel, new Dimension(WIDTH_LIMIT, HEIGHT_LIMIT), columns, allItems, "catalog");
+		catalogTable = new GoodsTable(
+				modelPanel, 
+				new Dimension(WIDTH_LIMIT, HEIGHT_LIMIT), 
+				columns, 
+				allItems, 
+				"catalog",
+				false
+				);
 
         revalidate();
         repaint();
@@ -207,7 +214,14 @@ public class CatalogPage extends Page implements updatedPage {
 		
 		listDonator = DataBarang.listSellerUser("donate");
 
-		catalogTable = new GoodsTable(modelPanel, new Dimension(WIDTH_LIMIT, HEIGHT_LIMIT), columns, allItems, "catalog");
+		catalogTable = new GoodsTable(
+				modelPanel, 
+				new Dimension(WIDTH_LIMIT, HEIGHT_LIMIT), 
+				columns, 
+				allItems, 
+				"catalog",
+				true
+				);
 
         revalidate();
         repaint();
