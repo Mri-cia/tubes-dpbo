@@ -1,5 +1,6 @@
 package app.view;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.border.*;
 import javax.swing.event.DocumentEvent;
@@ -7,6 +8,9 @@ import javax.swing.event.DocumentListener;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.net.URL;
 import java.util.EventListener;
 
 import app.components.CButton;
@@ -102,14 +106,36 @@ public class LoginPage extends Page implements updatedPage  {
 		
 		//--LogoPanel--//
 		logoPanel.setLayout(new BoxLayout(logoPanel, BoxLayout.X_AXIS));
-		JPanel logo = new JPanel();
+		JPanel logoPlace = new JPanel();
 		
 		//testing boundaries
-		logo.setBorder(BorderFactory.createBevelBorder(1));;
+		//logoPlace.setBorder(BorderFactory.createBevelBorder(1));;
 		
-		logo.setMaximumSize(new Dimension(150,150));
+		logoPlace.setMaximumSize(new Dimension(150,150));
 		
-		logoPanel.add(logo);
+		logoPanel.add(logoPlace);
+		
+		// Load the image
+		URL imageUrl = getClass().getResource("/app/view/assets/logo_aplikasi.png");
+		ImageIcon icon = new ImageIcon(imageUrl);
+		Image image = icon.getImage();
+
+		// Convert to BufferedImage for better control
+		BufferedImage bufferedImage = new BufferedImage(image.getWidth(null), image.getHeight(null), BufferedImage.TYPE_INT_ARGB);
+		Graphics2D g2d = bufferedImage.createGraphics();
+		g2d.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BICUBIC);
+		g2d.drawImage(image, 0, 0, null);
+		g2d.dispose();
+
+		// Resize the BufferedImage
+		Image resizedImage = bufferedImage.getScaledInstance(150, 150, Image.SCALE_SMOOTH);
+
+		// Create a new ImageIcon
+		icon = new ImageIcon(resizedImage);
+
+		// Create a JLabel and add the image
+		JLabel label = new JLabel(icon);
+		logoPlace.add(label);
 		
 		
 		//--Username Panel--//

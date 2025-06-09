@@ -1,5 +1,6 @@
 package app.view;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 
 import app.modules.DataBarang;
@@ -9,6 +10,8 @@ import app.modules.User;
 import app.exception.*;
 
 import java.awt.*;
+import java.io.IOException;
+import java.net.URL;
 import java.util.HashMap;
 
 public class MainWindow extends JFrame {
@@ -27,6 +30,7 @@ public class MainWindow extends JFrame {
     setLocationRelativeTo(null);
     
     setBackground(new Color(0xfafafa));
+    setFavicon();
     
     DataUser.initData();
     DataBarang.initializeData(); //Inisialisasi data awal
@@ -87,9 +91,14 @@ public class MainWindow extends JFrame {
   
   
   
-  //--Metode untuk class user terisi atau tidak
-//  private void checkUserClass() { 
-//	  User user = LoginPage.getCurrentUser();
-//	  System.out.println(user.getUsername() + user.getPassword()); 
-//  }
+  private void setFavicon() {
+	    Image appLogo;
+		try {
+			appLogo = ImageIO.read(getClass().getResource("/app/view/assets/logo_ursula_favicon.png"));
+			setIconImage(appLogo);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	    
+  }
 }
