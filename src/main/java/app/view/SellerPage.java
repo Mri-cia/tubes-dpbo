@@ -188,30 +188,38 @@ public class SellerPage extends Page implements updatedPage {
 	
 	private void countingStatistic() {
 		// --numberPanel--//
-		numberPanel.removeAll();
+		if (numberPanel != null) {
+			numberPanel.removeAll();
+		}
 		numberPanel.setLayout(new BoxLayout(numberPanel, BoxLayout.X_AXIS));
 		
-		int totalItem = DataBarang.data.get(user).size();
-		
+		int totalItem = 0;
 		int expiring = 0;
-		for (Barang b : DataBarang.data.get(user)) {
-			try {
-				if(b.isKadaluarsa()) {
-					expiring++;
+		
+		if(DataBarang.data.get(user) != null) {
+			totalItem = DataBarang.data.get(user).size();
+			for (Barang b : DataBarang.data.get(user)) {
+				try {
+					if(b.isKadaluarsa()) {
+						expiring++;
+					}
+				} catch (ParseException e) {
+					// TODO Auto-generated catch block
+					System.out.println(e.getMessage());
+					e.printStackTrace();
 				}
-			} catch (ParseException e) {
-				// TODO Auto-generated catch block
-				System.out.println(e.getMessage());
-				e.printStackTrace();
 			}
 		}
+		
 		
 		
 		if (user instanceof Seller) {
 			
 			int value = 0;
-			for (Barang b : DataBarang.data.get(user)) {
-				value = value + b.getPriceInt();
+			if (DataBarang.data.get(user) != null) {
+				for (Barang b : DataBarang.data.get(user)) {
+					value = value + b.getPriceInt();
+				}
 			}
 			
 			JLabel goodsListed = new JLabel("Barang Terdaftar: " + totalItem);
@@ -254,7 +262,22 @@ public class SellerPage extends Page implements updatedPage {
 	    modelPanel = new JPanel(); // Create a new instance to ensure old content is gone
 	    modelPanel.setPreferredSize(new Dimension((int) (WIDTH_LIMIT * 0.9), 230));
 
-	    String[] columns = { "Nama", "Tipe", "Kadaluarsa"};
+	    //ArrayList<String> columns = new ArrayList<>();
+	    String[] columns = new String[0];
+	    if (user instanceof Seller) {
+	    	columns = new String[]{"Nama", "Tipe", "Kadaluarsa", "Price (IDR)"};	
+//	    	columns.add("Nama");	
+//	    	columns.add("Nama");	
+//	    	columns.add("Nama");	
+//	    	columns.add("Nama");
+	    } else if(user instanceof Donator) {
+	    	columns = new String[]{ "Nama", "Tipe", "Kadaluarsa"};		
+//	    	columns.add("Nama");	
+//	    	columns.add("Nama");	
+//	    	columns.add("Nama");	    	
+	    }
+	    
+	    
 	    ArrayList<Barang> data = DataBarang.barangUser;
 
 	    Dimension tableSize = new Dimension((int) (WIDTH_LIMIT * 0.9), 400);

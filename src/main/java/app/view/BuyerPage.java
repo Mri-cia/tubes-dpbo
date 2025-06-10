@@ -179,18 +179,22 @@ public class BuyerPage extends Page implements updatedPage {
 		}
 		numberPanel.setLayout(new BoxLayout(numberPanel, BoxLayout.X_AXIS));
 		
-		int totalItem = DataBarang.data.get(user).size();
-		
+		int totalItem = 0;
 		String goodsType = "";
 		int makan = 0;
 		int minum = 0;
-		for (Barang b : DataBarang.data.get(user)) {
-			if (b.getType().equalsIgnoreCase("makanan")) {
-				makan++;
-			} else if (b.getType().equalsIgnoreCase("minuman")) {
-				minum++;
+		
+		if(DataBarang.data.get(user) != null) {
+			totalItem = DataBarang.data.get(user).size();
+			for (Barang b : DataBarang.data.get(user)) {
+				if (b.getType().equalsIgnoreCase("makanan")) {
+					makan++;
+				} else if (b.getType().equalsIgnoreCase("minuman")) {
+					minum++;
+				}
 			}
 		}
+		
 		if (makan > minum) {
 			goodsType = "Makanan";
 		} else if (makan < minum) {
@@ -237,13 +241,16 @@ public class BuyerPage extends Page implements updatedPage {
 			//--numPaneRight--//
 			
 			int spent = 0;
-			for (Barang b : DataBarang.data.get(user)) {
-				spent = spent + b.getDiscountedPriceInt();			
-			}
-			
 			int saved = 0;
-			for (Barang b : DataBarang.data.get(user)) {
-				saved = saved + (b.getPriceInt() - b.getDiscountedPriceInt());			
+			
+			if(DataBarang.data.get(user) != null) {
+				for (Barang b : DataBarang.data.get(user)) {
+					spent = spent + b.getDiscountedPriceInt();			
+				}
+				
+				for (Barang b : DataBarang.data.get(user)) {
+					saved = saved + (b.getPriceInt() - b.getDiscountedPriceInt());			
+				}
 			}
 			
 			numPaneRight.setLayout(new BoxLayout(numPaneRight, BoxLayout.Y_AXIS));

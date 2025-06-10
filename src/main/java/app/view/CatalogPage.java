@@ -10,6 +10,7 @@ import java.awt.FlowLayout;
 import java.awt.event.ActionListener;
 import java.awt.event.HierarchyEvent;
 import java.net.URL;
+import java.text.ParseException;
 import java.util.ArrayList;
 
 import javax.swing.*;
@@ -173,8 +174,14 @@ public class CatalogPage extends Page implements updatedPage {
 		for (User u : DataBarang.data.keySet()) {
 			if (u instanceof Seller) {
 				for (Barang b : DataBarang.data.get(u)) {
-					allItems.add(b);
-					userLists.add(u);
+					try {
+						if (!(b.isKadaluarsa())) {
+							allItems.add(b);
+							userLists.add(u);
+						}
+					} catch (ParseException e) {
+						e.printStackTrace();
+					}
 				}
 			}
 		}
@@ -206,8 +213,15 @@ public class CatalogPage extends Page implements updatedPage {
 		for (User u : DataBarang.data.keySet()) {
 			if (u instanceof Donator) {
 				for (Barang b : DataBarang.data.get(u)) {
-					allItems.add(b);
-					userLists.add(u);
+					try {
+						if (!(b.isKadaluarsa())) {
+							allItems.add(b);
+							userLists.add(u);
+						}
+					} catch (ParseException e) {
+						e.printStackTrace();
+					}
+
 				}
 			} 
 		}
@@ -241,7 +255,6 @@ public class CatalogPage extends Page implements updatedPage {
 	    }
 		buyBtn.addActionListener(e -> {
 			int selectedRow = catalogTable.getSelectedRow();
-			System.out.println(selectedRow);
 			Barang selectedBarang = allItems.get(selectedRow);
 			User itemOwner = userLists.get(selectedRow);
 			if (user instanceof Buyer) {

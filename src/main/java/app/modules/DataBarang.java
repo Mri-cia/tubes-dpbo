@@ -125,7 +125,7 @@ public class DataBarang {
         listBarang.add(new Barang("Gado-Gado", "Makanan", DateUtils.parseDateStr("2025-10-08"), 21000));
         listBarang.add(new Barang("Jus Semangka", "Minuman", DateUtils.parseDateStr("2025-10-10"), 10000));
 		User bosha = DataUser.getDataUser(5);
-		data.put(ilya, listBarang);
+		data.put(bosha, listBarang);
 		
 		
 		//Penerima
@@ -158,7 +158,7 @@ public class DataBarang {
         listBarang.add(new Barang("Kue Soes", "Makanan", DateUtils.parseDateStr("2025-09-21"), 11000));
         listBarang.add(new Barang("Kopi Robusta", "Minuman", DateUtils.parseDateStr("2025-09-23"), 15000));
 		User sasha = DataUser.getDataUser(5);
-		data.put(ilya, listBarang);
+		data.put(sasha, listBarang);
 
 
 	}
