@@ -72,8 +72,7 @@ public class GoodsTable extends JScrollPane{
     			Object[] row = {
     					item.getName(),
     					item.getType(),
-    					item.getDate(),
-	    				0
+    					item.getDate()
     			};
     			model.addRow(row);
     		}
@@ -84,7 +83,7 @@ public class GoodsTable extends JScrollPane{
     					item.getName(),
     					item.getType(),
     					item.getDate(),
-    					item.getDiscountedPrice()
+    					item.getDiscountedPriceStr()
     			};
     			model.addRow(row);
     		}
@@ -127,7 +126,6 @@ public class GoodsTable extends JScrollPane{
 	    					item.getName(),
 	    					item.getType(),
 	    					item.getDate(),
-		    				0
 	    			};
 	    			model.addRow(row);
 	    		}
@@ -138,7 +136,7 @@ public class GoodsTable extends JScrollPane{
 	    					item.getName(),
 	    					item.getType(),
 	    					item.getDate(),
-	    					item.getDiscountedPrice()
+	    					item.getDiscountedPriceStr()
 	    			};
 	    			model.addRow(row);
 	    		}

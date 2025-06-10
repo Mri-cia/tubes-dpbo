@@ -16,9 +16,14 @@ public class DataUser {
 	
 	public static void initData() {
 		users.add(new Seller("URSULA", "L8x2Qm"));
+		users.add(new Seller("YALNA", "I0ADSHY925"));
+		users.add(new Seller("MARUI", "TE730123ADNC"));
 		users.add(new Donator("RALSNA", "Zp9T7v"));
+		users.add(new Donator("PLINA", "U63KTPAS"));
 		users.add(new Buyer("ILYA", "Qe6B1n"));
+		users.add(new Buyer("BOSHA", "12QERSe6KUn"));
 		users.add(new Recipient("USHA", "D4wJ9y"));
+		users.add(new Recipient("SAHSA", "IXYA817P"));
 	}
 	
 	public static Set<User> getUsers() {

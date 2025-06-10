@@ -16,6 +16,7 @@ import app.modules.Donator;
 import app.modules.Recipient;
 import app.modules.User;
 import app.utils.Colors;
+import app.utils.CurrencyFormat;
 
 public class BuyerPage extends Page implements updatedPage {
 	JTable table;
@@ -173,6 +174,9 @@ public class BuyerPage extends Page implements updatedPage {
 	
 	private void countingStatistic() {
 		//--numberPanel--//
+		if (numberPanel != null) {
+			numberPanel.removeAll();
+		}
 		numberPanel.setLayout(new BoxLayout(numberPanel, BoxLayout.X_AXIS));
 		
 		int totalItem = DataBarang.data.get(user).size();
@@ -233,11 +237,18 @@ public class BuyerPage extends Page implements updatedPage {
 			//--numPaneRight--//
 			
 			int spent = 0;
+			for (Barang b : DataBarang.data.get(user)) {
+				spent = spent + b.getDiscountedPriceInt();			
+			}
+			
 			int saved = 0;
+			for (Barang b : DataBarang.data.get(user)) {
+				saved = saved + (b.getPriceInt() - b.getDiscountedPriceInt());			
+			}
 			
 			numPaneRight.setLayout(new BoxLayout(numPaneRight, BoxLayout.Y_AXIS));
-			JLabel moneySpent = new JLabel("Total Money Spent: " + spent);
-			JLabel moneySaved = new JLabel("Total Money Saved: " + saved);
+			JLabel moneySpent = new JLabel("Total Money Spent: " + CurrencyFormat.formatInt(spent));
+			JLabel moneySaved = new JLabel("Total Money Saved: " + CurrencyFormat.formatInt(saved));
 			
 			moneySpent.setFont(new Font("ARIAL", Font.BOLD, 13));
 			moneySaved.setFont(new Font("ARIAL", Font.BOLD, 13));

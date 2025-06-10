@@ -53,7 +53,11 @@ public class Barang {
 		return name;
 	}
 	
-	public String getPrice() {
+	public int getPriceInt() {
+		return harga;
+	}
+	
+	public String getPriceStr() {
 		return CurrencyFormat.formatInt(harga);
 	}
 	
@@ -85,11 +89,13 @@ public class Barang {
 		this.discount = discount;
 	}
 
-	public double getDiscountedPrice() {
-		return discountedPrice;
+	public int getDiscountedPriceInt() {
+		return (int)discountedPrice;
 	}
 
-
+	public String getDiscountedPriceStr() {
+		return CurrencyFormat.formatInt((int)discountedPrice);
+	}
 	
 	
 }

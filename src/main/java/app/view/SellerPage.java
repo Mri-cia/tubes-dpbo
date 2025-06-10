@@ -211,11 +211,7 @@ public class SellerPage extends Page implements updatedPage {
 			
 			int value = 0;
 			for (Barang b : DataBarang.data.get(user)) {
-				try {
-					value = value + CurrencyFormat.formatStr(b.getPrice());
-				} catch (ParseException e) {
-					e.printStackTrace();
-				}
+				value = value + b.getPriceInt();
 			}
 			
 			JLabel goodsListed = new JLabel("Barang Terdaftar: " + totalItem);
@@ -258,7 +254,7 @@ public class SellerPage extends Page implements updatedPage {
 	    modelPanel = new JPanel(); // Create a new instance to ensure old content is gone
 	    modelPanel.setPreferredSize(new Dimension((int) (WIDTH_LIMIT * 0.9), 230));
 
-	    String[] columns = { "Nama", "Tipe", "Kadaluarsa", "Price (IDR)" };
+	    String[] columns = { "Nama", "Tipe", "Kadaluarsa"};
 	    ArrayList<Barang> data = DataBarang.barangUser;
 
 	    Dimension tableSize = new Dimension((int) (WIDTH_LIMIT * 0.9), 400);

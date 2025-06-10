@@ -198,7 +198,7 @@ public class CatalogPage extends Page implements updatedPage {
 		modelPanel.removeAll(); //refresh panel
 		
         // Convert item list to table data
-        String[] columns = {"Nama", "Tipe", "Kadaluarsa", "Price (IDR)"};
+        String[] columns = {"Nama", "Tipe", "Kadaluarsa"};
 
         
 		allItems = new ArrayList<>();

@@ -18,80 +18,147 @@ public class DataBarang {
 	public static void initializeData() {
 		//Penjual
 		listBarang = new ArrayList<>();
-		listBarang.add(new Barang("Pai Coklat", "Makanan", DateUtils.parseDateStr("2025-05-23"), 50000));
-		listBarang.add(new Barang("Es Teh Manis", "Minuman", DateUtils.parseDateStr("2025-06-01"), 15000));
-		listBarang.add(new Barang("Roti Tawar", "Makanan", DateUtils.parseDateStr("2025-05-30"), 20000));
-		listBarang.add(new Barang("Jus Mangga", "Minuman", DateUtils.parseDateStr("2025-06-05"), 25000));
-		listBarang.add(new Barang("Keripik Kentang", "Makanan", DateUtils.parseDateStr("2025-06-10"), 30000));
-		listBarang.add(new Barang("Air Mineral", "Minuman", DateUtils.parseDateStr("2025-05-26"), 10000));
-		listBarang.add(new Barang("Coklat Batangan", "Makanan", DateUtils.parseDateStr("2025-06-03"), 18000));
-		listBarang.add(new Barang("Kopi Hitam", "Minuman", DateUtils.parseDateStr("2025-06-08"), 22000));
-		listBarang.add(new Barang("Biskuit Keju", "Makanan", DateUtils.parseDateStr("2025-06-12"), 27000));
-		listBarang.add(new Barang("Susu UHT", "Minuman", DateUtils.parseDateStr("2025-06-15"), 19000));
-		listBarang.add(new Barang("Nasi Bungkus", "Makanan", DateUtils.parseDateStr("2025-05-27"), 30000));
-		listBarang.add(new Barang("Teh Botol", "Minuman", DateUtils.parseDateStr("2025-05-28"), 14000));
-		listBarang.add(new Barang("Mie Instan", "Makanan", DateUtils.parseDateStr("2025-06-07"), 12000));
-		listBarang.add(new Barang("Soda Lemon", "Minuman", DateUtils.parseDateStr("2025-06-11"), 26000));
-		listBarang.add(new Barang("Donat Gula", "Makanan", DateUtils.parseDateStr("2025-06-04"), 16000));
+        listBarang.add(new Barang("Pai Coklat", "Makanan", DateUtils.parseDateStr("2025-05-23"), 50000));
+        listBarang.add(new Barang("Teh Botol", "Minuman", DateUtils.parseDateStr("2025-06-01"), 8000));
+        listBarang.add(new Barang("Keripik Kentang", "Makanan", DateUtils.parseDateStr("2025-07-15"), 15000));
+        listBarang.add(new Barang("Jus Mangga", "Minuman", DateUtils.parseDateStr("2025-06-20"), 12000));
+        listBarang.add(new Barang("Roti Tawar", "Makanan", DateUtils.parseDateStr("2025-05-25"), 17000));
+        listBarang.add(new Barang("Air Mineral", "Minuman", DateUtils.parseDateStr("2025-08-01"), 5000));
+        listBarang.add(new Barang("Donat Coklat", "Makanan", DateUtils.parseDateStr("2025-05-30"), 10000));
+        listBarang.add(new Barang("Kopi Hitam", "Minuman", DateUtils.parseDateStr("2025-06-15"), 15000));
+        listBarang.add(new Barang("Nasi Goreng", "Makanan", DateUtils.parseDateStr("2025-06-05"), 25000));
+        listBarang.add(new Barang("Susu Kedelai", "Minuman", DateUtils.parseDateStr("2025-06-10"), 9000));
+        listBarang.add(new Barang("Coklat Batangan", "Makanan", DateUtils.parseDateStr("2025-06-22"), 13000));
+        listBarang.add(new Barang("Es Jeruk", "Minuman", DateUtils.parseDateStr("2025-06-18"), 7000));
 		User ursula = DataUser.getDataUser(0);
 		data.put(ursula, listBarang);
+		
+		listBarang = new ArrayList<>();
+        listBarang.add(new Barang("Martabak Manis", "Makanan", DateUtils.parseDateStr("2025-06-07"), 30000));
+        listBarang.add(new Barang("Soda Gembira", "Minuman", DateUtils.parseDateStr("2025-07-01"), 11000));
+        listBarang.add(new Barang("Burger Sapi", "Makanan", DateUtils.parseDateStr("2025-07-10"), 27000));
+        listBarang.add(new Barang("Smoothie Pisang", "Minuman", DateUtils.parseDateStr("2025-06-25"), 16000));
+        listBarang.add(new Barang("Ayam Goreng", "Makanan", DateUtils.parseDateStr("2025-05-28"), 30000));
+        listBarang.add(new Barang("Milkshake Coklat", "Minuman", DateUtils.parseDateStr("2025-06-11"), 14000));
+        listBarang.add(new Barang("Pizza Mini", "Makanan", DateUtils.parseDateStr("2025-07-03"), 22000));
+		User yalna = DataUser.getDataUser(1);
+		data.put(yalna, listBarang);
 
+
+		listBarang = new ArrayList<>();
+        listBarang.add(new Barang("Kue Pancong", "Makanan", DateUtils.parseDateStr("2025-08-01"), 9000));
+        listBarang.add(new Barang("Susu Jahe", "Minuman", DateUtils.parseDateStr("2025-08-05"), 12000));
+        listBarang.add(new Barang("Seblak Bandung", "Makanan", DateUtils.parseDateStr("2025-08-10"), 22000));
+        listBarang.add(new Barang("Cendol Durian", "Minuman", DateUtils.parseDateStr("2025-08-12"), 15000));
+        listBarang.add(new Barang("Kroket Ayam", "Makanan", DateUtils.parseDateStr("2025-08-15"), 13000));
+        listBarang.add(new Barang("Kopi Tubruk", "Minuman", DateUtils.parseDateStr("2025-08-18"), 14000));
+        listBarang.add(new Barang("Tahu Isi", "Makanan", DateUtils.parseDateStr("2025-08-20"), 8000));
+        listBarang.add(new Barang("Jus Nanas", "Minuman", DateUtils.parseDateStr("2025-08-22"), 11000));
+        listBarang.add(new Barang("Bakwan Jagung", "Makanan", DateUtils.parseDateStr("2025-08-24"), 9000));
+        listBarang.add(new Barang("Teh Lemon", "Minuman", DateUtils.parseDateStr("2025-08-25"), 9500));
+        listBarang.add(new Barang("Tempe Mendoan", "Makanan", DateUtils.parseDateStr("2025-08-27"), 7000));
+		User marui = DataUser.getDataUser(2);
+		data.put(marui, listBarang);
+
+
+		
+		
 		//Donatur
 		listBarang = new ArrayList<>();
-		listBarang.add(new Barang("Bakso Sapi", "Makanan", DateUtils.parseDateStr("2025-06-13"), 35000));
-		listBarang.add(new Barang("Lemon Tea", "Minuman", DateUtils.parseDateStr("2025-06-06"), 17000));
-		listBarang.add(new Barang("Ayam Goreng", "Makanan", DateUtils.parseDateStr("2025-06-17"), 45000));
-		listBarang.add(new Barang("Smoothie Alpukat", "Minuman", DateUtils.parseDateStr("2025-06-09"), 28000));
-		listBarang.add(new Barang("Kentang Goreng", "Makanan", DateUtils.parseDateStr("2025-06-18"), 24000));
-		listBarang.add(new Barang("Susu Kedelai", "Minuman", DateUtils.parseDateStr("2025-06-02"), 13000));
-		listBarang.add(new Barang("Pizza Mini", "Makanan", DateUtils.parseDateStr("2025-06-19"), 38000));
-		listBarang.add(new Barang("Sari Kelapa", "Minuman", DateUtils.parseDateStr("2025-06-20"), 21000));
-		listBarang.add(new Barang("Martabak Telur", "Makanan", DateUtils.parseDateStr("2025-06-21"), 42000));
-		listBarang.add(new Barang("Teh Hijau", "Minuman", DateUtils.parseDateStr("2025-06-22"), 15000));
-		listBarang.add(new Barang("Spaghetti", "Makanan", DateUtils.parseDateStr("2025-06-23"), 34000));
-		listBarang.add(new Barang("Air Kelapa", "Minuman", DateUtils.parseDateStr("2025-06-24"), 20000));
-		listBarang.add(new Barang("Onigiri", "Makanan", DateUtils.parseDateStr("2025-06-25"), 23000));
-		listBarang.add(new Barang("Milkshake Coklat", "Minuman", DateUtils.parseDateStr("2025-06-26"), 27000));
-		listBarang.add(new Barang("Pempek", "Makanan", DateUtils.parseDateStr("2025-06-27"), 33000));
-		listBarang.add(new Barang("Jamu Kunyit", "Minuman", DateUtils.parseDateStr("2025-06-28"), 12000));
-		listBarang.add(new Barang("Pisang Goreng", "Makanan", DateUtils.parseDateStr("2025-06-29"), 15000));
-		listBarang.add(new Barang("Susu Stroberi", "Minuman", DateUtils.parseDateStr("2025-06-30"), 18000));
-		listBarang.add(new Barang("Tempe Mendoan", "Makanan", DateUtils.parseDateStr("2025-07-01"), 16000));
-		listBarang.add(new Barang("Kopi Susu", "Minuman", DateUtils.parseDateStr("2025-07-02"), 19000));
-		listBarang.add(new Barang("Tahu Isi", "Makanan", DateUtils.parseDateStr("2025-07-03"), 14000));
-		listBarang.add(new Barang("Es Jeruk", "Minuman", DateUtils.parseDateStr("2025-07-04"), 13000));
-		listBarang.add(new Barang("Sate Ayam", "Makanan", DateUtils.parseDateStr("2025-07-05"), 39000));
-		listBarang.add(new Barang("Cappuccino", "Minuman", DateUtils.parseDateStr("2025-07-06"), 25000));
-		listBarang.add(new Barang("Kue Lapis", "Makanan", DateUtils.parseDateStr("2025-07-07"), 21000));
-		listBarang.add(new Barang("Sirup Melon", "Minuman", DateUtils.parseDateStr("2025-07-08"), 11000));
-		listBarang.add(new Barang("Kue Cubit", "Makanan", DateUtils.parseDateStr("2025-07-09"), 16000));
-		User ralsna = DataUser.getDataUser(1);
+        listBarang.add(new Barang("Nasi Padang", "Makanan", DateUtils.parseDateStr("2025-06-19"), 32000));
+        listBarang.add(new Barang("Kopi Susu", "Minuman", DateUtils.parseDateStr("2025-06-27"), 12000));
+        listBarang.add(new Barang("Kue Nastar", "Makanan", DateUtils.parseDateStr("2025-06-14"), 19000));
+        listBarang.add(new Barang("Minuman Energi", "Minuman", DateUtils.parseDateStr("2025-06-12"), 10000));
+        listBarang.add(new Barang("Pisang Goreng", "Makanan", DateUtils.parseDateStr("2025-05-31"), 11000));
+        listBarang.add(new Barang("Teh Tarik", "Minuman", DateUtils.parseDateStr("2025-06-23"), 9000));
+        listBarang.add(new Barang("Sosis Bakar", "Makanan", DateUtils.parseDateStr("2025-07-09"), 20000));
+        listBarang.add(new Barang("Cappuccino", "Minuman", DateUtils.parseDateStr("2025-06-29"), 16000));
+        listBarang.add(new Barang("Kue Bolu", "Makanan", DateUtils.parseDateStr("2025-06-26"), 17000));
+        listBarang.add(new Barang("Jus Stroberi", "Minuman", DateUtils.parseDateStr("2025-06-16"), 14000));
+        listBarang.add(new Barang("Pempek Palembang", "Makanan", DateUtils.parseDateStr("2025-07-06"), 26000));
+        listBarang.add(new Barang("Lemon Tea", "Minuman", DateUtils.parseDateStr("2025-06-03"), 10000));
+        listBarang.add(new Barang("Kentang Goreng", "Makanan", DateUtils.parseDateStr("2025-05-26"), 15000));
+        listBarang.add(new Barang("Air Kelapa", "Minuman", DateUtils.parseDateStr("2025-06-21"), 11000));
+		User ralsna = DataUser.getDataUser(3);
 		data.put(ralsna, listBarang);
+		
+		listBarang = new ArrayList<>();
+        listBarang.add(new Barang("Sate Padang", "Makanan", DateUtils.parseDateStr("2025-10-12"), 32000));
+        listBarang.add(new Barang("Matcha Latte", "Minuman", DateUtils.parseDateStr("2025-10-14"), 16000));
+        listBarang.add(new Barang("Kue Sagu", "Makanan", DateUtils.parseDateStr("2025-10-16"), 10000));
+        listBarang.add(new Barang("Teh Susu", "Minuman", DateUtils.parseDateStr("2025-10-18"), 11000));
+        listBarang.add(new Barang("Kue Kering", "Makanan", DateUtils.parseDateStr("2025-10-20"), 18000));
+        listBarang.add(new Barang("Es Teler", "Minuman", DateUtils.parseDateStr("2025-10-22"), 14000));
+        listBarang.add(new Barang("Ayam Geprek", "Makanan", DateUtils.parseDateStr("2025-10-24"), 26000));
+        listBarang.add(new Barang("Susu Almond", "Minuman", DateUtils.parseDateStr("2025-10-25"), 14000));
+        listBarang.add(new Barang("Sayur Asem", "Makanan", DateUtils.parseDateStr("2025-10-27"), 19000));
+        listBarang.add(new Barang("Wedang Ronde", "Minuman", DateUtils.parseDateStr("2025-10-29"), 12000));
+        listBarang.add(new Barang("Tumpeng Mini", "Makanan", DateUtils.parseDateStr("2025-10-30"), 35000));
+        listBarang.add(new Barang("Es Lemonade", "Minuman", DateUtils.parseDateStr("2025-11-01"), 13000));
+		User plina = DataUser.getDataUser(1);
+		data.put(plina, listBarang);
+		
 		
 		//Pembeli
 		listBarang = new ArrayList<>();
-		listBarang.add(new Barang("Pai Coklat", "Makanan", DateUtils.parseDateStr("2025-05-23"), 50000));
-		listBarang.add(new Barang("Teh Botol", "Minuman", DateUtils.parseDateStr("2025-06-15"), 8000));
-		listBarang.add(new Barang("Laptop Asus", "Elektronik", DateUtils.parseDateStr("2026-01-01"), 12000000));
-		listBarang.add(new Barang("Sabun Mandi", "Kebutuhan", DateUtils.parseDateStr("2025-07-01"), 12000));
-		listBarang.add(new Barang("Kemeja Batik", "Pakaian", DateUtils.parseDateStr("2025-08-10"), 150000));
-		listBarang.add(new Barang("Coklat SilverQueen", "Makanan", DateUtils.parseDateStr("2025-06-05"), 25000));
-		listBarang.add(new Barang("Air Mineral", "Minuman", DateUtils.parseDateStr("2025-07-20"), 5000));
-		listBarang.add(new Barang("Mouse Logitech", "Elektronik", DateUtils.parseDateStr("2026-02-01"), 350000));
-		listBarang.add(new Barang("Handuk", "Kebutuhan", DateUtils.parseDateStr("2025-09-30"), 40000));
-		listBarang.add(new Barang("Celana Jeans", "Pakaian", DateUtils.parseDateStr("2025-10-15"), 200000));
-		User ilya = DataUser.getDataUser(2);
+        listBarang.add(new Barang("Kopi Latte", "Minuman", DateUtils.parseDateStr("2025-06-17"), 17000));
+        listBarang.add(new Barang("Kue Lapis", "Makanan", DateUtils.parseDateStr("2025-06-02"), 18000));
+        listBarang.add(new Barang("Teh Hijau", "Minuman", DateUtils.parseDateStr("2025-06-30"), 9000));
+        listBarang.add(new Barang("Sate Ayam", "Makanan", DateUtils.parseDateStr("2025-06-08"), 35000));
+        listBarang.add(new Barang("Sirup Jeruk", "Minuman", DateUtils.parseDateStr("2025-07-20"), 10000));
+        listBarang.add(new Barang("Kue Cubit", "Makanan", DateUtils.parseDateStr("2025-05-29"), 12000));
+        listBarang.add(new Barang("Es Campur", "Minuman", DateUtils.parseDateStr("2025-06-13"), 13000));
+        listBarang.add(new Barang("Bakso Sapi", "Makanan", DateUtils.parseDateStr("2025-07-07"), 28000));
+        listBarang.add(new Barang("Jus Alpukat", "Minuman", DateUtils.parseDateStr("2025-07-04"), 15000));
+		User ilya = DataUser.getDataUser(5);
 		data.put(ilya, listBarang);
+		
+		listBarang = new ArrayList<>();
+        listBarang.add(new Barang("Cilok Bandung", "Makanan", DateUtils.parseDateStr("2025-09-25"), 7000));
+        listBarang.add(new Barang("Teh Talua", "Minuman", DateUtils.parseDateStr("2025-09-26"), 11000));
+        listBarang.add(new Barang("Bakmi Jawa", "Makanan", DateUtils.parseDateStr("2025-09-28"), 24000));
+        listBarang.add(new Barang("Air Jahe Hangat", "Minuman", DateUtils.parseDateStr("2025-09-30"), 10000));
+        listBarang.add(new Barang("Perkedel Kentang", "Makanan", DateUtils.parseDateStr("2025-10-01"), 9500));
+        listBarang.add(new Barang("Coklat Panas", "Minuman", DateUtils.parseDateStr("2025-10-02"), 12000));
+        listBarang.add(new Barang("Opor Ayam", "Makanan", DateUtils.parseDateStr("2025-10-04"), 29000));
+        listBarang.add(new Barang("Es Kopi Susu", "Minuman", DateUtils.parseDateStr("2025-10-06"), 17000));
+        listBarang.add(new Barang("Gado-Gado", "Makanan", DateUtils.parseDateStr("2025-10-08"), 21000));
+        listBarang.add(new Barang("Jus Semangka", "Minuman", DateUtils.parseDateStr("2025-10-10"), 10000));
+		User bosha = DataUser.getDataUser(5);
+		data.put(ilya, listBarang);
+		
 		
 		//Penerima
 		listBarang = new ArrayList<>();
-		listBarang.add(new Barang("Biskuit Roma", "Makanan", DateUtils.parseDateStr("2025-06-25"), 18000));
-		listBarang.add(new Barang("Jus Mangga", "Minuman", DateUtils.parseDateStr("2025-07-18"), 12000));
-		listBarang.add(new Barang("Kipas Angin", "Elektronik", DateUtils.parseDateStr("2026-03-12"), 450000));
-		listBarang.add(new Barang("Pasta Gigi", "Kebutuhan", DateUtils.parseDateStr("2025-08-03"), 15000));
-		listBarang.add(new Barang("Jaket Hoodie", "Pakaian", DateUtils.parseDateStr("2025-11-22"), 250000));
-		User usha = DataUser.getDataUser(3);
+        listBarang.add(new Barang("Brownies Kukus", "Makanan", DateUtils.parseDateStr("2025-06-06"), 20000));
+        listBarang.add(new Barang("Kopi Vietnam", "Minuman", DateUtils.parseDateStr("2025-06-24"), 18000));
+        listBarang.add(new Barang("Lemper Ayam", "Makanan", DateUtils.parseDateStr("2025-06-28"), 9000));
+        listBarang.add(new Barang("Jus Jambu", "Minuman", DateUtils.parseDateStr("2025-06-09"), 13000));
+        listBarang.add(new Barang("Kue Putu", "Makanan", DateUtils.parseDateStr("2025-06-04"), 8000));
+        listBarang.add(new Barang("Es Cincau", "Minuman", DateUtils.parseDateStr("2025-07-02"), 9500));
+        listBarang.add(new Barang("Lontong Sayur", "Makanan", DateUtils.parseDateStr("2025-07-08"), 23000));
+        listBarang.add(new Barang("Jus Apel", "Minuman", DateUtils.parseDateStr("2025-07-05"), 13500));
+		User usha = DataUser.getDataUser(7);
 		data.put(usha, listBarang);
+		
+		listBarang = new ArrayList<>();
+        listBarang.add(new Barang("Sari Kacang Hijau", "Minuman", DateUtils.parseDateStr("2025-08-30"), 8500));
+        listBarang.add(new Barang("Kue Lumpur", "Makanan", DateUtils.parseDateStr("2025-09-01"), 10000));
+        listBarang.add(new Barang("Jus Pepaya", "Minuman", DateUtils.parseDateStr("2025-09-02"), 9000));
+        listBarang.add(new Barang("Kacang Goreng", "Makanan", DateUtils.parseDateStr("2025-09-04"), 7500));
+        listBarang.add(new Barang("Bandrek", "Minuman", DateUtils.parseDateStr("2025-09-06"), 9500));
+        listBarang.add(new Barang("Serabi Solo", "Makanan", DateUtils.parseDateStr("2025-09-08"), 11000));
+        listBarang.add(new Barang("Teh Manis Dingin", "Minuman", DateUtils.parseDateStr("2025-09-09"), 7000));
+        listBarang.add(new Barang("Puding Coklat", "Makanan", DateUtils.parseDateStr("2025-09-11"), 12500));
+        listBarang.add(new Barang("Susu Kurma", "Minuman", DateUtils.parseDateStr("2025-09-13"), 13500));
+        listBarang.add(new Barang("Risol Mayo", "Makanan", DateUtils.parseDateStr("2025-09-14"), 12000));
+        listBarang.add(new Barang("Kopi Arabika", "Minuman", DateUtils.parseDateStr("2025-09-16"), 16000));
+        listBarang.add(new Barang("Ayam Penyet", "Makanan", DateUtils.parseDateStr("2025-09-18"), 27000));
+        listBarang.add(new Barang("Lassi Mangga", "Minuman", DateUtils.parseDateStr("2025-09-19"), 15000));
+        listBarang.add(new Barang("Kue Soes", "Makanan", DateUtils.parseDateStr("2025-09-21"), 11000));
+        listBarang.add(new Barang("Kopi Robusta", "Minuman", DateUtils.parseDateStr("2025-09-23"), 15000));
+		User sasha = DataUser.getDataUser(5);
+		data.put(ilya, listBarang);
 
 
 	}
