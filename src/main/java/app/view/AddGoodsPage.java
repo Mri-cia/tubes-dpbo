@@ -6,6 +6,7 @@ import javax.swing.event.DocumentListener;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.net.URL;
 import java.time.LocalDate;
 
 import app.modules.*;
@@ -91,8 +92,11 @@ public class AddGoodsPage extends Page implements updatedPage {
 
 		// --backPanel--//
 		backPanel.setLayout(new BoxLayout(backPanel, BoxLayout.Y_AXIS));
-		CButton backBtn = new CButton("back", 12);
+		URL homeIconURL = getClass().getResource("/app/view/assets/home_icon.png");
+		CButton backBtn = new CButton(new ImageIcon(homeIconURL));
 
+		backBtn.setMaximumSize(new Dimension(40,50));
+		
 		backBtn.addActionListener(e -> {
 			back.actionPerformed(e);
 		});
