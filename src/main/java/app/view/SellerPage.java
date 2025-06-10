@@ -262,19 +262,11 @@ public class SellerPage extends Page implements updatedPage {
 	    modelPanel = new JPanel(); // Create a new instance to ensure old content is gone
 	    modelPanel.setPreferredSize(new Dimension((int) (WIDTH_LIMIT * 0.9), 230));
 
-	    //ArrayList<String> columns = new ArrayList<>();
 	    String[] columns = new String[0];
 	    if (user instanceof Seller) {
 	    	columns = new String[]{"Nama", "Tipe", "Kadaluarsa", "Price (IDR)"};	
-//	    	columns.add("Nama");	
-//	    	columns.add("Nama");	
-//	    	columns.add("Nama");	
-//	    	columns.add("Nama");
 	    } else if(user instanceof Donator) {
 	    	columns = new String[]{ "Nama", "Tipe", "Kadaluarsa"};		
-//	    	columns.add("Nama");	
-//	    	columns.add("Nama");	
-//	    	columns.add("Nama");	    	
 	    }
 	    
 	    

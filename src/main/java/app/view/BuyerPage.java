@@ -14,6 +14,7 @@ import app.modules.DataBarang;
 import app.modules.DataUser;
 import app.modules.Donator;
 import app.modules.Recipient;
+import app.modules.Seller;
 import app.modules.User;
 import app.utils.Colors;
 import app.utils.CurrencyFormat;
@@ -291,8 +292,14 @@ public class BuyerPage extends Page implements updatedPage {
 			modelPanel.removeAll(); //refresh panel
 			modelPanel.setPreferredSize(new Dimension((int)(WIDTH_LIMIT * 0.9), 230));
 			tablePanel.add(modelPanel);
-
-			String[] columns = {"Nama", "Tipe", "Kadaluarsa", "Price (IDR)"};
+			
+		    String[] columns = new String[0];
+		    if (user instanceof Seller) {
+		    	columns = new String[]{"Nama", "Tipe", "Kadaluarsa", "Price (IDR)"};	
+		    } else if(user instanceof Donator) {
+		    	columns = new String[]{ "Nama", "Tipe", "Kadaluarsa"};		
+		    }
+		    
 			ArrayList<Barang> data = DataBarang.barangUser;
 		    
 			Dimension tableSize = new Dimension((int)(WIDTH_LIMIT * 0.9), 400);
