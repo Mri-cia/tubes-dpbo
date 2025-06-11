@@ -315,7 +315,6 @@ public class SellerPage extends Page implements updatedPage {
 				sellerTable.saveEditedCell();
 			}
 			int editedRow = sellerTable.getSelectedRow();
-			System.out.println("Tes");
 			int editedColumn = sellerTable.getSelectedColumn();
 			
 			

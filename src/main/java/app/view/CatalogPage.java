@@ -260,7 +260,7 @@ public class CatalogPage extends Page implements updatedPage {
 				Barang selectedBarang = allItems.get(selectedRow);
 				User itemOwner = userLists.get(selectedRow);
 				DataBarang.buyBarang(selectedBarang, selectedRow);
-				DataBarang.data.get(itemOwner).remove(selectedRow);
+				DataBarang.removeBarang(itemOwner, selectedBarang);
 			} else {
 				CErrorDialog preventPop = new CErrorDialog(mainFrame, ErrorMessage.UNSELECTED_CELL.getMessage(), 1);
 				preventPop.setBtn1("Ok");
@@ -274,6 +274,7 @@ public class CatalogPage extends Page implements updatedPage {
 				//reload
 				donatedGoods();
 			} 
+
 			
 		});
 	}

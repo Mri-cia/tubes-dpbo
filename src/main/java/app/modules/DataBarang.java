@@ -303,4 +303,15 @@ public class DataBarang {
 		return listUser;
 	}
 	
+	
+	public static void removeBarang(User owner, Barang barang) {
+		int index = 0;
+		for (Barang b : data.get(owner)) {
+			if (b.equals(barang)) {
+				break;
+			}
+			index++;
+		}
+		data.get(owner).remove(index);
+	}
 }

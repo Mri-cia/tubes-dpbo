@@ -294,9 +294,9 @@ public class BuyerPage extends Page implements updatedPage {
 			tablePanel.add(modelPanel);
 			
 		    String[] columns = new String[0];
-		    if (user instanceof Seller) {
+		    if (user instanceof Buyer) {
 		    	columns = new String[]{"Nama", "Tipe", "Kadaluarsa", "Price (IDR)"};	
-		    } else if(user instanceof Donator) {
+		    } else if(user instanceof Recipient) {
 		    	columns = new String[]{ "Nama", "Tipe", "Kadaluarsa"};		
 		    }
 		    

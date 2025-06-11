@@ -209,7 +209,6 @@ public class GoodsTable extends JScrollPane{
 	}
 	
 	public int getSelectedRow() {
-		System.out.println("ini");
 		return table.getSelectedRow();
 	}
 	
