@@ -351,6 +351,11 @@ public class SellerPage extends Page implements updatedPage {
 	            DataBarang.data.get(user).remove(selectedRow);
 	            DataBarang.getUser(user); // Update barangUser
 	            refreshTable(tablePanel); // Refresh table view
+	        } else {
+				CErrorDialog preventPop = new CErrorDialog(mainFrame, ErrorMessage.UNSELECTED_CELL.getMessage(), 1);
+				preventPop.setBtn1("Ok");
+				preventPop.setVisible(true);
+				refreshTable(tablePanel);
 	        }
 		});
 	}

@@ -255,27 +255,25 @@ public class CatalogPage extends Page implements updatedPage {
 	    }
 		buyBtn.addActionListener(e -> {
 			int selectedRow = catalogTable.getSelectedRow();
-			Barang selectedBarang = allItems.get(selectedRow);
-			User itemOwner = userLists.get(selectedRow);
-			if (user instanceof Buyer) {
-				
+			
+			if(selectedRow >= 0) {
+				Barang selectedBarang = allItems.get(selectedRow);
+				User itemOwner = userLists.get(selectedRow);
 				DataBarang.buyBarang(selectedBarang, selectedRow);
-				
 				DataBarang.data.get(itemOwner).remove(selectedRow);
-				
+			} else {
+				CErrorDialog preventPop = new CErrorDialog(mainFrame, ErrorMessage.UNSELECTED_CELL.getMessage(), 1);
+				preventPop.setBtn1("Ok");
+				preventPop.setVisible(true);
+			}
+
+			if (user instanceof Buyer) {
 				//reload
 				tradedGoods();
-				
 			} else if (user instanceof Recipient) {
-				
-				DataBarang.buyBarang(selectedBarang, selectedRow);
-				
-				DataBarang.data.get(itemOwner).remove(selectedRow);
-				
 				//reload
 				donatedGoods();
 			} 
-
 			
 		});
 	}
