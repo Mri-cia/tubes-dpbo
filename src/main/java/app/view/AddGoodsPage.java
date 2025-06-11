@@ -124,8 +124,12 @@ public class AddGoodsPage extends Page implements updatedPage {
 		formPanel.add(Box.createRigidArea(new Dimension(0, 10)));
 		formPanel.add(typePanel);
 		formPanel.add(Box.createRigidArea(new Dimension(0, 10)));
-		formPanel.add(pricePanel);
-		formPanel.add(Box.createRigidArea(new Dimension(0, 10)));
+		
+		if(user instanceof Seller) {
+			formPanel.add(pricePanel);
+			formPanel.add(Box.createRigidArea(new Dimension(0, 10)));
+		}
+		
 		formPanel.add(datePanel);
 		formPanel.add(Box.createRigidArea(new Dimension(0, 10)));
 		formPanel.add(buttonPanel);
@@ -331,8 +335,8 @@ public class AddGoodsPage extends Page implements updatedPage {
 
 	@Override
 	public void setUser(User user) {
-		// TODO Auto-generated method stub
-
+		this.user = user;
+		updateUserInfo();
 	}
 
 	@Override

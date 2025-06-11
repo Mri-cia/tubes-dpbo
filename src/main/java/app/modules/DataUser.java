@@ -10,10 +10,10 @@ import app.exception.ErrorMessage;
 
 public class DataUser {
 	private static Set<User> users = new LinkedHashSet<>();
-	private static User activeUser  = new User("", "", "");
-	
+	private static User activeUser = new User("", "", "");
+
 	public static String Error;
-	
+
 	public static void initData() {
 		users.add(new Seller("URSULA", "L8x2Qm"));
 		users.add(new Seller("YALNA", "I0ADSHY925"));
@@ -25,26 +25,26 @@ public class DataUser {
 		users.add(new Recipient("USHA", "D4wJ9y"));
 		users.add(new Recipient("SAHSA", "IXYA817P"));
 	}
-	
+
 	public static Set<User> getUsers() {
 		return users;
 	}
-	
+
 	public static User getActiveUser() {
 		return activeUser;
 	}
-	
+
 	public static User getDataUser(int index) {
 		ArrayList<User> userList = new ArrayList<>(users);
 		return userList.get(index);
 	}
-	
+
 	public static void setDataUser(User u) {
 		users.add(u);
 	}
-	
+
 	public static void setUserRole(String name, String pass, String selectedRole) {
-		switch(selectedRole) {
+		switch (selectedRole) {
 		case "Penjual":
 			activeUser = new Seller(name, pass);
 			break;
@@ -53,13 +53,13 @@ public class DataUser {
 			break;
 		case "Pembeli":
 			activeUser = new Buyer(name, pass);
-	        break;
+			break;
 		case "Penerima":
 			activeUser = new Recipient(name, pass);
-	        break;
+			break;
 		}
 	}
-	
+
 	public static boolean verifyUser() {
 		if (checkPassChar(activeUser.getPassword())) {
 			Error = ErrorMessage.PASSWORD_TOO_SHORT.getMessage();
@@ -78,7 +78,7 @@ public class DataUser {
 			}
 		}
 	}
-	
+
 	public static boolean checkUser(User u) {
 		for (User user : users) {
 			boolean sameUser = user.getUsername().equalsIgnoreCase(u.getUsername());
@@ -89,19 +89,19 @@ public class DataUser {
 		}
 		return false;
 	}
-	
+
 	private static boolean checkPassword(User u) {
 		for (User user : users) {
 			boolean sameUser = user.getUsername().equalsIgnoreCase(u.getUsername());
 			boolean sameRole = user.getRole().equalsIgnoreCase(u.getRole());
 			boolean samePass = user.getPassword().equals(u.getPassword());
 			if (sameUser && sameRole && samePass) {
-		        return true;
-		    }
+				return true;
+			}
 		}
 		return false;
 	}
-	
+
 	private static boolean checkPassChar(String pass) {
 		char[] cPass = pass.toCharArray();
 		if (cPass.length >= 6) {
