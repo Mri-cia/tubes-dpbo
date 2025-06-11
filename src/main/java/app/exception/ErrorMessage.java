@@ -11,7 +11,9 @@ public enum ErrorMessage {
     EXPIRED_GOODS("This goods is expired, and will not proceed to adding."),
     UNSELECTED_CELL("Please pick one cell."),
     WRONG_FORMAT("Please edit the cell with this format "),
-    UNPERMITTED_EDIT("Can't edit this cell.");
+    UNPERMITTED_EDIT("Can't edit this cell."),
+	WRONG_DATE_FORMAT("Invalid date format (dd-MM-yyyy}"),
+	WRONG_TYPE("Invalid type for barang (Makanan/Minuman)");
 	
 	
 	private String message;

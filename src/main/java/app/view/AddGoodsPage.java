@@ -305,7 +305,6 @@ public class AddGoodsPage extends Page implements updatedPage {
 	}
 
 	private ActionListener submitBarang() {
-		System.out.println("ini masuk");
 		return e -> {
 			DataBarang.addBarang(new Barang(name, type, expire, price));
 			

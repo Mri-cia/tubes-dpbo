@@ -10,6 +10,7 @@ import java.io.File;
 import java.net.URL;
 import java.text.ParseException;
 import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
 import app.modules.*;
@@ -316,24 +317,33 @@ public class SellerPage extends Page implements updatedPage {
 			}
 			int editedRow = sellerTable.getSelectedRow();
 			int editedColumn = sellerTable.getSelectedColumn();
-			
+			CErrorDialog preventPop;
 			
 			try {
+				
+				
 				if(editedRow < 0) {
 					throw new AppException(ErrorMessage.UNSELECTED_CELL);
 				} else if (editedColumn >= 3) {
 					throw new AppException(ErrorMessage.UNPERMITTED_EDIT);
 				} else {
 					String editedValue = sellerTable.getSelectedCellValue();
+					if (editedColumn == 1 && !editedValue.equalsIgnoreCase("Makanan") && !editedValue.equalsIgnoreCase("Minuman")) {
+						throw new AppException(ErrorMessage.WRONG_TYPE);
+					}
 					DataBarang.editBarang(editedRow, editedColumn, editedValue);
 				}
-			} catch (Exception e2) {
-				CErrorDialog preventPop = new CErrorDialog(mainFrame, e2.getMessage(), 1);
+			} catch (DateTimeParseException e3) {
+				preventPop = new CErrorDialog(mainFrame, ErrorMessage.WRONG_DATE_FORMAT.getMessage(), 1);
 				preventPop.setBtn1("Ok");
 				preventPop.setVisible(true);
-				refreshTable(tablePanel);
+			} catch (Exception e2) {
+				preventPop = new CErrorDialog(mainFrame, e2.getMessage(), 1);
+				preventPop.setBtn1("Ok");
+				preventPop.setVisible(true);
 			}
 			
+			refreshTable(tablePanel);
 			sellerTable.revalidate();
 			sellerTable.repaint();
 				

@@ -236,12 +236,9 @@ public class DataBarang {
 		return null;
 	}
 	
-
-	
 	public static void addBarang(Barang barang) {
 			for (User u : data.keySet()) {
 				if (u.getUsername().equals(currentUser.getUsername()) && u.getRole().equals(currentUser.getRole())) {
-					System.out.println("barang udah masuk");
 					data.get(u).add(barang);
 					barangUser.add(barang);
 				}
