@@ -16,9 +16,11 @@ import app.modules.*;
 import app.utils.CurrencyFormat;
 import app.utils.DateUtils;
 import app.components.*;
+import app.exception.AppException;
+import app.exception.ErrorMessage;
 
 public class SellerPage extends Page implements updatedPage {
-
+	private JFrame mainFrame;
 
 	private JPanel tablePanel = new JPanel();
 	private JPanel modelPanel = new JPanel();
@@ -38,8 +40,9 @@ public class SellerPage extends Page implements updatedPage {
 	ActionListener tambahBarang;
 	ActionListener catalog;
 
-	public SellerPage() {
-
+	public SellerPage(JFrame mainFrame) {
+		this.mainFrame = mainFrame;
+		
 		// --MainPanel setup--//
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		JPanel profilePanel = new JPanel();
@@ -304,18 +307,37 @@ public class SellerPage extends Page implements updatedPage {
 	}
 
 	private void editBtnAction() {
+		for (ActionListener al : editBtn.getActionListeners()) {
+			editBtn.removeActionListener(al);
+		}
 		editBtn.addActionListener(e -> {
 			if (sellerTable.isEditing()) {
 				sellerTable.saveEditedCell();
 			}
 			int editedRow = sellerTable.getSelectedRow();
+			System.out.println("Tes");
 			int editedColumn = sellerTable.getSelectedColumn();
-			String editedValue = sellerTable.getSelectedCellValue();
-
-			DataBarang.editBarang(editedRow, editedColumn, editedValue);
-
+			
+			
+			try {
+				if(editedRow < 0) {
+					throw new AppException(ErrorMessage.UNSELECTED_CELL);
+				} else if (editedColumn >= 3) {
+					throw new AppException(ErrorMessage.UNPERMITTED_EDIT);
+				} else {
+					String editedValue = sellerTable.getSelectedCellValue();
+					DataBarang.editBarang(editedRow, editedColumn, editedValue);
+				}
+			} catch (Exception e2) {
+				CErrorDialog preventPop = new CErrorDialog(mainFrame, e2.getMessage(), 1);
+				preventPop.setBtn1("Ok");
+				preventPop.setVisible(true);
+				refreshTable(tablePanel);
+			}
+			
 			sellerTable.revalidate();
 			sellerTable.repaint();
+				
 		});
 	}
 	

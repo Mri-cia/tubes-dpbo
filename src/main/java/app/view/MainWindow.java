@@ -43,7 +43,7 @@ public class MainWindow extends JFrame {
 	  
 	  AddGoodsPage winTambahBarang = new AddGoodsPage();
 	  CatalogPage winKatalog = new CatalogPage(this);
-	  SellerPage winPenj = new SellerPage();
+	  SellerPage winPenj = new SellerPage(this);
 	  BuyerPage winPem = new BuyerPage();
 	  LoginPage winLogin = new LoginPage();
 	  

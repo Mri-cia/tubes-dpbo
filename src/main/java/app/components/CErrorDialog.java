@@ -56,8 +56,11 @@ public class CErrorDialog extends JDialog{
         content.add(messageLabel, BorderLayout.CENTER);
 
         JPanel buttonPanel = new JPanel(); // FlowLayout by default
-        buttonPanel.add(btn1);
-        buttonPanel.add(btn2);
+        if (numOfButton == 1) {
+        	buttonPanel.add(btn1);
+        } else if (numOfButton > 1) {
+        	buttonPanel.add(btn2);
+        }
 
         content.add(buttonPanel, BorderLayout.SOUTH);
 
@@ -67,13 +70,11 @@ public class CErrorDialog extends JDialog{
     private void registerEvents() {
         btn1.addActionListener(
         		e -> {
-                    System.out.println("OK clicked");
                     dispose();
                 });
 
         btn2.addActionListener(
         		e -> {
-                    System.out.println("Cancel clicked");
                     dispose();
                 });
     }

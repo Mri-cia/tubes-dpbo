@@ -7,14 +7,20 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.util.ArrayList;
 
+import javax.swing.DefaultCellEditor;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableCellEditor;
+import javax.swing.table.TableCellEditor;
 
+import app.exception.ErrorMessage;
 import app.modules.Barang;
 import app.modules.DataBarang;
 import app.utils.CurrencyFormat;
@@ -56,6 +62,7 @@ public class GoodsTable extends JScrollPane{
 	        setViewportView(table);
 	        table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 	        table.getTableHeader().setReorderingAllowed(false);
+
 	        
 	        setPreferredSize(new Dimension((int)(tableSize.getWidth() * 0.8), 260));
 	        panel.setLayout(new BorderLayout()); // Make sure layout is BorderLayout to use CENTER properly
@@ -181,6 +188,12 @@ public class GoodsTable extends JScrollPane{
 
 	}
 	
+	public void preventEditing(JFrame owner, String message) {
+		CErrorDialog preventPop = new CErrorDialog(owner, message, 1);
+		preventPop.setBtn1("Ok");
+		preventPop.setVisible(true);
+	}
+	
 	public void triggerUpdate() {
 		((DefaultTableModel) table.getModel()).fireTableDataChanged();
 	}
@@ -196,6 +209,7 @@ public class GoodsTable extends JScrollPane{
 	}
 	
 	public int getSelectedRow() {
+		System.out.println("ini");
 		return table.getSelectedRow();
 	}
 	

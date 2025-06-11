@@ -295,7 +295,7 @@ public class CatalogPage extends Page implements updatedPage {
 	    if (this.user == null) { 
 	        SwingUtilities.invokeLater(() -> {
 	            try {
-	                throw new AppException(ErrorMessage.NO_ROLE_FOUND.getMessage());
+	                throw new AppException(ErrorMessage.NO_ROLE_FOUND);
 	            } catch (AppException e) {
 	            	CErrorDialog currentError =  new CErrorDialog(mainFrame, e.getMessage(), 2); 
 	            	currentError.setBtn1("Go to Login");
